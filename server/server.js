@@ -1,26 +1,29 @@
 let port = 41399;
 
-const countries = require("./countries").countries;
-const UPDATE_TIME = 36000000;
+let teams;
 
-//countries with tabs in the webpage (and need 12 to be subtracted from their totals)
-const dozenCountries = ["Australia", "China", "India", "United Kingdom"];
+const fs = require("fs");
+const countries = require("./countries").countries;
+
+const express = require("express");
+const app = express();
 
 //Can pass port as first argument (or leave empty for default value)
 if (process.argv.length > 2) {
     port = parseInt(process.argv[2]);
 }
 
-const express = require("express");
-const app = express();
+//countries with tabs in the webpage (and need 12 to be subtracted from their totals)
+const dozenCountries = ["Australia", "China", "India", "United Kingdom"];
 
-app.get("/", (req, res) => {
-    res.send(JSON.stringify(countries));
-});
-
-app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
-});
+let frontendCountries = [];
+for (let i = 0; i < countries.length; i++) {
+    frontendCountries[i] = {
+        flag: countries[i].flag,
+        name: countries[i].name,
+        score: 0
+    }
+}
 
 async function checkNews() {
     console.log("-----");
@@ -28,7 +31,9 @@ async function checkNews() {
     const response = await fetch("https://www.cnn.com/world");
     const responseText = await response.text();
 
-    let result = [];
+    for (let i = 0; i < frontendCountries.length; i++) {
+        frontendCountries[i].score = 0;
+    }
 
     for (let i = 0; i < countries.length; i++) {
         let split1 = responseText.split(countries[i].name[0]);
@@ -54,34 +59,67 @@ async function checkNews() {
             }
         }
 
-        result[i] = {
-            flag: countries[i].flag,
-            amount: split1Count + split2Count
+        frontendCountries[i].score = split1Count + split2Count;
+        if (dozenCountries.includes(frontendCountries[i].name[0])) {
+            frontendCountries[i].score -= 12;
         }
-        if (dozenCountries.includes(countries[i].name[0])) {
-            result[i].amount -= 12;
-        }
-        if (result[i].amount < 0) {
+        if (frontendCountries[i].amount < 0) {
             console.log("NEGATIVE AMOUNT!");
-            console.log(result);
+            console.log(frontendCountries);
+        }
+
+        for (let j = 0; j < teams.length; j++) {
+            if (teams[j].countries[0].flag === frontendCountries[i].flag) {
+                teams[j].countries[0].score = frontendCountries[i].score;
+                teams[j].score += frontendCountries[i].score;
+            }
+            else if (teams[j].countries[1].flag === frontendCountries[i].flag) {
+                teams[j].countries[1].score = frontendCountries[i].score;
+                teams[j].score += frontendCountries[i].score;
+            }
         }
     }
 
-    for (let i = 0; i < result.length; i++) {
-        if (result[i].amount != 0) {
-            console.log(result[i]);
+    for (let i = 0; i < frontendCountries.length; i++) {
+        if (frontendCountries[i].amount != 0) {
+            console.log(frontendCountries[i]);
         }
     }
 }
 
-let lastHour = new Date().getHours()
-
-checkNews();
-
-setInterval(() => {
-    let currentHour = new Date().getHours();
-    if (currentHour != lastHour) {
-        checkNews();
-        lastHour = currentHour;
+fs.readFile("./gamedata.json", (err, data) => {
+    if (err) {
+        console.log(err);
     }
-}, 1000);
+    teams = JSON.parse(data + "").teams;
+
+    app.use(express.static("react/build/"))
+
+    app.get("/", (req, res) => {
+        res.redirect("/index.html");
+    });
+
+    app.get("/data", (req, res) => {
+        res.send(JSON.stringify({
+            countries: frontendCountries,
+            teams: teams
+        }));
+    })
+
+    app.listen(port, () => {
+        console.log(`Server started on port ${port}`);
+    });
+
+    let lastHour = new Date().getHours();
+
+    checkNews();
+
+    //update each time the hour changes
+    setInterval(() => {
+        let currentHour = new Date().getHours();
+        if (currentHour != lastHour) {
+            checkNews();
+            lastHour = currentHour;
+        }
+    }, 1000);
+});
