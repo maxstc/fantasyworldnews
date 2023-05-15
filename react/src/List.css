@@ -1,0 +1,12 @@
+div.list {
+    width: calc(100% / 3);
+    display: inline-block;
+    vertical-align: text-top;
+}
+
+p.listHeader {
+    margin-left: 40px;
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
