@@ -8,7 +8,9 @@ const TeamList = (props) => {
         <div className="list">
             <p className="listHeader">Teams</p>
             {
-                props.teams.map((team) => (
+                props.teams.sort((a, b) => {
+                    return b.score - a.score;
+                }).map((team) => (
                     <Team teamName={team.name} teamScore={team.score} teamCountries={team.countries} />
                 ))
             }
