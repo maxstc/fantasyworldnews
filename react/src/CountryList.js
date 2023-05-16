@@ -8,7 +8,9 @@ const CountryList = (props) => {
         <div className="list">
             <p className="listHeader">Countries</p>
             {
-                props.countries.map((country) => (
+                props.countries.sort((a, b) => {
+                    return b.score - a.score;
+                }).map((country) => (
                     <Country countryFlag={country.flag} countryName={country.name[0]} countryScore={country.score} />
                 ))
             }

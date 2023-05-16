@@ -1,13 +1,16 @@
 import React from 'react';
 import './List.css';
 import './TradeColumn.css';
+import OfferList from './OfferList';
 
 const TradeColumn = (props) => {
 
     return (
         <div className="list">
             <p className="listHeader">Your Countries</p>
-            <p className="centerText">{props.teamName}</p>
+            <center>
+                <input className="centerText" placeholder="Team Name" defaultValue={props.teamName}></input>
+            </center>
             <div>
                 <span className="centerText">{props.countries[0].flag} : {props.countries[0].score}</span>
                 <span className="centerText">{props.countries[1].flag} : {props.countries[1].score}</span>
