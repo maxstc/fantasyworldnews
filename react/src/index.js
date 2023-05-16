@@ -16,7 +16,7 @@ fetch("data").then((data) => {
       <React.StrictMode>
         <TeamList teams={data.teams} />
         <CountryList countries={data.countries} />
-        <TradeColumn />
+        <TradeColumn teamName="team1" countries={data.teams[0].countries}/>
       </React.StrictMode>
     );
   })
