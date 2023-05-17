@@ -3,7 +3,9 @@ import "./TradePopup.css";
 
 const TradePopup = (props) => {
     return (
-        <p>Hi</p>
+        <div class="popupBackground">
+            <p>Hello</p>
+        </div>
     );
 }
 

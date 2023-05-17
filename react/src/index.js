@@ -4,6 +4,7 @@ import './index.css';
 import TeamList from "./TeamList";
 import CountryList from "./CountryList";
 import TradeColumn from "./TradeColumn";
+import TradePopup from "./TradePopup";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
