@@ -8,9 +8,7 @@ const TradeColumn = (props) => {
     return (
         <div className="list">
             <p className="listHeader">Your Countries</p>
-            <center>
-                <input className="centerText" placeholder="Team Name" defaultValue={props.teamName}></input>
-            </center>
+            <p className="centerText">{props.teamName}</p>
             <div>
                 <span className="centerText">{props.countries[0].flag} : {props.countries[0].score}</span>
                 <span className="centerText">{props.countries[1].flag} : {props.countries[1].score}</span>

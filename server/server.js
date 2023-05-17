@@ -93,9 +93,14 @@ fs.readFile("./gamedata.json", (err, data) => {
     }
     teams = JSON.parse(data + "").teams;
 
-    app.use(express.static("react/build/"))
-
     app.get("/", (req, res) => {
+        //have them enter a team name then redirect to /team/<teamname>
+        res.end("Please add \"/team/<your team name>\" to the address bar. For example, if you went to 123.10.10.123:41399, instead go to 123.10.10.123:41399/team/max if your team name is max. This is case sensitive.");
+    });
+
+    app.get("/team/:teamName", (req, res) => {
+        //set the teamName to a session cookie and redirect them to index.html
+        res.cookie("teamName", req.params.teamName);
         res.redirect("/index.html");
     });
 
@@ -105,6 +110,8 @@ fs.readFile("./gamedata.json", (err, data) => {
             teams: teams
         }));
     })
+
+    app.use(express.static("react/build/"))
 
     app.listen(port, () => {
         console.log(`Server started on port ${port}`);
