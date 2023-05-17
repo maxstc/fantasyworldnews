@@ -10,13 +10,29 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 let countries;
 let teams;
 
+function getTeamName(cookies) {
+  let cs = cookies.split(";");
+  for (let i = 0; i < cs.length; i++) {
+    let c = cs[i];
+
+    while(c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+
+    if (c.indexOf("teamName") == 0) {
+      return (c.substring("teamName".length + 1, c.length));
+    }
+  }
+  return "";
+}
+
 fetch("data").then((data) => {
   data.json().then((data) => {
     root.render(
       <React.StrictMode>
         <TeamList teams={data.teams} />
         <CountryList countries={data.countries} />
-        <TradeColumn teamName="team1" countries={data.teams[0].countries}/>
+        <TradeColumn teamName={getTeamName(document.cookie)} countries={data.teams[0].countries}/>
       </React.StrictMode>
     );
   })
