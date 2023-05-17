@@ -44,6 +44,7 @@ fetch("data").then((data) => {
         <TeamList teams={data.teams} />
         <CountryList countries={data.countries} />
         <TradeColumn teamName={getTeamName(document.cookie)} countries={getCountries(getTeamName(document.cookie), data)}/>
+        <TradePopup />
       </React.StrictMode>
     );
   })
