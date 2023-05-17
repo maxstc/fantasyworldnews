@@ -23,7 +23,18 @@ function getTeamName(cookies) {
       return (c.substring("teamName".length + 1, c.length));
     }
   }
-  return "";
+  return undefined;
+}
+
+function getCountries(teamName, data) {
+  console.log(data.teams);
+  console.log(teamName);
+  for (let i = 0; i < data.teams.length; i++) {
+    if (data.teams[i].name === teamName) {
+      return data.teams[i].countries;
+    }
+  }
+  return undefined;
 }
 
 fetch("data").then((data) => {
@@ -32,7 +43,7 @@ fetch("data").then((data) => {
       <React.StrictMode>
         <TeamList teams={data.teams} />
         <CountryList countries={data.countries} />
-        <TradeColumn teamName={getTeamName(document.cookie)} countries={data.teams[0].countries}/>
+        <TradeColumn teamName={getTeamName(document.cookie)} countries={getCountries(getTeamName(document.cookie), data)}/>
       </React.StrictMode>
     );
   })
