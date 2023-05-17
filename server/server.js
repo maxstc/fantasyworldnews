@@ -46,7 +46,7 @@ async function checkNews() {
         for (let j = 0; j < split1.length - 1; j++) {
             let left = split1[j].charAt(split1[j].length - 1);
             let right = split1[j+1].charAt(0);
-            if (left.toUpperCase() == left.toLowerCase() && right.toUpperCase() == right.toUpperCase()) {
+            if (left.toUpperCase() == left.toLowerCase() && right.toUpperCase() == right.toLowerCase()) {
                 split1Count++;
             }
         }
@@ -54,7 +54,7 @@ async function checkNews() {
         for (let j = 0; j < split2.length - 1; j++) {
             let left = split2[j].charAt(split2[j].length - 1);
             let right = split2[j+1].charAt(0);
-            if (left.toUpperCase() == left.toLowerCase() && right.toUpperCase() == right.toUpperCase()) {
+            if (left.toUpperCase() == left.toLowerCase() && right.toUpperCase() == right.toLowerCase()) {
                 split2Count++;
             }
         }
