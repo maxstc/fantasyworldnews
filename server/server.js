@@ -111,7 +111,7 @@ fs.readFile("./gamedata.json", (err, data) => {
         }));
     })
 
-    app.use(express.static("react/build/"))
+    app.use(express.static("react/build/"));
 
     app.listen(port, () => {
         console.log(`Server started on port ${port}`);
