@@ -28,8 +28,6 @@ function getTeamName(cookies) {
 }
 
 function getTeam(teamName, data) {
-  console.log(data.teams);
-  console.log(teamName);
   for (let i = 0; i < data.teams.length; i++) {
     if (data.teams[i].name === teamName) {
       return data.teams[i];

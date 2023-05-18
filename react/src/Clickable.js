@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import './Row.css'
-import './Team.css';
 
-const Team = (props) => {
+const Clickable = (props) => {
 
     const [hover, setHover] = useState(false);
     const [click, setClick] = useState(false);
 
     const sectionStyle = {
+        margin: "5px 30px",
+        "border-radius": "5px",
         border: hover ? "3px solid lightgray" : "1px solid lightgray",
         padding: hover ? "3px" : "5px",
         background: click ? "lightgray" : "white"
@@ -15,29 +15,20 @@ const Team = (props) => {
 
     function processClick(c) {
         if (c===true) {
-            props.callback();
+            props.clickCallback();
         }
     }
 
     return (
-        <div style={sectionStyle} className="row" 
+        <div style={sectionStyle}
             onMouseEnter={()=>{setHover(true)}}
             onMouseLeave={()=>{setHover(false);setClick(false)}}
             onMouseDown={()=>{setClick(true)}}
             onMouseUp={()=>{processClick(click);setClick(false)}}>
-            <span className="name">{props.teamName}</span>
-            <span className="score">{props.teamScore}</span>
-            {
-                props.teamCountries.map((country) => (
-                    <span>
-                        <span className="country">{country.flag}</span>
-                        <span className="score">{country.score}</span>
-                    </span>
-                ))
-            }
+                {props.inside}
         </div>
     );
 
 }
 
-export default Team;
+export default Clickable;

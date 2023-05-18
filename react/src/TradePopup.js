@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import "./TradePopup.css";
 import "./TradeColumn.css";
+import Clickable from "./Clickable";
 
 const TradePopup = (props) => {
 
     const [selectTarget, setSelectTarget] = useState(0);
     const [selectUser, setSelectUser] = useState(0);
+
+    const [hover, setHover] = useState(-1);
+    const [click, setClick] = useState(-1);
 
     function isSelected(id, isTarget) {
         if (isTarget) {
@@ -22,17 +26,40 @@ const TradePopup = (props) => {
                 <p className="centerText">Trade Offer</p>
                 <div className="tradeColumn">
                     <p className="centerText">Their Countries</p>
-                    <p className={isSelected(0, false)}>{props.targetTeam.countries[0].flag}</p>
-                    <p className={isSelected(1, false)}>{props.targetTeam.countries[1].flag}</p>
+                    <Clickable clickCallback={()=>{}} inside={
+                        <p className="centerText">
+                            {props.targetTeam.countries[0].flag}
+                        </p>
+                    }/>
+                    <Clickable clickCallback={()=>{}} inside={
+                        <p className="centerText">
+                            {props.targetTeam.countries[1].flag}
+                        </p>
+                    }/>
                 </div>
                 <div className="tradeColumn">
                     <p className="centerText">Your Countries</p>
-                    <p className={isSelected(0, true)}>{props.userTeam.countries[0].flag}</p>
-                    <p className={isSelected(1, true)}>{props.userTeam.countries[1].flag}</p>
+                    <Clickable clickCallback={()=>{}} inside={
+                        <p className="centerText">
+                            {props.userTeam.countries[0].flag}
+                        </p>
+                    }/>
+                    <Clickable clickCallback={()=>{}} inside={
+                        <p className="centerText">
+                            {props.userTeam.countries[1].flag}
+                        </p>
+                    }/>
                 </div>
-                <div>
-                    <p>confirm</p>
-                    <p>cancel</p>
+                <p className="centerText">Their {props.targetTeam.countries[selectTarget].flag} for your {props.userTeam.countries[selectUser].flag}</p>
+                <div className="tradeColumn">
+                    <Clickable clickCallback={()=>{}} inside={
+                        <p className="centerText">Confirm</p>
+                    }/>
+                </div>
+                <div className="tradeColumn">
+                    <Clickable clickCallback={()=>{}} inside={
+                        <p className="centerText">Cancel</p>
+                    }/>
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Team from './Team';
+import Clickable from './Clickable';
 import './List.css';
 
 const TeamList = (props) => {
@@ -11,7 +12,20 @@ const TeamList = (props) => {
                 props.teams.sort((a, b) => {
                     return b.score - a.score;
                 }).map((team) => (
-                    <Team teamName={team.name} teamScore={team.score} teamCountries={team.countries} />
+                    <Clickable clickCallback={()=>{}} inside={
+                        <div>
+                            <span className="name">{team.name}</span>
+                            <span className="score">{team.score}</span>
+                            {
+                                team.countries.map((country) => (
+                                    <span>
+                                        <span className="country">{country.flag}</span>
+                                        <span className="score">{country.score}</span>
+                                    </span>
+                                ))
+                            }
+                        </div>
+                    }/>
                 ))
             }
         </div>
