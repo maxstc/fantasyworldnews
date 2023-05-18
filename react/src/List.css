@@ -4,6 +4,15 @@ div.list {
     vertical-align: text-top;
 }
 
+div.row {
+    margin: 5px;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}
+
 p.listHeader {
     margin-left: 40px;
     font-size: 20px;
@@ -19,4 +28,10 @@ span.name {
 span.country {
     margin-left: 20px;
     margin-right: 5px;
+}
+
+span.score {
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    padding: 0px 2px;
 }

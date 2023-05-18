@@ -19,6 +19,7 @@ const TeamList = (props) => {
                                 team.countries.map((country) => (
                                     <span>
                                         <span className="country">{country.flag}</span>
+                                        <span className="name">{country.name}</span>
                                         <span className="score">{country.score}</span>
                                     </span>
                                 ))

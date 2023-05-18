@@ -1,5 +1,5 @@
 import React from 'react';
-import Country from './Country.js';
+import Clickable from './Clickable';
 import './List.css';
 
 const CountryList = (props) => {
@@ -11,7 +11,13 @@ const CountryList = (props) => {
                 props.countries.sort((a, b) => {
                     return b.score - a.score;
                 }).map((country) => (
-                    <Country countryFlag={country.flag} countryName={country.name[0]} countryScore={country.score} />
+                    <Clickable clickCallback={()=>{}} inside={
+                        <div>
+                            <span className="flag">{country.flag}</span>
+                            <span className="name">{country.name[0]}</span>
+                            <span className="score">{country.score}</span>
+                        </div>
+                    }/>
                 ))
             }
         </div>
