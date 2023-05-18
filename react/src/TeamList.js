@@ -1,5 +1,4 @@
 import React from 'react';
-import Team from './Team';
 import Clickable from './Clickable';
 import './List.css';
 

@@ -10,3 +10,13 @@ p.listHeader {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+span.name {
+    margin-left: 2px;
+    margin-right: 5px;
+}
+
+span.country {
+    margin-left: 20px;
+    margin-right: 5px;
+}
