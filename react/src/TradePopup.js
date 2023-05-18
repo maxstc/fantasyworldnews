@@ -5,12 +5,11 @@ import Clickable from "./Clickable";
 
 const TradePopup = (props) => {
 
-    const [hidden, setHidden] = useState(true);
     const [selectTarget, setSelectTarget] = useState(0);
     const [selectUser, setSelectUser] = useState(0);
 
     const hiddenStyle = {
-        display: hidden ? "none" : "initial"
+        display: props.hidden ? "none" : "initial"
     }
 
     function sendProposal(a, b, c) {
@@ -51,12 +50,12 @@ const TradePopup = (props) => {
                 </div>
                 <p className="centerText">Their {props.targetTeam.countries[selectTarget].flag} {props.targetTeam.countries[selectTarget].name} for your {props.userTeam.countries[selectUser].flag} {props.userTeam.countries[selectUser].name}</p>
                 <div className="tradeColumn">
-                    <Clickable clickCallback={()=>{sendProposal(props.userTeam, selectTarget, selectUser);setHidden(true)}} inside={
+                    <Clickable clickCallback={()=>{sendProposal(props.userTeam, selectTarget, selectUser);props.closeTrade()}} inside={
                         <p className="centerText">Confirm</p>
                     }/>
                 </div>
                 <div className="tradeColumn">
-                    <Clickable clickCallback={()=>{setHidden(true)}} inside={
+                    <Clickable clickCallback={()=>{props.closeTrade()}} inside={
                         <p className="centerText">Cancel</p>
                     }/>
                 </div>

@@ -3,6 +3,9 @@ import Clickable from './Clickable';
 import './List.css';
 
 const TeamList = (props) => {
+    function startTrade(teamName) {
+        props.startTrade(teamName)
+    }
 
     return (
         <div className="list">
@@ -11,7 +14,7 @@ const TeamList = (props) => {
                 props.teams.sort((a, b) => {
                     return b.score - a.score;
                 }).map((team) => (
-                    <Clickable clickCallback={()=>{}} inside={
+                    <Clickable clickCallback={()=>{startTrade(team.name)}} inside={
                         <div>
                             <span className="name">{team.name}</span>
                             <span className="score">{team.score}</span>
