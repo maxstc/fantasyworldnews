@@ -2,6 +2,8 @@ div.list {
     width: calc(100% / 3);
     display: inline-block;
     vertical-align: text-top;
+    overflow-y: scroll;
+    height: 100vh;
 }
 
 div.row {
