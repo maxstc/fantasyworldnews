@@ -27,12 +27,12 @@ function getTeamName(cookies) {
   return undefined;
 }
 
-function getCountries(teamName, data) {
+function getTeam(teamName, data) {
   console.log(data.teams);
   console.log(teamName);
   for (let i = 0; i < data.teams.length; i++) {
     if (data.teams[i].name === teamName) {
-      return data.teams[i].countries;
+      return data.teams[i];
     }
   }
   return undefined;
@@ -44,8 +44,8 @@ fetch("data").then((data) => {
       <React.StrictMode>
         <TeamList teams={data.teams} />
         <CountryList countries={data.countries} />
-        <TradeColumn teamName={getTeamName(document.cookie)} countries={getCountries(getTeamName(document.cookie), data)}/>
-        <TradePopup />
+        <TradeColumn teamName={getTeamName(document.cookie)} countries={getTeam(getTeamName(document.cookie), data).countries}/>
+        <TradePopup targetTeam={getTeam("team1", data)} userTeam={getTeam(getTeamName(document.cookie), data)}/>
       </React.StrictMode>
     );
   })
