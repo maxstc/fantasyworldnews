@@ -13,11 +13,12 @@ const TradePopup = (props) => {
         display: props.hidden ? "none" : "initial"
     }
 
-    function sendProposal(userTeam, targetCountry, userCountry) {
+    function sendProposal(userTeam, targetTeam, userCountry, targetCountry) {
         postData("/trade", {
-            sender: userTeam,
-            targetCountry: targetCountry,
-            userCountry: userCountry
+            proposer: userTeam,
+            target: targetTeam,
+            proposerCountry: userCountry,
+            targetCountry: targetCountry
         });
     }
 
@@ -53,7 +54,7 @@ const TradePopup = (props) => {
                 </div>
                 <p className="centerText">Their {props.targetTeam.countries[selectTarget].flag} {props.targetTeam.countries[selectTarget].name} for your {props.userTeam.countries[selectUser].flag} {props.userTeam.countries[selectUser].name}</p>
                 <div className="tradeColumn">
-                    <Clickable clickCallback={()=>{sendProposal(props.userTeam, selectTarget, selectUser);props.closeTrade()}} inside={
+                    <Clickable clickCallback={()=>{sendProposal(props.userTeam, props.targetTeam, selectUser, selectTarget);props.closeTrade()}} inside={
                         <p className="centerText">Confirm</p>
                     }/>
                 </div>

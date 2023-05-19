@@ -1,6 +1,7 @@
 let port = 41399;
 
 let teams;
+let trades;
 
 const fs = require("fs");
 const countries = require("./countries").countries;
@@ -27,7 +28,7 @@ for (let i = 0; i < countries.length; i++) {
 }
 
 async function checkNews() {
-    console.log("-----");
+    console.log("Checking news...");
     console.log(new Date());
     const response = await fetch("https://www.cnn.com/world");
     const responseText = await response.text();
@@ -88,15 +89,81 @@ async function checkNews() {
     }
 }
 
+function handleTrade(reqBody) {
+    console.log("Got a trade:");
+    console.log(reqBody);
+    let proposerTeam = reqBody.proposer;
+    let targetTeam = reqBody.target;
+    let proposerCountry = reqBody.proposerCountry;
+    let targetCountry = reqBody.targetCountry;
+    //check trade is valid
+    //cant trade with yourself
+    if (proposerTeam === targetTeam) {
+        console.log("Proposer and target are the same");
+        return;
+    }
+    //find the two teams involved
+    for (let i = 0; i < teams.length; i++) {
+        if (teams[i] === reqBody.proposerTeam) {
+            proposerTeam = teams[i];
+        }
+        else if (teams[i].targetTeam === reqBody.targetTeam) {
+            targetTeam = teams[i];
+        }
+    }
+    //check if proposal already exists, remove it if it does
+    for (let i = 0; i < trades.length; i++) {
+        if (
+            trades[i].proposerTeam === proposerTeam 
+            && trades[i].targetTeam === targetTeam 
+            && trades[i].proposerCountry === proposerCountry 
+            && trades[i].targetCountry === targetCountry) {
+                //trade already exists, remove this older one
+                trades.splice(i, 1);
+                i--;
+        }
+        else if (
+            trades[i].proposerTeam === targetTeam
+            && trades[i].targetTeam === proposerTeam
+            && trades[i].proposerCountry === targetCountry 
+            && trades[i].targetCountry === proposerCountry) {
+                //trade already exists in opposite direction, execute the trade
+                trades.splice(i, 1);
+                i--;
+                executeTrade(proposerTeam, targetTeam, proposerCountry, targetCountry);
+        }
+    }
+    //add this proposal
+    trades[trades.length] = {
+        proposerTeam: proposerTeam,
+        targetTeam: targetTeam,
+        proposerCountry: proposerCountry,
+        targetCountry: targetCountry,
+        hourAdded: new Date().getHours()
+    }
+    console.log(trades);
+}
+
+function handleAcceptTrade(reqBody, teams, trades) {
+    console.log("Got a trade acceptance:");
+    console.log(reqBody);
+}
+
 fs.readFile("./gamedata.json", (err, data) => {
     if (err) {
         console.log(err);
     }
-    teams = JSON.parse(data + "").teams;
+    let parsedData = JSON.parse(data + "");
+    teams = parsedData.teams;
+    trades = parsedData.trades;
 
     app.post("/trade", (req, res) => {
         console.log("POST");
         handleTrade(req.body);
+    });
+
+    app.post("/accepttrade", (req, res) => {
+        handleAcceptTrade(req.body);
     });
 
     app.get("/", (req, res) => {
@@ -133,6 +200,12 @@ fs.readFile("./gamedata.json", (err, data) => {
         if (currentHour != lastHour) {
             checkNews();
             lastHour = currentHour;
+            for (let i = 0; i < trades.length; i++) {
+                if (trades[i].hourAdded === currentHour) {
+                    trades.splice(i, 1);
+                    i--;
+                }
+            }
         }
     }, 1000);
 
