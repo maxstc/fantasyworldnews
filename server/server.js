@@ -7,6 +7,7 @@ const countries = require("./countries").countries;
 
 const express = require("express");
 const app = express();
+app.use(express.json());
 
 //Can pass port as first argument (or leave empty for default value)
 if (process.argv.length > 2) {
@@ -93,6 +94,11 @@ fs.readFile("./gamedata.json", (err, data) => {
     }
     teams = JSON.parse(data + "").teams;
 
+    app.post("/trade", (req, res) => {
+        console.log("POST");
+        handleTrade(req.body);
+    });
+
     app.get("/", (req, res) => {
         //have them enter a team name then redirect to /team/<teamname>
         res.end("Please add \"/team/<your team name>\" to the address bar. For example, if you went to 123.10.10.123:41399, instead go to 123.10.10.123:41399/team/max if your team name is max. This is case sensitive.");
@@ -129,4 +135,13 @@ fs.readFile("./gamedata.json", (err, data) => {
             lastHour = currentHour;
         }
     }, 1000);
+
+    const stdin = process.openStdin();
+
+    stdin.addListener("data", function(d) {
+        if (d.toString().trim() === "stop") {
+            console.log("Stopping the server");
+            process.exit();
+        }
+    })
 });

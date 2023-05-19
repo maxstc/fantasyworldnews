@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./TradePopup.css";
 import "./TradeColumn.css";
 import Clickable from "./Clickable";
+import postData from "./postData";
 
 const TradePopup = (props) => {
 
@@ -12,10 +13,12 @@ const TradePopup = (props) => {
         display: props.hidden ? "none" : "initial"
     }
 
-    function sendProposal(a, b, c) {
-        console.log(a);
-        console.log(b);
-        console.log(c);
+    function sendProposal(userTeam, targetCountry, userCountry) {
+        postData("/trade", {
+            sender: userTeam,
+            targetCountry: targetCountry,
+            userCountry: userCountry
+        });
     }
 
     return (

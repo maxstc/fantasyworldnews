@@ -6,3 +6,5 @@ async function postData(url, data) {
   });
   return x;
 }
+
+export default postData;
