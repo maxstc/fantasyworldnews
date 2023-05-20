@@ -28,11 +28,6 @@ const TradePopup = (props) => {
                 <p className="centerText">Trade Offer</p>
                 <div className="tradeColumn">
                     <p className="centerText">Their Countries</p>
-                    (props.targetTeam === -1) ?
-                    <p className="centerText">
-                        This part hasn't been added yet... Sorry! :D
-                    </p>
-                    :
                     <Clickable clickCallback={()=>{setSelectTarget(props.teams[props.targetTeam].countries[0])}} inside={
                         <p className="centerText">
                             {props.teams[props.targetTeam].countries[0].flag} {props.teams[props.targetTeam].countries[0].name}
