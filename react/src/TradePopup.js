@@ -15,8 +15,8 @@ const TradePopup = (props) => {
 
     function sendProposal(userTeam, targetTeam, userCountry, targetCountry) {
         postData("/trade", {
-            proposer: userTeam,
-            target: targetTeam,
+            proposerTeam: userTeam,
+            targetTeam: targetTeam,
             proposerCountry: userCountry,
             targetCountry: targetCountry
         });
@@ -28,31 +28,31 @@ const TradePopup = (props) => {
                 <p className="centerText">Trade Offer</p>
                 <div className="tradeColumn">
                     <p className="centerText">Their Countries</p>
-                    <Clickable clickCallback={()=>{setSelectTarget(0)}} inside={
+                    <Clickable clickCallback={()=>{setSelectTarget(props.teams[props.targetTeam].countries[0])}} inside={
                         <p className="centerText">
-                            {props.targetTeam.countries[0].flag} {props.targetTeam.countries[0].name}
+                            {props.teams[props.targetTeam].countries[0].flag} {props.teams[props.targetTeam].countries[0].name}
                         </p>
                     }/>
-                    <Clickable clickCallback={()=>{setSelectTarget(1)}} inside={
+                    <Clickable clickCallback={()=>{setSelectTarget(props.teams[props.targetTeam].countries[1])}} inside={
                         <p className="centerText">
-                            {props.targetTeam.countries[1].flag} {props.targetTeam.countries[1].name}
+                            {props.teams[props.targetTeam].countries[1].flag} {props.teams[props.targetTeam].countries[1].name}
                         </p>
                     }/>
                 </div>
                 <div className="tradeColumn">
                     <p className="centerText">Your Countries</p>
-                    <Clickable clickCallback={()=>{setSelectUser(0)}} inside={
+                    <Clickable clickCallback={()=>{setSelectUser(props.teams[props.userTeam].countries[0])}} inside={
                         <p className="centerText">
-                            {props.userTeam.countries[0].flag} {props.userTeam.countries[0].name}
+                            {props.teams[props.userTeam].countries[0].flag} {props.teams[props.userTeam].countries[0].name}
                         </p>
                     }/>
-                    <Clickable clickCallback={()=>{setSelectUser(1)}} inside={
+                    <Clickable clickCallback={()=>{setSelectUser(props.teams[props.userTeam].countries[1])}} inside={
                         <p className="centerText">
-                            {props.userTeam.countries[1].flag} {props.userTeam.countries[1].name}
+                            {props.teams[props.userTeam].countries[1].flag} {props.teams[props.userTeam].countries[1].name}
                         </p>
                     }/>
                 </div>
-                <p className="centerText">Their {props.targetTeam.countries[selectTarget].flag} {props.targetTeam.countries[selectTarget].name} for your {props.userTeam.countries[selectUser].flag} {props.userTeam.countries[selectUser].name}</p>
+                <p className="centerText">Their {props.teams[props.targetTeam].countries[selectTarget].flag} {props.teams[props.targetTeam].countries[selectTarget].name} for your {props.teams[props.userTeam].countries[selectUser].flag} {props.teams[props.userTeam].countries[selectUser].name}</p>
                 <div className="tradeColumn">
                     <Clickable clickCallback={()=>{sendProposal(props.userTeam, props.targetTeam, selectUser, selectTarget);props.closeTrade()}} inside={
                         <p className="centerText">Confirm</p>

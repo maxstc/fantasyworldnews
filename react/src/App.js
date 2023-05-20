@@ -35,10 +35,12 @@ const App = (props) => {
     }
     return undefined;
   }
+
+  let userTeam = getTeam(getTeamName(), props.data);
   
-  function startTrade(teamName) {
-    if (teamName != getTeamName()) {
-      setTradeTeam(teamName);
+  function startTrade(team, country) {
+    if (team != userTeam()) {
+      setTradeTeam(team);
       setHidden(false);
     }
   }
@@ -50,9 +52,9 @@ const App = (props) => {
   return (
     <div>
       <TeamList startTrade={startTrade} teams={props.data.teams} />
-      <CountryList countries={props.data.countries} />
-      <TradeColumn teamName={getTeamName()} countries={getTeam(getTeamName(), props.data).countries}/>
-      <TradePopup targetTeam={getTeam(tradeTeam, props.data)} userTeam={getTeam(getTeamName(), props.data)} hidden={hidden} closeTrade={closeTrade}/>
+      <CountryList countries={props.data.countries} teams={props.data.teams} startTrade={startTrade} />
+      <TradeColumn team={userTeam} teams={props.data.teams} countries={props.data.countries} trades={props.data.trades} />
+      <TradePopup targetTeam={tradeTeam} userTeam={userTeam} hidden={hidden} closeTrade={closeTrade} teams={props.data.teams} countries={props.data.countries} />
     </div>
   )
   

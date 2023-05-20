@@ -90,8 +90,8 @@ async function checkNews() {
 function handleTrade(reqBody) {
     console.log("Got a trade:");
     console.log(reqBody);
-    let proposerTeam = reqBody.proposer;            //team index
-    let targetTeam = reqBody.target;                //team index
+    let proposerTeam = reqBody.proposerTeam;        //team index
+    let targetTeam = reqBody.targetTeam;            //team index
     let proposerCountry = reqBody.proposerCountry;  //country index (in all countries)
     let targetCountry = reqBody.targetCountry;      //country index (in all countries)
     //check trade is valid (proposer and target have the corresponding countries of the trade)
