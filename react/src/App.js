@@ -30,7 +30,7 @@ const App = (props) => {
   function getTeam(teamName, data) {
     for (let i = 0; i < data.teams.length; i++) {
       if (data.teams[i].name === teamName) {
-        return data.teams[i];
+        return i;
       }
     }
     return undefined;

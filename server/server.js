@@ -69,47 +69,56 @@ async function checkNews() {
             console.log("NEGATIVE AMOUNT!");
             console.log(frontendCountries);
         }
-
-        for (let j = 0; j < teams.length; j++) {
-            if (teams[j].countries[0].flag === frontendCountries[i].flag) {
-                teams[j].countries[0].score = frontendCountries[i].score;
-                teams[j].score += frontendCountries[i].score;
-            }
-            else if (teams[j].countries[1].flag === frontendCountries[i].flag) {
-                teams[j].countries[1].score = frontendCountries[i].score;
-                teams[j].score += frontendCountries[i].score;
-            }
-        }
     }
 
-    for (let i = 0; i < frontendCountries.length; i++) {
-        if (frontendCountries[i].amount != 0) {
-            console.log(frontendCountries[i]);
-        }
+    for (let i = 0; i < teams.length; i++) {
+        teams[i].score += frontendCountries[teams[i].countries[0]].score;
+        teams[i].score += frontendCountries[teams[i].countries[1]].score;
     }
+
+    //print out countries that scored
+    // for (let i = 0; i < frontendCountries.length; i++) {
+    //     if (frontendCountries[i].amount != 0) {
+    //         console.log(frontendCountries[i]);
+    //     }
+    // }
+    console.log("Check news done.");
 }
 
+//adds a proposal to the list of proposals
+//does not execute a trade (unless an opposite trade already existed)
 function handleTrade(reqBody) {
     console.log("Got a trade:");
     console.log(reqBody);
-    let proposerTeam = reqBody.proposer;
-    let targetTeam = reqBody.target;
-    let proposerCountry = reqBody.proposerCountry;
-    let targetCountry = reqBody.targetCountry;
-    //check trade is valid
+    let proposerTeam = reqBody.proposer;            //team index
+    let targetTeam = reqBody.target;                //team index
+    let proposerCountry = reqBody.proposerCountry;  //country index (in all countries)
+    let targetCountry = reqBody.targetCountry;      //country index (in all countries)
+    //check trade is valid (proposer and target have the corresponding countries of the trade)
+    if (targetTeam === -1) { //swapping an unselected country
+        if (!teams[proposerTeam].countries.includes(proposerCountry)) {
+            console.log("Invalid trade");
+            return;
+        }
+        //check no one has that country
+        for (let i = 0; i < teams.length; i++) {
+            if (teams[i].countries.includes(targetCountry)) {
+                console.log("Invalid trade");
+                return;
+            }
+        }
+        claimCountry(proposerTeam, proposerCountry, targetCountry);
+        removeInvalidTrades(proposerCountry);
+        return;
+    }
+    if (!teams[proposerTeam].countries.includes(proposerCountry) || !teams[targetTeam].countries.includes(targetCountry)) {
+        console.log("Invalid trade");
+        return;
+    }
     //cant trade with yourself
     if (proposerTeam === targetTeam) {
         console.log("Proposer and target are the same");
         return;
-    }
-    //find the two teams involved
-    for (let i = 0; i < teams.length; i++) {
-        if (teams[i] === reqBody.proposerTeam) {
-            proposerTeam = teams[i];
-        }
-        else if (teams[i].targetTeam === reqBody.targetTeam) {
-            targetTeam = teams[i];
-        }
     }
     //check if proposal already exists, remove it if it does
     for (let i = 0; i < trades.length; i++) {
@@ -128,9 +137,11 @@ function handleTrade(reqBody) {
             && trades[i].proposerCountry === targetCountry 
             && trades[i].targetCountry === proposerCountry) {
                 //trade already exists in opposite direction, execute the trade
+                executeTrade(tradeId);
+                removeInvalidTrades(proposerCountry);
+                removeInvalidTrades(targetCountry);
                 trades.splice(i, 1);
                 i--;
-                executeTrade(proposerTeam, targetTeam, proposerCountry, targetCountry);
         }
     }
     //add this proposal
@@ -139,14 +150,90 @@ function handleTrade(reqBody) {
         targetTeam: targetTeam,
         proposerCountry: proposerCountry,
         targetCountry: targetCountry,
+        timestamp: Date.now(),
         hourAdded: new Date().getHours()
     }
     console.log(trades);
 }
 
-function handleAcceptTrade(reqBody, teams, trades) {
-    console.log("Got a trade acceptance:");
+//can be done by proposer or target
+function handleDeclineTrade(reqBody) {
+    console.log("Declining trade:");
     console.log(reqBody);
+    let team = reqBody.team;
+    let tradeId = reqBody.tradeId;
+    let timestamp = reqBody.timestamp;
+    if (trades[tradeId].proposerTeam === team || trades[tradeId].targetTeam === team) {
+        if (trades[tradeId].timestamp === timestamp) {
+            trades.splice(tradeId, 1);
+        }
+        else {
+            console.log("Trade decline has been moved or already declined.");
+        }
+    }
+    else {
+        console.log("Invalid trade decline.");
+    }
+}
+
+//can only be done by target
+function handleAcceptTrade(reqBody) {
+    console.log("Accepting trade:");
+    console.log(reqBody);
+    let team = reqBody.team;
+    let tradeId = reqBody.tradeId;
+    let timestamp = reqBody.timestamp;
+    if (trades[tradeId].targetTeam === team) {
+        if (trades[tradeId].timestamp === timestamp) {
+            executeTrade(tradeId);
+            trades.splice(tradeId, 1);
+        }
+        else {
+            console.log("Trade accept has been moved or already declined.");
+        }
+    }
+    else {
+        console.log("Invalid trade accept.");
+    }
+}
+
+//remove any trades that reference a given country
+function removeInvalidTrades(country) {
+    for (let i = 0; i < trades.length; i++) {
+        if (trades[i].proposerCountry === country || trades[i].targetCountry === country) {
+            trades.splice(i, 1);
+            i--;
+        }
+    }
+}
+
+function claimCountry(proposerTeam, proposerCountry, targetCountry) {
+    for (let i = 0; i < teams[proposerTeam].countries.length; i++) {
+        if (teams[proposerTeam].countries[i] === proposerCountry) {
+            teams[proposerTeam].countries[i] = targetCountry;
+        }
+    }
+}
+
+//executes a trade in the array "trades" at index tradeId.
+function executeTrade(tradeId) {
+    let team1 = trades[tradeId].proposerTeam;
+    let team2 = trades[tradeId].targetTeam;
+    let country1 = trades[tradeId].proposerCountry;
+    let country2 = trades[tradeId].targetCountry;
+
+    for (let i = 0; i < teams[team1].countries.length; i++) {
+        if (teams[team1].countries[i] === country1) {
+            teams[team1].countries[i] = country2;
+        }
+    }
+    for (let i = 0; i < teams[team2].countries.length; i++) {
+        if (teams[team2].countries[i] === country2) {
+            teams[team2].countries[i] = country1;
+        }
+    }
+
+    console.log("Trade executed.");
 }
 
 fs.readFile("./gamedata.json", (err, data) => {
@@ -182,7 +269,7 @@ fs.readFile("./gamedata.json", (err, data) => {
             countries: frontendCountries,
             teams: teams
         }));
-    })
+    });
 
     app.use(express.static("react/build/"));
 
