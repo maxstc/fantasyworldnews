@@ -39,7 +39,7 @@ const App = (props) => {
   let userTeam = getTeam(getTeamName(), props.data);
   
   function startTrade(team, country) {
-    if (team != userTeam()) {
+    if (team != userTeam) {
       setTradeTeam(team);
       setHidden(false);
     }
