@@ -12,7 +12,7 @@ const TeamList = (props) => {
             <p className="listHeader">Teams</p>
             {
                 [...Array(props.teams.length).keys()].sort((a, b) => {
-                    props.teams[b].score - props.teams[a].score;
+                    return props.teams[b].score - props.teams[a].score;
                 }).map((teamId) => (
                     <Clickable clickCallback={()=>{startTrade(teamId)}} inside={
                         <div>

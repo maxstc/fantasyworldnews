@@ -23,9 +23,9 @@ const CountryList = (props) => {
                 }).map((countryId) => (
                     <Clickable clickCallback={()=>{startTrade(countryId)}} inside={
                         <div>
-                            <span className="flag">{country.flag}</span>
-                            <span className="name">{country.name[0]}</span>
-                            <span className="score">{country.score}</span>
+                            <span className="flag">{props.countries[countryId].flag}</span>
+                            <span className="name">{props.countries[countryId].name[0]}</span>
+                            <span className="score">{props.countries[countryId].score}</span>
                         </div>
                     }/>
                 ))
