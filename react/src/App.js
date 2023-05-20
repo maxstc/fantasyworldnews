@@ -9,7 +9,7 @@ const App = (props) => {
   console.log(props.data);
   
   const [hidden, setHidden] = React.useState(true);
-  const [tradeTeam, setTradeTeam] = React.useState(props.data.teams[0].name);  
+  const [tradeTeam, setTradeTeam] = React.useState(0);  
 
   function getTeamName() {
     let cs = document.cookie.split(";");
