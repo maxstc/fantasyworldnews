@@ -42,13 +42,8 @@ const App = (props) => {
   function startTrade(team, country) {
     if (team === -1) {
       for (let i = 0; i < props.data.teams.length; i++) {
-        for (let j = 0; j < props.data.teams[i].countries.length; j++) {
-          if (props.data.teams[i].countries[j] === country) {
-            team = i;
-            country = j;
-            j = props.data.teams[j].countries.length;
-            i = props.data.teams.length;
-          }
+        if (props.data.teams[i].countries.includes(country)) {
+          team = i;
         }
       }
     }
@@ -68,7 +63,7 @@ const App = (props) => {
       <TeamList startTrade={startTrade} teams={props.data.teams} countries={props.data.countries} />
       <CountryList countries={props.data.countries} teams={props.data.teams} startTrade={startTrade} />
       <TradeColumn team={userTeam} teams={props.data.teams} countries={props.data.countries} trades={props.data.trades} />
-      <TradePopup targetTeam={tradeTeam} userTeam={userTeam} hidden={hidden} closeTrade={closeTrade} teams={props.data.teams} countries={props.data.countries} />
+      <TradePopup targetTeam={tradeTeam} targetCountry={tradeCountry} userTeam={userTeam} userCountry={props.data.teams[userTeam].countries[0]} hidden={hidden} closeTrade={closeTrade} teams={props.data.teams} countries={props.data.countries} />
     </div>
   )
   
