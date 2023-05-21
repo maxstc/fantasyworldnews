@@ -40,13 +40,14 @@ const App = (props) => {
   let userTeam = getTeam(getTeamName(), props.data);
   
   function startTrade(team, country) {
-    if (team === -1) {
-      for (let i = 0; i < props.data.teams.length; i++) {
-        if (props.data.teams[i].countries.includes(country)) {
-          team = i;
-        }
-      }
-    }
+    console.log("starting trade" + team + "," + country);
+    // if (team === -1) {
+    //   for (let i = 0; i < props.data.teams.length; i++) {
+    //     if (props.data.teams[i].countries.includes(country)) {
+    //       team = i;
+    //     }
+    //   }
+    // }
     if (team != userTeam) {
       setTradeTeam(team);
       setTradeCountry(country);
@@ -57,6 +58,7 @@ const App = (props) => {
   function closeTrade() {
     setHidden(true);
   }
+
 
   return (
     <div>
