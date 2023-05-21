@@ -213,6 +213,7 @@ function claimCountry(proposerTeam, proposerCountry, targetCountry) {
             teams[proposerTeam].countries[i] = targetCountry;
         }
     }
+    console.log("Country claimed.");
 }
 
 //executes a trade in the array "trades" at index tradeId.
