@@ -97,13 +97,13 @@ function handleTrade(reqBody) {
     //check trade is valid (proposer and target have the corresponding countries of the trade)
     if (targetTeam === -1) { //swapping an unselected country
         if (!teams[proposerTeam].countries.includes(proposerCountry)) {
-            console.log("Invalid trade");
+            console.log("Invalid trade, proposer does not have country for swap");
             return;
         }
         //check no one has that country
         for (let i = 0; i < teams.length; i++) {
             if (teams[i].countries.includes(targetCountry)) {
-                console.log("Invalid trade");
+                console.log("Invalid trade, someone has that country");
                 return;
             }
         }
@@ -112,7 +112,7 @@ function handleTrade(reqBody) {
         return;
     }
     if (!teams[proposerTeam].countries.includes(proposerCountry) || !teams[targetTeam].countries.includes(targetCountry)) {
-        console.log("Invalid trade");
+        console.log("Invalid trade, one part is missing country");
         return;
     }
     //cant trade with yourself
