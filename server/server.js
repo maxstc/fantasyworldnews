@@ -39,12 +39,22 @@ function saveData(makeBackup) {
                 console.log(err);
                 console.log(strData);
             }
-            fs.writeFile("./gamedata.json", strData, (err)=>{if (err) {console.log(err)}});
+            fs.unlink("./gamedata.json", (err)=>{
+                if (err) {
+                    console.log(err);
+                }
+                fs.writeFile("./gamedata.json", strData, (err)=>{if (err) {console.log(err)}});
+            });
         });
     }
     else {
         console.log("Saved data with backup." + filePostfix);
-        fs.writeFile("./gamedata.json", strData, (err)=>{if (err) {console.log(err)}});
+        fs.unlink("./gamedata.json", (err)=>{
+            if (err) {
+                console.log(err);
+            }
+            fs.writeFile("./gamedata.json", strData, (err)=>{if (err) {console.log(err)}});
+        });
     }
 }
 
