@@ -1,5 +1,4 @@
 # todo
-- show offers (that you've made and that are made towards you) button in trade screen (and a button to accept or decline)
 - have offer buttons send msg to server
 
 # backlog

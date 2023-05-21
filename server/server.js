@@ -43,7 +43,7 @@ function saveData(makeBackup) {
         });
     }
     else {
-        console.log("Saved data." + filePostfix);
+        console.log("Saved data with backup." + filePostfix);
         fs.writeFile("./gamedata.json", strData, (err)=>{if (err) {console.log(err)}});
     }
 }
@@ -230,6 +230,7 @@ function removeInvalidTrades(country) {
             i--;
         }
     }
+    saveData(false);
 }
 
 function claimCountry(proposerTeam, proposerCountry, targetCountry) {

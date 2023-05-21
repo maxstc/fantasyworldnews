@@ -13,13 +13,13 @@ const OfferList = (props) => {
                     (props.trades[tradeId].proposerTeam === props.userTeam) ?
                     <div className="row">
                         <Clickable inlineBlock={1} margin={"5px"} clickCallback={()=>{}} inside={<span>❌</span>} />
-                        <span>abcd</span>
+                        <span>{props.countries[props.trades[tradeId].proposerCountry].flag} {props.countries[props.trades[tradeId].proposerCountry].name[0]} for {props.countries[props.trades[tradeId].targetCountry].flag} {props.countries[props.trades[tradeId].targetCountry].name[0]}</span>
                     </div>
                     :
                     <div className="row">
                         <Clickable inlineBlock={1} margin={"5px"} clickCallback={()=>{}} inside={<span>✅</span>} />
                         <Clickable inlineBlock={1} margin={"5px"} clickCallback={()=>{}} inside={<span>❌</span>} />
-                        <span>abcd</span>
+                        <span>{props.countries[props.trades[tradeId].proposerCountry].flag} {props.countries[props.trades[tradeId].proposerCountry].name[0]} for {props.countries[props.trades[tradeId].targetCountry].flag} {props.countries[props.trades[tradeId].targetCountry].name[0]}</span>
                     </div>
                 ))
             }

@@ -64,7 +64,7 @@ const App = (props) => {
     <div>
       <TeamList startTrade={startTrade} teams={props.data.teams} countries={props.data.countries} />
       <CountryList countries={props.data.countries} teams={props.data.teams} startTrade={startTrade} />
-      <TradeColumn team={userTeam} teams={props.data.teams} countries={props.data.countries} trades={props.data.trades} />
+      <TradeColumn team={userTeam} teams={props.data.teams} countries={props.data.countries} trades={props.data.trades} userTeam={userTeam} />
       <TradePopup targetTeam={tradeTeam} targetCountry={tradeCountry} userTeam={userTeam} userCountry={props.data.teams[userTeam].countries[0]} hidden={hidden} closeTrade={closeTrade} teams={props.data.teams} countries={props.data.countries} />
     </div>
   )

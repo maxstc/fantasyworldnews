@@ -24,7 +24,7 @@ const TradeColumn = (props) => {
                     </div>
             }
             <p className="listHeader">Trade Offers</p>
-            <OfferList trades={props.trades} />
+            <OfferList trades={props.trades} userTeam={props.userTeam} countries={props.countries}/>
         </div>
     );
 
