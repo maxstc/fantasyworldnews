@@ -6,11 +6,12 @@ const Clickable = (props) => {
     const [click, setClick] = useState(false);
 
     const sectionStyle = {
-        margin: "5px 30px",
+        margin: (props.margin === undefined) ? "5px 30px" : props.margin,
         "border-radius": "5px",
         border: hover ? "3px solid lightgray" : "1px solid lightgray",
         padding: hover ? "3px" : "5px",
-        background: click ? "lightgray" : "white"
+        background: click ? "lightgray" : "white",
+        display: (props.inlineBlock === 1) ? "inline-block" : ""
     }
 
     function processClick(c) {
