@@ -10,6 +10,7 @@ const App = (props) => {
   
   const [hidden, setHidden] = React.useState(true);
   const [tradeTeam, setTradeTeam] = React.useState(0);  
+  const [tradeCountry, setTradeCountry] = React.useState(0);
 
   function getTeamName() {
     let cs = document.cookie.split(";");
@@ -39,8 +40,21 @@ const App = (props) => {
   let userTeam = getTeam(getTeamName(), props.data);
   
   function startTrade(team, country) {
+    if (team === -1) {
+      for (let i = 0; i < props.data.teams.length; i++) {
+        for (let j = 0; j < props.data.teams[i].countries.length; j++) {
+          if (props.data.teams[i].countries[j] === country) {
+            team = i;
+            country = j;
+            j = props.data.teams[j].countries.length;
+            i = props.data.teams.length;
+          }
+        }
+      }
+    }
     if (team != userTeam) {
       setTradeTeam(team);
+      setTradeCountry(country);
       setHidden(false);
     }
   }

@@ -21,7 +21,7 @@ const CountryList = (props) => {
                 [...Array(props.countries.length).keys()].sort((a, b) => {
                     return props.countries[b].score - props.countries[a].score;
                 }).map((countryId) => (
-                    <Clickable clickCallback={()=>{startTrade(countryId)}} inside={
+                    <Clickable clickCallback={()=>{startTrade(-1, countryId)}} inside={
                         <div>
                             <span className="flag">{props.countries[countryId].flag}</span>
                             <span className="name">{props.countries[countryId].name[0]}</span>
