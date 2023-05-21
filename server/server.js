@@ -27,6 +27,27 @@ for (let i = 0; i < countries.length; i++) {
     }
 }
 
+function saveData(makeBackup) {
+    let strData = JSON.stringify({
+        teams: teams,
+        trades: trades
+    }, null, 2);
+    let filePostfix = Date.now();
+    if (makeBackup) {
+        fs.copyFile("./gamedata.json", "./backups/gamedata" + filePostfix + ".json", (err) => {
+            if (err) {
+                console.log(err);
+                console.log(strData);
+            }
+            fs.writeFile("./gamedata.json", strData);
+        });
+    }
+    else {
+        console.log("Saving data with backup." + filePostfix);
+        fs.writeFile("./gamedata.json", strData);
+    }
+}
+
 async function checkNews() {
     console.log("Checking news...");
     console.log(new Date());
@@ -83,6 +104,7 @@ async function checkNews() {
     //     }
     // }
     console.log("Check news done.");
+    saveData(true);
 }
 
 //adds a proposal to the list of proposals
@@ -154,6 +176,7 @@ function handleTrade(reqBody) {
         hourAdded: new Date().getHours()
     }
     console.log(trades);
+    saveData(false);
 }
 
 //can be done by proposer or target
@@ -174,6 +197,7 @@ function handleDeclineTrade(reqBody) {
     else {
         console.log("Invalid trade decline.");
     }
+    saveData(false);
 }
 
 //can only be done by target
@@ -195,6 +219,7 @@ function handleAcceptTrade(reqBody) {
     else {
         console.log("Invalid trade accept.");
     }
+    saveData(false);
 }
 
 //remove any trades that reference a given country
@@ -214,6 +239,7 @@ function claimCountry(proposerTeam, proposerCountry, targetCountry) {
         }
     }
     console.log("Country claimed.");
+    saveData(false);
 }
 
 //executes a trade in the array "trades" at index tradeId.
@@ -235,6 +261,7 @@ function executeTrade(tradeId) {
     }
 
     console.log("Trade executed.");
+    saveData(false);
 }
 
 fs.readFile("./gamedata.json", (err, data) => {
