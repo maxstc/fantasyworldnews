@@ -76,7 +76,7 @@ const TradePopup = (props) => {
                 </div>
                 <p className="centerText">{props.countries[selectTarget].flag} {props.countries[selectTarget].name[0]} for your {props.countries[selectUser].flag} {props.countries[selectUser].name[0]}</p>
                 <div className="tradeColumn">
-                    <Clickable clickCallBack={()=>{sendProposal(props.userTeam, props.targetTeam, selectUser, selectTarget)}} inside={
+                    <Clickable clickCallback={()=>{sendProposal(props.userTeam, props.targetTeam, selectUser, selectTarget)}} inside={
                         <p className="centerText">Confirm</p>
                     }/>
                 </div>

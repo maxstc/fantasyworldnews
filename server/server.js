@@ -267,7 +267,8 @@ fs.readFile("./gamedata.json", (err, data) => {
     app.get("/data", (req, res) => {
         res.send(JSON.stringify({
             countries: frontendCountries,
-            teams: teams
+            teams: teams,
+            trades: trades
         }));
     });
 
