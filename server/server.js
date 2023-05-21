@@ -39,12 +39,12 @@ function saveData(makeBackup) {
                 console.log(err);
                 console.log(strData);
             }
-            fs.writeFile("./gamedata.json", strData);
+            fs.writeFile("./gamedata.json", strData, (err)=>{if (err) {console.log(err)}});
         });
     }
     else {
-        console.log("Saving data with backup." + filePostfix);
-        fs.writeFile("./gamedata.json", strData);
+        console.log("Saved data." + filePostfix);
+        fs.writeFile("./gamedata.json", strData, (err)=>{if (err) {console.log(err)}});
     }
 }
 
