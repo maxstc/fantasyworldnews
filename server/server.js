@@ -288,8 +288,14 @@ fs.readFile("./gamedata.json", (err, data) => {
         handleTrade(req.body);
     });
 
+    app.post("/declinetrade", (req, res) => {
+        handleDeclineTrade(req.body);
+        res.json(true);
+    })
+
     app.post("/accepttrade", (req, res) => {
         handleAcceptTrade(req.body);
+        res.json(true);
     });
 
     app.get("/", (req, res) => {
