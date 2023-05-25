@@ -3,7 +3,8 @@ let port = 41399;
 let teams;
 let trades;
 
-const fs = require("fs");
+//import { unlink, readFile, writeFile, copyFile } from "node:fs/promises";
+const fs = require("node:fs/promises");
 const countries = require("./countries").countries;
 
 const express = require("express");
@@ -27,35 +28,20 @@ for (let i = 0; i < countries.length; i++) {
     }
 }
 
-function saveData(makeBackup) {
+async function saveData(makeBackup) {
     let strData = JSON.stringify({
         teams: teams,
         trades: trades
     }, null, 2);
     let filePostfix = Date.now();
     if (makeBackup) {
-        fs.copyFile("./gamedata.json", "./backups/gamedata" + filePostfix + ".json", (err) => {
-            if (err) {
-                console.log(err);
-                console.log(strData);
-            }
-            fs.unlink("./gamedata.json", (err)=>{
-                if (err) {
-                    console.log(err);
-                }
-                fs.writeFile("./gamedata.json", strData, (err)=>{if (err) {console.log(err)}});
-            });
-        });
+        await fs.copyFile("./gamedata.json", "./backups/gamedata" + filePostfix + ".json");
     }
-    else {
-        console.log("Saved data with backup." + filePostfix);
-        fs.unlink("./gamedata.json", (err)=>{
-            if (err) {
-                console.log(err);
-            }
-            fs.writeFile("./gamedata.json", strData, (err)=>{if (err) {console.log(err)}});
-        });
-    }
+    console.log("unlinking...");
+    await fs.unlink("./gamedata.json");
+    console.log("writing...");
+    await fs.writeFile("./gamedata.json", strData);
+    console.log("done...");
 }
 
 async function checkNews() {
@@ -114,7 +100,7 @@ async function checkNews() {
     //     }
     // }
     console.log("Check news done.");
-    saveData(true);
+    await saveData(true);
 }
 
 //adds a proposal to the list of proposals
@@ -186,7 +172,6 @@ function handleTrade(reqBody) {
         hourAdded: new Date().getHours()
     }
     console.log(trades);
-    saveData(false);
 }
 
 //can be done by proposer or target
@@ -207,7 +192,6 @@ function handleDeclineTrade(reqBody) {
     else {
         console.log("Invalid trade decline.");
     }
-    saveData(false);
 }
 
 //can only be done by target
@@ -229,7 +213,6 @@ function handleAcceptTrade(reqBody) {
     else {
         console.log("Invalid trade accept.");
     }
-    saveData(false);
 }
 
 //remove any trades that reference a given country
@@ -240,7 +223,6 @@ function removeInvalidTrades(country) {
             i--;
         }
     }
-    saveData(false);
 }
 
 function claimCountry(proposerTeam, proposerCountry, targetCountry) {
@@ -250,7 +232,6 @@ function claimCountry(proposerTeam, proposerCountry, targetCountry) {
         }
     }
     console.log("Country claimed.");
-    saveData(false);
 }
 
 //executes a trade in the array "trades" at index tradeId.
@@ -272,26 +253,22 @@ function executeTrade(tradeId) {
     }
 
     console.log("Trade executed.");
-    saveData(false);
 }
 
-fs.readFile("./gamedata.json", (err, data) => {
-    if (err) {
-        console.log(err);
-    }
+fs.readFile("./gamedata.json").then((data) => {
     let parsedData = JSON.parse(data + "");
     teams = parsedData.teams;
     trades = parsedData.trades;
 
     app.post("/trade", (req, res) => {
-        console.log("POST");
         handleTrade(req.body);
+        res.json(true);
     });
 
     app.post("/declinetrade", (req, res) => {
         handleDeclineTrade(req.body);
         res.json(true);
-    })
+    });
 
     app.post("/accepttrade", (req, res) => {
         handleAcceptTrade(req.body);
@@ -349,5 +326,5 @@ fs.readFile("./gamedata.json", (err, data) => {
             console.log("Stopping the server");
             process.exit();
         }
-    })
+    });
 });

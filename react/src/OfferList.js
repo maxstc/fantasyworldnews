@@ -14,13 +14,18 @@ const OfferList = (props) => {
             team: props.userTeam,
             tradeId: tradeId,
             timestamp: props.trades[tradeId].timestamp
+        }).then(() => {
+            props.refresh();
         });
     }
+
     function acceptOffer(tradeId) {
         postData("/accepttrade", {
             team: props.userTeam,
             tradeId: tradeId,
             timestamp: props.trades[tradeId].timestamp
+        }).then(() => {
+            props.refresh();
         });
     }
 

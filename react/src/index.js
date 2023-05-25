@@ -4,12 +4,16 @@ import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-fetch("data").then((data) => {
-  data.json().then((data) => {
-    root.render(
-      <React.StrictMode>
-        <App data={data} />
-      </React.StrictMode>
-    );
-  })
-});
+function refresh() {
+  fetch("data").then((data) => {
+    data.json().then((data) => {
+      root.render(
+        <React.StrictMode>
+          <App data={data} refresh={refresh} />
+        </React.StrictMode>
+      );
+    })
+  });
+}
+
+refresh();

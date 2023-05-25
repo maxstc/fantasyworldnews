@@ -19,6 +19,8 @@ const TradePopup = (props) => {
             targetTeam: targetTeam,
             proposerCountry: userCountry,
             targetCountry: targetCountry
+        }).then(() => {
+            props.refresh();
         });
     }
 
