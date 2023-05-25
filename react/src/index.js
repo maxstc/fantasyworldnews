@@ -17,3 +17,5 @@ function refresh() {
 }
 
 refresh();
+
+setInterval(refresh, 3000);
