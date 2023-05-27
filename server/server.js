@@ -82,9 +82,14 @@ async function checkNews() {
         if (dozenCountries.includes(frontendCountries[i].name[0])) {
             frontendCountries[i].score -= 12;
         }
-        if (frontendCountries[i].amount < 0) {
+        if (frontendCountries[i].name[0] == "Switzerland") {
+            frontendCountries[i].score -= 2;
+            //sorry switzerland, but for some reason u always get 2 more points than you should
+        }
+        if (frontendCountries[i].score < 0) {
             console.log("NEGATIVE AMOUNT!");
             console.log(frontendCountries);
+            frontendCountries[i].score = 0;
         }
     }
 
@@ -302,7 +307,7 @@ fs.readFile("./gamedata.json").then((data) => {
 
     let lastHour = new Date().getHours();
 
-    checkNews();
+    //checkNews();
 
     //update each time the hour changes
     setInterval(() => {
