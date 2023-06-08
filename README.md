@@ -1,5 +1,12 @@
 # todo
-- have offer buttons send msg to server
-
-# backlog
-- if you click from the middle country column and it already belongs to a team, then have that country already selected in the trade column
+- country daily/weekly stats
+- player stats
+- ingame drafting
+- more than 2 countries
+- multicountry trades
+- dont have to go to /team/yourname each time
+- show who claimed each country in the middle row
+- middle column filter (alphabetical, last hour performance, last day performance, etc)
+- keep track of headlines
+- read the text of articles
+- showing flags on chrome
