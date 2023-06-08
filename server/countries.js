@@ -647,7 +647,7 @@ const countries = [
     "flag": "🇰🇳",
     "name": [
       "Saint Kitts and Nevis",
-      "Kittitian or Nevisian"
+      "Kittitian, Nevisian"
     ]
   },
   {
