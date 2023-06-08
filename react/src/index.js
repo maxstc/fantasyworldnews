@@ -5,7 +5,7 @@ import App from "./App";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 function refresh() {
-  fetch("data").then((data) => {
+  fetch("http://" + window.location.hostname + ":41399/data").then((data) => {
     data.json().then((data) => {
       root.render(
         <React.StrictMode>

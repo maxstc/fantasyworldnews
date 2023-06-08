@@ -38,7 +38,7 @@ const App = (props) => {
   }
 
   let userTeam = getTeam(getTeamName(), props.data);
-  
+
   function startTrade(team, country) {
     console.log("starting trade" + team + "," + country);
     // if (team === -1) {

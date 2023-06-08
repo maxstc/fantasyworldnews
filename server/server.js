@@ -292,6 +292,7 @@ fs.readFile("./gamedata.json").then((data) => {
     });
 
     app.get("/data", (req, res) => {
+        res.set("Access-Control-Allow-Origin", "http://localhost:3000");
         res.send(JSON.stringify({
             countries: frontendCountries,
             teams: teams,
