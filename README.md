@@ -10,3 +10,4 @@
 - keep track of headlines
 - read the text of articles
 - showing flags on chrome
+- search bar for middle column
