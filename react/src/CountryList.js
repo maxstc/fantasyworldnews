@@ -23,7 +23,7 @@ const CountryList = (props) => {
                 }).map((countryId) => (
                     <Clickable clickCallback={()=>{startTrade(countryId)}} inside={
                         <div>
-                            <span className="flag">{props.countries[countryId].flag}</span>
+                            <span className="flag">{<img width="20" src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + props.countries[countryId].countrycode + ".svg"}/>}</span>
                             <span className="name">{props.countries[countryId].name[0]}</span>
                             <span className="score">{props.countries[countryId].score}</span>
                         </div>

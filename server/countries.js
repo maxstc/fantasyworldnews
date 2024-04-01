@@ -1,4 +1,4 @@
-[
+const countries = [
   {
     "flag": "🇦🇩",
     "name": [
@@ -1600,3 +1600,7 @@
     "countrycode": "ZW"
   }
 ]
+
+module.exports = {
+  countries: countries
+}

@@ -24,6 +24,7 @@ for (let i = 0; i < countries.length; i++) {
     frontendCountries[i] = {
         flag: countries[i].flag,
         name: countries[i].name,
+        countrycode: countries[i].countrycode,
         score: 0
     }
 }
