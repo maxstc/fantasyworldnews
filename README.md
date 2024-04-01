@@ -1,6 +1,4 @@
 # todo
-- showing flags on chrome
-
 - keep track of headlines
 - read the text of articles
 - country daily/weekly stats
