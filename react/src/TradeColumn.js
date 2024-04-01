@@ -1,6 +1,7 @@
 import React from 'react';
 import './List.css';
 import './TradeColumn.css';
+import Flag from './Flag';
 import OfferList from './OfferList';
 
 const TradeColumn = (props) => {
@@ -19,8 +20,8 @@ const TradeColumn = (props) => {
                     <p className="centerText">Your team doesn't exist</p>
                     :
                     <div>
-                        <span className="centerText">{props.countries[props.teams[props.team].countries[0]].flag} : {props.countries[props.teams[props.team].countries[0]].score}</span>
-                        <span className="centerText">{props.countries[props.teams[props.team].countries[1]].flag} : {props.countries[props.teams[props.team].countries[1]].score}</span>
+                        <span className="centerText"><Flag flagWidth="40" countrycode={props.countries[props.teams[props.team].countries[0]].countrycode}/> {props.countries[props.teams[props.team].countries[0]].name[0]} : {props.countries[props.teams[props.team].countries[0]].score}</span>
+                        <span className="centerText"><Flag flagWidth="40" countrycode={props.countries[props.teams[props.team].countries[1]].countrycode}/> {props.countries[props.teams[props.team].countries[1]].name[0]} : {props.countries[props.teams[props.team].countries[1]].score}</span>
                     </div>
             }
             <p className="listHeader">Trade Offers</p>
