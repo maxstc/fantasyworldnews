@@ -4,6 +4,10 @@ import './List.css';
 
 const CountryList = (props) => {
 
+    const flagstyle = {
+        border: "1px solid black"
+    }
+
     function startTrade(countryId) {
         for (let i = 0; i < props.teams.length; i++) {
             if (props.teams[i].countries.includes(countryId)) {
@@ -23,7 +27,7 @@ const CountryList = (props) => {
                 }).map((countryId) => (
                     <Clickable clickCallback={()=>{startTrade(countryId)}} inside={
                         <div>
-                            <span className="flag">{<img width="20" src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + props.countries[countryId].countrycode + ".svg"}/>}</span>
+                            <span className="flag">{<img width="20" style={flagstyle} src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + props.countries[countryId].countrycode + ".svg"}/>}</span>
                             <span className="name">{props.countries[countryId].name[0]}</span>
                             <span className="score">{props.countries[countryId].score}</span>
                         </div>
