@@ -1,5 +1,6 @@
 import React from 'react';
 import Clickable from './Clickable';
+import Flag from './Flag';
 import './List.css';
 
 const CountryList = (props) => {
@@ -27,7 +28,7 @@ const CountryList = (props) => {
                 }).map((countryId) => (
                     <Clickable clickCallback={()=>{startTrade(countryId)}} inside={
                         <div>
-                            <span className="flag">{<img width="20" style={flagstyle} src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + props.countries[countryId].countrycode + ".svg"}/>}</span>
+                            <span className="flag"><Flag flagWidth="20" countrycode={props.countries[countryId].countrycode}/></span>
                             <span className="name">{props.countries[countryId].name[0]}</span>
                             <span className="score">{props.countries[countryId].score}</span>
                         </div>
