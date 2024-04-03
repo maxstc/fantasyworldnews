@@ -1,0 +1,28 @@
+teams[]
+    name STRING
+    score NUMBER
+    countries[] NUMBER
+trades[]
+    proposerTeam NUMBER
+    targetTeam NUMBER
+    proposerCountry NUMBER
+    targetCountry NUMBER
+    proposerPointsOffered NUMBER
+countries[]
+    code STRING
+    flag STRING
+    names[] STRING
+    latestHeadlineIndices[] NUMBER
+tradeHistory[]
+    timestamp NUMBER
+    proposerTeam NUMBER
+    targetTeam NUMBER
+    proposerCountry NUMBER
+    targetCountry NUMBER
+    proposerPointsOffered NUMBER
+headlines[]
+    text STRING
+    timestamp NUMBER
+    mentionedCountries[]
+        countryIndex NUMBER
+        mentionedNames[] STRING
