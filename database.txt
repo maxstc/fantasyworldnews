@@ -1,28 +1,23 @@
 teams[]
     name STRING
     score NUMBER
-    countries[] NUMBER
+    countries[] INDEX
 trades[]
-    proposerTeam NUMBER
-    targetTeam NUMBER
-    proposerCountry NUMBER
-    targetCountry NUMBER
+    timestamp NUMBER
+    proposerTeam INDEX
+    targetTeam INDEX
+    proposerCountry INDEX
+    targetCountry INDEX
     proposerPointsOffered NUMBER
+    status STRING
 countries[]
     code STRING
     flag STRING
     names[] STRING
-    latestHeadlineIndices[] NUMBER
-tradeHistory[]
-    timestamp NUMBER
-    proposerTeam NUMBER
-    targetTeam NUMBER
-    proposerCountry NUMBER
-    targetCountry NUMBER
-    proposerPointsOffered NUMBER
+    latestHeadlineIndices[] INDEX
 headlines[]
     text STRING
     timestamp NUMBER
     mentionedCountries[]
-        countryIndex NUMBER
+        country INDEX
         mentionedNames[] STRING

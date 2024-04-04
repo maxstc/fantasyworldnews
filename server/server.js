@@ -1,5 +1,9 @@
 let port = 41399;
 
+const { MongoClient } = require("mongodb");
+const client = new MongoClient("mongodb://127.0.0.1:27017");
+await client.connect();
+
 let teams;
 let trades;
 
