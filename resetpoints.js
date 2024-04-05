@@ -10,17 +10,6 @@ async function main() {
     const colTradeHistory = db.collection("tradeHistory");
     const colHeadlines = db.collection("headlines");
 
-    const countries = require("./server/countries.js").countries;
-
-    for (let i = 0; i < countries.length; i++) {
-        colCountries.insertOne({
-            code: countries[i].countrycode,
-            flag: countries[i].flag,
-            names: countries[i].name,
-            latestHeadlineIndices: [],
-            owner: null
-        });
-    }
-    console.log("done")
+    colTeams.updateMany({}, {score: 0});
 }
 main();

@@ -2,14 +2,8 @@ let port = 41399;
 
 const { MongoClient } = require("mongodb");
 const client = new MongoClient("mongodb://127.0.0.1:27017");
-await client.connect();
-
-let teams;
-let trades;
-
-//import { unlink, readFile, writeFile, copyFile } from "node:fs/promises";
-const fs = require("node:fs/promises");
-const countries = require("./countries").countries;
+client.connect();
+const db = client.db("gamedata");
 
 const express = require("express");
 const app = express();
@@ -20,121 +14,23 @@ if (process.argv.length > 2) {
     port = parseInt(process.argv[2]);
 }
 
-//countries with tabs in the webpage (and need 12 to be subtracted from their totals)
-const dozenCountries = ["Australia", "China", "India", "United Kingdom"];
-
-let frontendCountries = [];
-for (let i = 0; i < countries.length; i++) {
-    frontendCountries[i] = {
-        flag: countries[i].flag,
-        name: countries[i].name,
-        countrycode: countries[i].countrycode,
-        score: 0
-    }
-}
-
-async function saveData(makeBackup) {
-    let strData = JSON.stringify({
-        teams: teams,
-        trades: trades
-    }, null, 2);
-    let filePostfix = Date.now();
-    if (makeBackup) {
-        await fs.copyFile("./gamedata.json", "./backups/gamedata" + filePostfix + ".json");
-    }
-    console.log("unlinking...");
-    await fs.unlink("./gamedata.json");
-    console.log("writing...");
-    await fs.writeFile("./gamedata.json", strData);
-    console.log("done...");
-}
-
-async function checkNews() {
-    console.log("Checking news...");
-    console.log(new Date());
-    const response = await fetch("https://www.cnn.com/world");
-    const responseText = await response.text();
-
-    for (let i = 0; i < frontendCountries.length; i++) {
-        frontendCountries[i].score = 0;
-    }
-
-    for (let i = 0; i < countries.length; i++) {
-        let split1 = responseText.split(countries[i].name[0]);
-        let split1Count = 0;
-        let split2 = responseText.split(countries[i].name[1]);
-        let split2Count = 0;
-
-        //check that the splits are separated by non-alphanumeric stuff
-        //i.e. check that the occurences are actual works (so words like "American" won't be recognized as both an occurence of "America" AND "American")
-        for (let j = 0; j < split1.length - 1; j++) {
-            let left = split1[j].charAt(split1[j].length - 1);
-            let right = split1[j+1].charAt(0);
-            if (left.toUpperCase() == left.toLowerCase() && right.toUpperCase() == right.toLowerCase()) {
-                split1Count++;
-            }
-        }
-
-        for (let j = 0; j < split2.length - 1; j++) {
-            let left = split2[j].charAt(split2[j].length - 1);
-            let right = split2[j+1].charAt(0);
-            if (left.toUpperCase() == left.toLowerCase() && right.toUpperCase() == right.toLowerCase()) {
-                split2Count++;
-            }
-        }
-
-        frontendCountries[i].score = split1Count + split2Count;
-        if (dozenCountries.includes(frontendCountries[i].name[0])) {
-            frontendCountries[i].score -= 12;
-        }
-        if (frontendCountries[i].name[0] == "Switzerland") {
-            frontendCountries[i].score -= 2;
-            //sorry switzerland, but for some reason u always get 2 more points than you should
-        }
-        if (frontendCountries[i].score < 0) {
-            console.log("NEGATIVE AMOUNT!");
-            console.log(frontendCountries);
-            frontendCountries[i].score = 0;
-        }
-    }
-
-    for (let i = 0; i < teams.length; i++) {
-        teams[i].score += frontendCountries[teams[i].countries[0]].score;
-        teams[i].score += frontendCountries[teams[i].countries[1]].score;
-    }
-
-    //print out countries that scored
-    // for (let i = 0; i < frontendCountries.length; i++) {
-    //     if (frontendCountries[i].amount != 0) {
-    //         console.log(frontendCountries[i]);
-    //     }
-    // }
-    console.log("Check news done.");
-    await saveData(true);
-}
-
 //adds a proposal to the list of proposals
 //does not execute a trade (unless an opposite trade already existed)
 function handleTrade(reqBody) {
     console.log("Got a trade:");
     console.log(reqBody);
-    let proposerTeam = reqBody.proposerTeam;        //team index
-    let targetTeam = reqBody.targetTeam;            //team index
-    let proposerCountry = reqBody.proposerCountry;  //country index (in all countries)
-    let targetCountry = reqBody.targetCountry;      //country index (in all countries)
+    let proposerTeam = reqBody.proposerTeam;        //team id
+    let targetTeam = reqBody.targetTeam;            //team id
+    let proposerCountries = reqBody.proposerCountries;  //country ids (in all countries)
+    let targetCountries = reqBody.targetCountries;      //country ids (in all countries)
     //check trade is valid (proposer and target have the corresponding countries of the trade)
-    if (targetTeam === -1) { //swapping an unselected country
+    if (targetTeam === null) { //swapping an unselected country
         if (!teams[proposerTeam].countries.includes(proposerCountry)) {
             console.log("Invalid trade, proposer does not have country for swap");
             return;
         }
-        //check no one has that country
-        for (let i = 0; i < teams.length; i++) {
-            if (teams[i].countries.includes(targetCountry)) {
-                console.log("Invalid trade, someone has that country");
-                return;
-            }
-        }
+        //check that country is unclaimed
+        
         claimCountry(proposerTeam, proposerCountry, targetCountry);
         removeInvalidTrades(proposerCountry);
         return;

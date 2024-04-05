@@ -6,15 +6,21 @@ trades[]
     timestamp NUMBER
     proposerTeam INDEX
     targetTeam INDEX
-    proposerCountry INDEX
-    targetCountry INDEX
+    proposerCountries[] INDEX
+    targetCountries[] INDEX
     proposerPointsOffered NUMBER
     status STRING
+bids[]
+    timestamp NUMBER
+    proposerTeam INDEX
+    targetCountry INDEX
+    pointsBid NUMBER
 countries[]
     code STRING
     flag STRING
     names[] STRING
     latestHeadlineIndices[] INDEX
+    owner INDEX
 headlines[]
     text STRING
     timestamp NUMBER
