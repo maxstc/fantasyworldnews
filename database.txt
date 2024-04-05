@@ -1,26 +1,22 @@
 teams[]
     name STRING
     score NUMBER
-    countries[] INDEX
 trades[]
     timestamp NUMBER
     proposerTeam INDEX
     targetTeam INDEX
-    proposerCountries[] INDEX
-    targetCountries[] INDEX
-    proposerPointsOffered NUMBER
-    status STRING
-bids[]
-    timestamp NUMBER
-    proposerTeam INDEX
+    proposerCountry INDEX
     targetCountry INDEX
-    pointsBid NUMBER
+    proposerPointsOffered NUMBER
+    status STRING pending, canceled, accepted, declined, bidpending, bidsuccess, bidfail
 countries[]
     code STRING
     flag STRING
     names[] STRING
     latestHeadlineIndices[] INDEX
     owner INDEX
+    lastSwapTimestamp NUMBER
+    malus NUMBER
 headlines[]
     text STRING
     timestamp NUMBER
