@@ -222,8 +222,8 @@ app.get("/data", async (req, res) => {
     res.send(JSON.stringify({
         teams: await db.collection("teams").find().toArray(),
         trades: await db.collection("teams").find({$or: [{targetTeam: req.body.teamName}, {proposerTeam: req.body.teamName}]}).toArray(),
-        countries: await db.collection("countries").toArray(),
-        headlines: await db.collection("headlines").toArray()
+        countries: await db.collection("countries").find().toArray(),
+        headlines: await db.collection("headlines").find().toArray()
     }));
 });
 

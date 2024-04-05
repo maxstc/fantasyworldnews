@@ -1,42 +1,6 @@
-import React from 'react';
-import Clickable from './Clickable';
-import Flag from './Flag';
-import './List.css';
+import React, { useState } from 'react';
 
 const CountryList = (props) => {
-
-    const flagstyle = {
-        border: "1px solid black"
-    }
-
-    function startTrade(countryId) {
-        for (let i = 0; i < props.teams.length; i++) {
-            if (props.teams[i].countries.includes(countryId)) {
-                props.startTrade(i, countryId);
-                return;
-            }
-        }
-        props.startTrade(-1, countryId);
-    }
-
-    return (
-        <div className="list">
-            <p className="listHeader">Countries</p>
-            {
-                [...Array(props.countries.length).keys()].sort((a, b) => {
-                    return props.countries[b].score - props.countries[a].score;
-                }).map((countryId) => (
-                    <Clickable clickCallback={()=>{startTrade(countryId)}} inside={
-                        <div>
-                            <span className="flag"><Flag flagWidth="20" countrycode={props.countries[countryId].countrycode}/></span>
-                            <span className="name">{props.countries[countryId].name[0]}</span>
-                            <span className="score">{props.countries[countryId].score}</span>
-                        </div>
-                    }/>
-                ))
-            }
-        </div>
-    );
 
 }
 

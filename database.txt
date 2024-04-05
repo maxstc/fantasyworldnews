@@ -23,3 +23,13 @@ headlines[]
     mentionedCountries[]
         country INDEX
         mentionedNames[] STRING
+log[] (to be added)
+    type STRING headline/trade/bid 
+    headline INDEX
+    winners[]
+        team INDEX
+        country INDEX
+    trade INDEX
+
+    <img width={props.flagWidth} style={flagStyle} src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + props.countrycode + ".svg"}/>
+    📰🤝💸

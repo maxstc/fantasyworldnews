@@ -1,93 +1,41 @@
 import React, { useState } from 'react';
+import CountryList from "./CountryList"
 import './App.css';
-import TeamList from "./TeamList";
-import CountryList from "./CountryList";
-import TradeColumn from "./TradeColumn";
-import TradePopup from "./TradePopup";
 
 const App = (props) => {
-  console.log(props.data);
-  
-  const [hidden, setHidden] = React.useState(true);
-  const [tradeTeam, setTradeTeam] = React.useState(0);  
-  const [tradeCountry, setTradeCountry] = React.useState(0);
+    let countries = {};
 
-  function getTeamName() {
-    let cs = document.cookie.split(";");
-    for (let i = 0; i < cs.length; i++) {
-      let c = cs[i];
-  
-      while(c.charAt(0) == " ") {
-        c = c.substring(1);
-      }
-  
-      if (c.indexOf("teamName") == 0) {
-        return (c.substring("teamName".length + 1, c.length));
-      }
+    for (let i = 0; i < props.data.countries.length; i++) {
+        countries[props.data.countries[i]._id] = props.data.countries[i];
+        countries[props.data.countries[i]._id].recentScore = 0;
     }
-    return undefined;
-  }
-  
-  function getTeam(teamName, data) {
-    for (let i = 0; i < data.teams.length; i++) {
-      if (data.teams[i].name === teamName) {
-        return i;
-      }
+
+    let headlines = [];
+    for (let i = 0; i < props.data.headlines.length; i++) {
+        if (props.data.headlines[i].timestamp - Date.now() < 1000*60*60*24*2 && props.data.headlines[i].mentionedCountries.length > 0) {
+            headlines.push(props.data.headlines[i]);
+        }
     }
-    return undefined;
-  }
-
-  let userTeam = getTeam(getTeamName(), props.data);
-
-  function startTrade(team, country) {
-    console.log("starting trade" + team + "," + country);
-    // if (team === -1) {
-    //   for (let i = 0; i < props.data.teams.length; i++) {
-    //     if (props.data.teams[i].countries.includes(country)) {
-    //       team = i;
-    //     }
-    //   }
-    // }
-    if (team != userTeam) {
-      setTradeTeam(team);
-      setTradeCountry(country);
-      setHidden(false);
+    headlines.sort((a, b) => {return b.timestamp - a.timestamp});
+    for (let i = 0; i < headlines.length; i++) {
+        for (let j = 0; j < headlines[i].mentionedCountries.length; j++) {
+            console.log(countries[headlines[i].mentionedCountries[j].country].names[0])
+            console.log(countries[headlines[i].mentionedCountries[j].country].recentScore)
+            countries[headlines[i].mentionedCountries[j].country].recentScore++;
+        }
     }
-  }
-  
-  function closeTrade() {
-    setHidden(true);
-  }
 
+    let displayedCountries = Object.keys(countries).map((key) => {return countries[key]}).sort((a,b) => {return b.recentScore - a.recentScore});
 
-  return (
-    <div>
-      <TeamList 
-        startTrade={startTrade} 
-        teams={props.data.teams} 
-        countries={props.data.countries} />
-      <CountryList 
-        countries={props.data.countries} 
-        teams={props.data.teams} 
-        startTrade={startTrade} />
-      <TradeColumn 
-        team={userTeam} 
-        teams={props.data.teams} 
-        countries={props.data.countries}
-        trades={props.data.trades} 
-        userTeam={userTeam} 
-        refresh={props.refresh} />
-      <TradePopup 
-        targetTeam={tradeTeam} 
-        targetCountry={tradeCountry} 
-        userTeam={userTeam} 
-        userCountry={props.data.teams[userTeam].countries[0]} 
-        hidden={hidden} closeTrade={closeTrade} 
-        teams={props.data.teams} 
-        countries={props.data.countries} 
-        refresh={props.refresh} />
-    </div>
-  )
+    const countryList = displayedCountries.map(country => 
+        <p>{country.names[0]} ({country.recentScore})</p>
+    );
+
+    return (
+        <div>
+            {countryList}
+        </div>
+    )
   
 }
 
