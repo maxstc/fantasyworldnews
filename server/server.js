@@ -81,6 +81,11 @@ function handleBid(reqBody) {
     let proposerCountry = reqBody.proposerCountry;
     let targetCountry = reqBody.targetCountry;
     let proposerPointsOffered = Math.floor(reqBody.proposerPointsOffered);
+
+    if (db.collection("countries").find({_id: targetCountry}).next().names[0] === "Israel") {
+        return {success: false, message: "Israel is banned. Too OP."};
+    }
+
     if (isNaN(proposerPointsOffered)) {
         return {success: false, message: "The offered number of points to bid was not a number."};
     }
@@ -168,7 +173,7 @@ function updateDB() {
     let maluses = [];
     db.collection("countries").find().forEach((x) => {
         if (x.owner != null) {
-            if ((Date.now() - lastSwapTimestamp) / (1000 * 60 * 60 * 24) > x.malus + 1) {
+            if ((Date.now() - x.lastSwapTimestamp) / (1000 * 60 * 60 * 24) > x.malus + 1) {
                 maluses.push({id: x._id, owner: x.owner, amount: x.malus + 1});
             }
         }
