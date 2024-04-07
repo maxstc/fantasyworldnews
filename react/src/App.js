@@ -5,7 +5,7 @@ const App = (props) => {
     let countries = {};
     let teams = {};
 
-    let selectedCountry = React.useState("");
+    const [selectedCountry, setSelectedCountry] = React.useState("");
 
     for (let i = 0; i < props.data.teams.length; i++) {
         teams[props.data.teams[i]._id] = props.data.teams[i];
@@ -25,8 +25,6 @@ const App = (props) => {
     headlines.sort((a, b) => {return b.timestamp - a.timestamp});
     for (let i = 0; i < headlines.length; i++) {
         for (let j = 0; j < headlines[i].mentionedCountries.length; j++) {
-            console.log(countries[headlines[i].mentionedCountries[j].country].names[0])
-            console.log(countries[headlines[i].mentionedCountries[j].country].recentScore)
             countries[headlines[i].mentionedCountries[j].country].recentScore++;
         }
     }
@@ -48,7 +46,7 @@ const App = (props) => {
         <tr>
             <td
             style={{cursor: "pointer"}} 
-            onClick={()=>{alert("hello")}}
+            onClick={()=>{setSelectedCountry(country._id)}}
             onMouseEnter={(e)=>{e.target.style.color="blue"}}
             onMouseLeave={(e)=>{e.target.style.color="black"}}>
                 <img width="20" src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + country.code + ".svg"} style={{border: "1px solid black", boxSizing: "border-box"}}/>
@@ -82,7 +80,7 @@ const App = (props) => {
         if (interval > 1) {
             return Math.floor(interval) + " m";
         }
-        return Math.floor(seconds) + " s";
+        return "<1 m";
     }
 
     const centerList = log.map(l => 
@@ -91,14 +89,55 @@ const App = (props) => {
             "📰 (" + getTimeAgo(l.timestamp) + ") " + l.text
             :
             ((l.status === "bidsuccess") ?
-            "🤝 (" + getTimeAgo(l.timestamp) + ") "
-            :
             "💸 (" + getTimeAgo(l.timestamp) + ") "
+            :
+            "🤝 (" + getTimeAgo(l.timestamp) + ") "
             )}
         </p>
     );
 
-    const sideActions = <p>hi</p>
+    function getRecentHeadlines(selectedCountry) {
+        let newHeadlines = headlines;
+        newHeadlines = newHeadlines.filter((hl) => {
+            for (let i = 0; i < hl.mentionedCountries.length; i++) {
+                if (hl.mentionedCountries[i].country === selectedCountry) {
+                    return true;
+                }
+            }
+            return false;
+        });
+        return newHeadlines.slice(0,3);
+    }
+
+    const sideActions = (selectedCountry === "") ?
+    <p></p>
+    :
+    <div>
+        <h1>{countries[selectedCountry].names[0]} <img width="40" src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + countries[selectedCountry].code + ".svg"} style={{border: "1px solid black", boxSizing: "border-box"}}/></h1>
+        <p>{(countries[selectedCountry].owner != null) ? countries[selectedCountry].owner : "Unowned"}</p>
+        <p>Last 48 hours: {countries[selectedCountry].recentScore} points</p>
+        <br></br>
+        <p>Recent headlines:</p>
+        {getRecentHeadlines(selectedCountry).map(hl => 
+            <p style={{textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden", width: "98%"}}>{"(" + getTimeAgo(hl.timestamp) + ") " + hl.text}</p>
+        )}
+        <br></br>
+        <p>Offered/bid points (Negative to ask for points)</p>
+        <input type="number" step="1"/> <br></br>
+        <input type="button" value="Claim"/>
+        <input type="button" value="Offer Trade"/>
+        <input type="button" value="Bid"/>
+        <br></br>
+        <input type="radio" id="a" value=""/>
+        <label for="a">hi</label>
+    </div>;
+
+
+    const leaderBoard = props.data.teams.sort((a, b) => {return b.score - a.score}).map(team => 
+        <p>
+            {team.name} ({team.score})
+        </p>
+    );
 
     return (
         <div>
@@ -111,9 +150,13 @@ const App = (props) => {
                 {centerList}
             </div>
             <div style={{float: "left", width: "30%", overflow: "scroll", height: "100vh"}}>
-                <table>
+                <div style={{height: "50vh"}}>
                     {sideActions}
-                </table>
+                </div>
+                <div style={{height: "50vh"}}>
+                    <h1>Leaderboard</h1>
+                    {leaderBoard}
+                </div>
             </div>
         </div>
     )
