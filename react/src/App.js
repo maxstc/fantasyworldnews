@@ -162,13 +162,13 @@ const App = (props) => {
 
     return (
         <div>
-            <div style={{float: "left", width: "25%"}}>
+            <div style={{float: "left", width: "25%", height: "100vh", display: "flex", flexFlow: "column"}}>
                 <div>
                     <button style={{border: "none", cursor: "pointer", padding: "10px"}} onClick={()=>{setLeftTab(0)}}>Countries</button>
                     <button style={{border: "none", cursor: "pointer", padding: "10px"}} onClick={()=>{setLeftTab(1)}}>Leaderboard</button>
                     <button style={{border: "none", cursor: "pointer", padding: "10px"}} onClick={()=>{setLeftTab(2)}}>{"Trades" + ((hasPendingTrades()) ? " ❗" : "")}</button>
                 </div>
-                <div style={{overflow: "scroll", height: "100vh"}}>
+                <div style={{overflow: "auto"}}>
                     {leftColumn()}
                 </div>
             </div>
