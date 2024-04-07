@@ -50,7 +50,8 @@ const App = (props) => {
         }
     });
 
-    let displayedCountries = azCountries.sort((a,b) => {return b.recentScore - a.recentScore});
+    let displayedCountries = azCountries.slice();
+    displayedCountries.sort((a,b) => {return b.recentScore - a.recentScore});
 
     const countryList = displayedCountries.map(country => 
         <tr>
