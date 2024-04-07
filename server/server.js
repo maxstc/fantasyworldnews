@@ -216,9 +216,16 @@ app.get("/", (req, res) => {
     res.end("Please add \"/team/<your team name>\" to the address bar. For example, if you went to 123.10.10.123:41399, instead go to 123.10.10.123:41399/team/max if your team name is max. This is case sensitive.");
 });
 
-app.get("/team/:teamName", (req, res) => {
+app.get("/team/:teamName", async (req, res) => {
     //set the teamName to a session cookie and redirect them to index.html
-    res.cookie("teamName", db.collection("teams").find({name: req.params.teamName}).next()._id);
+    console.log(req.params.teamName);
+    let id = await db.collection("teams").find({name: req.params.teamName}).next();
+    id = id._id.toString();
+    if (id === undefined) {
+        res.end("name not found :( make sure it's correct (case sensitive)");
+        return;
+    }
+    res.cookie("login", id);
     res.redirect("/index.html");
 });
 

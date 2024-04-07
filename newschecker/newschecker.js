@@ -28,39 +28,37 @@ async function checkNews() {
 }
 
 async function processHeadline(text) {
-  let cursor = db.collection("headlines").find({text: text});
-  cursor = await cursor.toArray();
-  if (cursor.length === 0) {
-      console.log("new headline: " + text);
-      let mentioned = [];
-      await db.collection("countries").find().forEach((x) => {
-          let matches = [];
-          for (let i = 0; i < x.names.length; i++) {
-              if (text.includes(x.names[i])) {
-                  matches.push(x.names[i]);
-              }
-          }
-          if (matches.length > 0) {
-              mentioned.push({
-                  country: x._id,
-                  mentionedNames: matches
-              });
-          }
-      });
-      db.collection("headlines").insertOne({
-          text: text,
-          timestamp: Date.now(),
-          mentionedCountries: mentioned
-      });
-      for (let i = 0; i < mentioned; i++) {
-        if (db.mentioned[i].country != null) {
-          db.collection("teams").updateOne(
-            {_id: db.collection("countries").find({_id: mentioned[i]}).next().owner},
-            {$inc: {score: 1}}
-          );
+    let cursor = db.collection("headlines").find({text: text});
+    cursor = await cursor.toArray();
+    if (cursor.length === 0) {
+        console.log("new headline: " + text);
+        let mentioned = [];
+        await db.collection("countries").find().forEach((x) => {
+            let matches = [];
+            for (let i = 0; i < x.names.length; i++) {
+                if (text.includes(x.names[i])) {
+                    matches.push(x.names[i]);
+                }
+            }
+            if (matches.length > 0) {
+                mentioned.push({
+                    country: x._id,
+                    mentionedNames: matches
+                });
+            }
+        });
+        db.collection("headlines").insertOne({
+            text: text,
+            timestamp: Date.now(),
+            mentionedCountries: mentioned
+        });
+        for (let i = 0; i < mentioned; i++) {
+            db.collection("teams").updateOne(
+                {_id: db.collection("countries").find({_id: mentioned[i]}).next().owner},
+                {$inc: {score: 1}}
+            );
         }
-      }
-  }
+    }
 }
 
 main();

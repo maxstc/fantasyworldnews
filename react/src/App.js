@@ -6,6 +6,7 @@ const App = (props) => {
     let teams = {};
 
     const [selectedCountry, setSelectedCountry] = React.useState("");
+    const [leftTab, setLeftTab] = React.useState(0);
 
     for (let i = 0; i < props.data.teams.length; i++) {
         teams[props.data.teams[i]._id] = props.data.teams[i];
@@ -139,24 +140,43 @@ const App = (props) => {
         </p>
     );
 
+    function leftColumn() {
+        switch (leftTab) {
+            case 0:
+                return <table>{countryList}</table>
+            case 1:
+                return <div>{leaderBoard}</div>
+            case 2:
+
+        }
+    }
+
+    function hasPendingTrades() {
+        for (let i = 0; i < props.data.trades.length; i++) {
+            if (props.data.trades[i].status === "pending" && props.data.trades[i].targetTeam === props.login) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     return (
         <div>
-            <div style={{float: "left", width: "25%", overflow: "scroll", height: "100vh"}}>
-                <table>
-                    {countryList}
-                </table>
+            <div style={{float: "left", width: "25%"}}>
+                <div>
+                    <button style={{border: "none", cursor: "pointer", padding: "10px"}} onClick={()=>{setLeftTab(0)}}>Countries</button>
+                    <button style={{border: "none", cursor: "pointer", padding: "10px"}} onClick={()=>{setLeftTab(1)}}>Leaderboard</button>
+                    <button style={{border: "none", cursor: "pointer", padding: "10px"}} onClick={()=>{setLeftTab(2)}}>{"Trades" + ((hasPendingTrades()) ? " ❗" : "")}</button>
+                </div>
+                <div style={{overflow: "scroll", height: "100vh"}}>
+                    {leftColumn()}
+                </div>
             </div>
             <div style={{float: "left", width: "45%", overflow: "scroll", height: "100vh"}}>
                 {centerList}
             </div>
             <div style={{float: "left", width: "30%", overflow: "scroll", height: "100vh"}}>
-                <div style={{height: "50vh"}}>
-                    {sideActions}
-                </div>
-                <div style={{height: "50vh"}}>
-                    <h1>Leaderboard</h1>
-                    {leaderBoard}
-                </div>
+                {sideActions}
             </div>
         </div>
     )
