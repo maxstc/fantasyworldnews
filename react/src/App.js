@@ -41,9 +41,32 @@ const App = (props) => {
     let log = trades.concat(headlines);
     log.sort((a,b)=>{return b.timestamp - a.timestamp});
 
-    let displayedCountries = Object.keys(countries).map((key) => {return countries[key]}).sort((a,b) => {return b.recentScore - a.recentScore});
+    let azCountries = Object.keys(countries).map((key) => {return countries[key]}).sort((a,b) => {
+        if (a.names[0] < b.names[0]) {
+            return -1;
+        }
+        else {
+            return 1;
+        }
+    });
+
+    let displayedCountries = azCountries.sort((a,b) => {return b.recentScore - a.recentScore});
 
     const countryList = displayedCountries.map(country => 
+        <tr>
+            <td
+            style={{cursor: "pointer"}} 
+            onClick={()=>{setSelectedCountry(country._id)}}
+            onMouseEnter={(e)=>{e.target.style.color="blue"}}
+            onMouseLeave={(e)=>{e.target.style.color="black"}}>
+                <img width="20" src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + country.code + ".svg"} style={{border: "1px solid black", boxSizing: "border-box"}}/>
+                {" " + country.names[0]}</td>
+            <td>{country.recentScore}</td>
+            <td>{(country.owner === null) ? "Unowned" : teams[country.owner].name}</td>
+        </tr>
+    );
+
+    const azList = azCountries.map(country => 
         <tr>
             <td
             style={{cursor: "pointer"}} 
@@ -133,11 +156,33 @@ const App = (props) => {
         <label for="a">hi</label>
     </div>;
 
+    function getCountries(team) {
+        let output = [];
+        for (let i = 0; i < props.data.countries.length; i++) {
+            if (props.data.countries[i].owner === team) {
+                output.push(props.data.countries[i]._id);
+            }
+        }
+        output.sort((a, b) => {
+            return b.recentScore - a.recentScore;
+        });
+        return output;
+    }
 
     const leaderBoard = props.data.teams.sort((a, b) => {return b.score - a.score}).map(team => 
-        <p>
-            {team.name} ({team.score})
-        </p>
+        <tr>
+            <td>
+                {team.name}
+            </td>
+            <td>
+                {team.score}
+            </td>
+            {getCountries(team._id).map(c => 
+                <td>
+                    <img width="20" src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + countries[c].code + ".svg"} style={{border: "1px solid black", boxSizing: "border-box"}}/>
+                </td>
+            )}
+        </tr>
     );
 
     function leftColumn() {
@@ -145,8 +190,10 @@ const App = (props) => {
             case 0:
                 return <table>{countryList}</table>
             case 1:
-                return <div>{leaderBoard}</div>
+                return <table>{azList}</table>
             case 2:
+                return <table>{leaderBoard}</table>
+            case 3:
 
         }
     }
@@ -164,9 +211,10 @@ const App = (props) => {
         <div>
             <div style={{float: "left", width: "25%", height: "100vh", display: "flex", flexFlow: "column"}}>
                 <div>
-                    <button style={{border: "none", cursor: "pointer", padding: "10px"}} onClick={()=>{setLeftTab(0)}}>Countries</button>
-                    <button style={{border: "none", cursor: "pointer", padding: "10px"}} onClick={()=>{setLeftTab(1)}}>Leaderboard</button>
-                    <button style={{border: "none", cursor: "pointer", padding: "10px"}} onClick={()=>{setLeftTab(2)}}>{"Trades" + ((hasPendingTrades()) ? " ❗" : "")}</button>
+                    <button style={{border: "none", cursor: "pointer", padding: "10px"}} onClick={()=>{setLeftTab(0)}}>Top Countries</button>
+                    <button style={{border: "none", cursor: "pointer", padding: "10px"}} onClick={()=>{setLeftTab(1)}}>A-Z</button>
+                    <button style={{border: "none", cursor: "pointer", padding: "10px"}} onClick={()=>{setLeftTab(2)}}>Leaderboard</button>
+                    <button style={{border: "none", cursor: "pointer", padding: "10px"}} onClick={()=>{setLeftTab(3)}}>{"Trades" + ((hasPendingTrades()) ? " ❗" : "")}</button>
                 </div>
                 <div style={{overflow: "auto"}}>
                     {leftColumn()}
