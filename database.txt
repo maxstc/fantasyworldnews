@@ -13,7 +13,6 @@ countries[]
     code STRING
     flag STRING
     names[] STRING
-    latestHeadlineIndices[] INDEX
     owner INDEX
     lastSwapTimestamp NUMBER
     malus NUMBER

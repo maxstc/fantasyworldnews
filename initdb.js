@@ -17,7 +17,6 @@ async function main() {
             code: countries[i].countrycode,
             flag: countries[i].flag,
             names: countries[i].name,
-            latestHeadlineIndices: [],
             owner: null
         });
     }
