@@ -45,6 +45,7 @@ async function processHeadline(text) {
                     country: x._id,
                     mentionedNames: matches
                 });
+                db.collection("teams").updateOne({_id: x.owner}, {$inc: {score: 1}});
             }
         });
         db.collection("headlines").insertOne({
@@ -52,12 +53,6 @@ async function processHeadline(text) {
             timestamp: Date.now(),
             mentionedCountries: mentioned
         });
-        for (let i = 0; i < mentioned; i++) {
-            db.collection("teams").updateOne(
-                {_id: db.collection("countries").find({_id: mentioned[i]}).next().owner},
-                {$inc: {score: 1}}
-            );
-        }
     }
 }
 

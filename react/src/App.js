@@ -48,7 +48,7 @@ const App = (props) => {
         else {
             return 1;
         }
-    });
+    }).filter((a) => {return a.names[0] != "Israel"});
 
     let displayedCountries = azCountries.slice();
     displayedCountries.sort((a,b) => {return b.recentScore - a.recentScore});
