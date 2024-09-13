@@ -35,7 +35,13 @@ function handleTrade(reqBody) {
         if (db.collection("countries").find({_id: targetCountry}).next().owner != null) {
             return {success: false, message: "The country you tried to claim has an owner."};
         }
-        //check the proposer has the country
+        //check if the proposer has less than the maximum number of countries
+        if (proposerCountry == null) {
+            if (db.collection("countries").find({owner: proposerTeam}).countDocuments() >= MAX_COUNTRIES) {
+                return {success: false, message: "You already have the maximum number of countries claimed."};
+            }
+        }
+        //check the proposer has the country they are trying to give up
         if (db.collection("countries").find({_id: proposerCountry}).next().owner != proposerTeam) {
             return {success: false, message: "You don't own the country you tried to swap."};
         }
@@ -74,52 +80,52 @@ function handleTrade(reqBody) {
     });
 }
 
-function handleBid(reqBody) {
-    let timestamp = Date.now();
-    let proposerTeam = reqBody.proposerTeam;
-    let targetTeam = null;
-    let proposerCountry = reqBody.proposerCountry;
-    let targetCountry = reqBody.targetCountry;
-    let proposerPointsOffered = Math.floor(reqBody.proposerPointsOffered);
+// function handleBid(reqBody) {
+//     let timestamp = Date.now();
+//     let proposerTeam = reqBody.proposerTeam;
+//     let targetTeam = null;
+//     let proposerCountry = reqBody.proposerCountry;
+//     let targetCountry = reqBody.targetCountry;
+//     let proposerPointsOffered = Math.floor(reqBody.proposerPointsOffered);
 
-    if (db.collection("countries").find({_id: targetCountry}).next().names[0] === "Israel") {
-        return {success: false, message: "Israel is banned. Too OP."};
-    }
+//     if (db.collection("countries").find({_id: targetCountry}).next().names[0] === "Israel") {
+//         return {success: false, message: "Israel is banned. Too OP."};
+//     }
 
-    if (isNaN(proposerPointsOffered)) {
-        return {success: false, message: "The offered number of points to bid was not a number."};
-    }
-    if (proposerPointsOffered < 1) {
-        return {success: false, message: "You must bid at least 1 point."};
-    }
-    let status = "bid";
+//     if (isNaN(proposerPointsOffered)) {
+//         return {success: false, message: "The offered number of points to bid was not a number."};
+//     }
+//     if (proposerPointsOffered < 1) {
+//         return {success: false, message: "You must bid at least 1 point."};
+//     }
+//     let status = "bid";
 
-    if (db.collection("countries").find({_id: targetCountry}).next().owner === null) {
-        return {success: false, message: "The country you tried to bid on has no owner."};
-    }
-    //check the proposer has the country
-    if (db.collection("countries").find({_id: proposerCountry}).next().owner != proposerTeam) {
-        return {success: false, message: "You don't own the country you tried to bid with."};
-    }
-    if (db.collection("teams").find({_id: proposerCountry}).next().score < proposerPointsOffered) {
-        return {success: false, message: "You don't have enough points for this bid."};
-    }
-    //check if proposal already exists between these two players
-    if (db.collection("trades").find({proposerTeam: proposerTeam, targetCountry: targetCountry, status: "bidpending"}).next() != null) {
-        return {success: false, message: "You already have a bid for this country."};
-    }
+//     if (db.collection("countries").find({_id: targetCountry}).next().owner === null) {
+//         return {success: false, message: "The country you tried to bid on has no owner."};
+//     }
+//     //check the proposer has the country
+//     if (db.collection("countries").find({_id: proposerCountry}).next().owner != proposerTeam) {
+//         return {success: false, message: "You don't own the country you tried to bid with."};
+//     }
+//     if (db.collection("teams").find({_id: proposerCountry}).next().score < proposerPointsOffered) {
+//         return {success: false, message: "You don't have enough points for this bid."};
+//     }
+//     //check if proposal already exists between these two players
+//     if (db.collection("trades").find({proposerTeam: proposerTeam, targetCountry: targetCountry, status: "bidpending"}).next() != null) {
+//         return {success: false, message: "You already have a bid for this country."};
+//     }
 
-    //add this proposal
-    db.collection("trades").insertOne({
-        timestamp: timestamp,
-        proposerTeam: proposerTeam,
-        targetTeam: targetTeam,
-        proposerCountry: proposerCountry,
-        targetCountry: targetCountry,
-        proposerPointsOffered: proposerPointsOffered,
-        status: status
-    });
-}
+//     //add this proposal
+//     db.collection("trades").insertOne({
+//         timestamp: timestamp,
+//         proposerTeam: proposerTeam,
+//         targetTeam: targetTeam,
+//         proposerCountry: proposerCountry,
+//         targetCountry: targetCountry,
+//         proposerPointsOffered: proposerPointsOffered,
+//         status: status
+//     });
+// }
 
 function handleDeclineTrade(reqBody) {
     db.collection("trades").updateOne({_id: reqBody.tradeId}, {status: "declined"});
@@ -153,55 +159,55 @@ function doSwap(proposerTeam, targetTeam, proposerCountry, targetCountry) {
     removeInvalidBids(targetCountry);
 }
 
-function handleRenew(reqBody) {
-    let winningBid = db.collection("trades")
-    .find({status: "bidpending", targetCountry: reqBody.targetCountry})
-    .sort({proposerPointsOffered:-1}).limit(1).next();
-    if (winningBid===null) {
-        db.collection("countries").updateOne({_id: reqBody.targetCountry}, {lastSwapTimestamp: Date.now(), malus: 0});
-        return {success: true, message: "No bids were on your country."};
-    }
-    else {
-        db.collection("trades").updateOne({_id: winningBid._id}, {status: "bidsuccess"});
-        db.collection("trades").updateMany({status: "bidpending", targetCountry: reqBody.targetCountry}, {status: "bidfail"});
-        doSwap(winningBid.proposerTeam, reqBody.team, winningBid.proposerCountry, winningBid.targetCountry);
-    }
-}
+// function handleRenew(reqBody) {
+//     let winningBid = db.collection("trades")
+//     .find({status: "bidpending", targetCountry: reqBody.targetCountry})
+//     .sort({proposerPointsOffered:-1}).limit(1).next();
+//     if (winningBid===null) {
+//         db.collection("countries").updateOne({_id: reqBody.targetCountry}, {lastSwapTimestamp: Date.now(), malus: 0});
+//         return {success: true, message: "No bids were on your country."};
+//     }
+//     else {
+//         db.collection("trades").updateOne({_id: winningBid._id}, {status: "bidsuccess"});
+//         db.collection("trades").updateMany({status: "bidpending", targetCountry: reqBody.targetCountry}, {status: "bidfail"});
+//         doSwap(winningBid.proposerTeam, reqBody.team, winningBid.proposerCountry, winningBid.targetCountry);
+//     }
+// }
 
 function updateDB() {
     //check for maluses
-    let maluses = [];
-    db.collection("countries").find().forEach((x) => {
-        if (x.owner != null) {
-            if ((Date.now() - x.lastSwapTimestamp) / (1000 * 60 * 60 * 24) > x.malus + 1) {
-                maluses.push({id: x._id, owner: x.owner, amount: x.malus + 1});
-            }
-        }
-    });
+    // let maluses = [];
+    // db.collection("countries").find().forEach((x) => {
+    //     if (x.owner != null) {
+    //         if ((Date.now() - x.lastSwapTimestamp) / (1000 * 60 * 60 * 24) > x.malus + 1) {
+    //             maluses.push({id: x._id, owner: x.owner, amount: x.malus + 1});
+    //         }
+    //     }
+    // });
     //add maluses
-    for (let i = 0; i < maluses.length; i++) {
-        db.collection("teams").updateOne(
-            {_id: maluses[i].owner},
-            {$inc: {score: maluses[i].amount}}
-        );
-        db.collection("countries").updateOne(
-            {_id: maluses[i].id},
-            {$inc: {malus: 1}}
-        );
-    }
+    // for (let i = 0; i < maluses.length; i++) {
+    //     db.collection("teams").updateOne(
+    //         {_id: maluses[i].owner},
+    //         {$inc: {score: maluses[i].amount}}
+    //     );
+    //     db.collection("countries").updateOne(
+    //         {_id: maluses[i].id},
+    //         {$inc: {malus: 1}}
+    //     );
+    // }
 }
 
 app.post("/trade", (req, res) => {
     res.json(handleTrade(req.body));
 });
 
-app.post("/bid", (req, res) => {
-    res.json(handleBid(req.body));
-});
+// app.post("/bid", (req, res) => {
+//     res.json(handleBid(req.body));
+// });
 
-app.post("/renew", (req, res) => {
-    res.json(handleRenew(req.body));
-})
+// app.post("/renew", (req, res) => {
+//     res.json(handleRenew(req.body));
+// })
 
 app.post("/declinetrade", (req, res) => {
     res.json(handleDeclineTrade(req.body));
@@ -222,7 +228,7 @@ app.get("/team/:teamName", async (req, res) => {
     let id = await db.collection("teams").find({name: req.params.teamName}).next();
     id = id._id.toString();
     if (id === undefined) {
-        res.end("name not found :( make sure it's correct (case sensitive)");
+        res.end("name not found :( make sure it's correct (case sensitive) and don't include <> in your team name (for example, /team/max)");
         return;
     }
     res.cookie("login", id);

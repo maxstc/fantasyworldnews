@@ -13,7 +13,7 @@ function refresh() {
     data.json().then((data) => {
       root.render(
         <React.StrictMode>
-          <App data={data} login={getLogin()} refresh={refresh} />
+          <App data={data} login={getLogin()} refresh={refresh}/>
         </React.StrictMode>
       );
     })

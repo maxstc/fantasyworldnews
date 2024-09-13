@@ -13,18 +13,25 @@ async function main() {
 async function tick() {
   let now = Date.now();
   if (Math.floor(lastUpdate / 60000) < Math.floor(now / 60000)) {
+    console.log("Checking news at " + new Date());
     checkNews();
     lastUpdate = now;
   }
 }
 
 async function checkNews() {
-  const response = await fetch("https://www.cnn.com/world");
-  const responseText = await response.text();
-  let doc = cheerio.load(responseText);
-  doc(".container__headline-text").map(async (index, element) => {
-      await processHeadline(doc(element).text());
-  });
+    try {
+        const response = await fetch("https://www.cnn.com/world");
+        const responseText = await response.text();
+        let doc = cheerio.load(responseText);
+        doc(".container__headline-text").map(async (index, element) => {
+            await processHeadline(doc(element).text());
+        });
+    }
+    catch (err) {
+        console.log("Check news failed");
+        console.error(err);
+    }
 }
 
 async function processHeadline(text) {

@@ -19,7 +19,7 @@ const App = (props) => {
 
     let headlines = [];
     for (let i = 0; i < props.data.headlines.length; i++) {
-        if (props.data.headlines[i].timestamp - Date.now() < 1000*60*60*24*2 && props.data.headlines[i].mentionedCountries.length > 0) {
+        if (Date.now() - props.data.headlines[i].timestamp < 1000*60*60*24*2 && props.data.headlines[i].mentionedCountries.length > 0) {
             headlines.push(props.data.headlines[i]);
         }
     }
@@ -53,8 +53,8 @@ const App = (props) => {
     let displayedCountries = azCountries.slice();
     displayedCountries.sort((a,b) => {return b.recentScore - a.recentScore});
 
-    const countryList = displayedCountries.map(country => 
-        <tr>
+    const countryList = displayedCountries.map((country, i) => 
+        <tr key={i}>
             <td
             style={{cursor: "pointer"}} 
             onClick={()=>{setSelectedCountry(country._id)}}
@@ -67,8 +67,8 @@ const App = (props) => {
         </tr>
     );
 
-    const azList = azCountries.map(country => 
-        <tr>
+    const azList = azCountries.map((country, i) => 
+        <tr key={i}>
             <td
             style={{cursor: "pointer"}} 
             onClick={()=>{setSelectedCountry(country._id)}}
@@ -139,7 +139,7 @@ const App = (props) => {
     :
     <div>
         <h1>{countries[selectedCountry].names[0]} <img width="40" src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + countries[selectedCountry].code + ".svg"} style={{border: "1px solid black", boxSizing: "border-box"}}/></h1>
-        <p>{(countries[selectedCountry].owner != null) ? countries[selectedCountry].owner : "Unowned"}</p>
+        <p>{(countries[selectedCountry].owner != null) ? teams[countries[selectedCountry].owner].name : "Unowned"}</p>
         <p>Last 48 hours: {countries[selectedCountry].recentScore} points</p>
         <br></br>
         <p>Recent headlines:</p>
@@ -147,14 +147,19 @@ const App = (props) => {
             <p style={{textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden", width: "98%"}}>{"(" + getTimeAgo(hl.timestamp) + ") " + hl.text}</p>
         )}
         <br></br>
-        <p>Offered/bid points (Negative to ask for points)</p>
-        <input type="number" step="1"/> <br></br>
+        {(countries[selectedCountry].owner != null) ? 
+        <div>
+            <p>Offer points (Negative to ask for points)</p>
+            <input type="number" step="1"/> <br></br>
+            <input type="button" value="Offer Trade"/>
+        </div>
+        :
         <input type="button" value="Claim"/>
-        <input type="button" value="Offer Trade"/>
-        <input type="button" value="Bid"/>
+        }
+        {/*<input type="button" value="Bid"/>*/}
         <br></br>
-        <input type="radio" id="a" value=""/>
-        <label for="a">hi</label>
+        <input type="radio" id="offeredCountry" value=""/>
+        <label for="offeredCountry">hi</label>
     </div>;
 
     function getCountries(team) {
@@ -170,8 +175,8 @@ const App = (props) => {
         return output;
     }
 
-    const leaderBoard = props.data.teams.sort((a, b) => {return b.score - a.score}).map(team => 
-        <tr>
+    const leaderBoard = props.data.teams.sort((a, b) => {return b.score - a.score}).map((team, i) => 
+        <tr key={i}>
             <td>
                 {team.name}
             </td>
@@ -189,13 +194,13 @@ const App = (props) => {
     function leftColumn() {
         switch (leftTab) {
             case 0:
-                return <table>{countryList}</table>
+                return <table><tbody>{countryList}</tbody></table>
             case 1:
-                return <table>{azList}</table>
+                return <table><tbody>{azList}</tbody></table>
             case 2:
-                return <table>{leaderBoard}</table>
+                return <table><tbody>{leaderBoard}</tbody></table>
             case 3:
-
+                return <p>trades</p>
         }
     }
 
