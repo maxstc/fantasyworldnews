@@ -226,11 +226,11 @@ app.get("/team/:teamName", async (req, res) => {
     //set the teamName to a session cookie and redirect them to index.html
     console.log(req.params.teamName);
     let id = await db.collection("teams").find({name: req.params.teamName}).next();
-    id = id._id.toString();
-    if (id === undefined) {
+    if (id === null) {
         res.end("name not found :( make sure it's correct (case sensitive) and don't include <> in your team name (for example, /team/max)");
         return;
     }
+    id = id._id.toString();
     res.cookie("login", id);
     res.redirect("/index.html");
 });
