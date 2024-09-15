@@ -15,25 +15,13 @@ function getLogin() {
     return "0";
 }
 
-// function refresh() {
-//     fetch("http://" + window.location.hostname + ":41399/data").then((data) => {
-//         data.json().then((data) => {
-//             root.render(
-//                 <React.StrictMode>
-//                     <App data={data} login={getLogin()} refresh={refresh}/>
-//                 </React.StrictMode>
-//             );
-//         })
-//     });
-// }
-
 function refresh() {
-    fetch("http://nice-newsletter.gl.at.ply.gg:5905/data").then((data) => {
+    fetch("http://" + window.location.hostname + (window.location.port != "" ? ":" + window.location.port : "")).then((data) => {
         data.json().then((data) => {
             root.render(
-              <React.StrictMode>
-                  <App data={data} login={getLogin()} refresh={refresh}/>
-              </React.StrictMode>
+                <React.StrictMode>
+                    <App data={data} login={getLogin()} refresh={refresh}/>
+                </React.StrictMode>
             );
         })
     });
