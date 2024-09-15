@@ -147,6 +147,17 @@ const App = (props) => {
             <p style={{textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden", width: "98%"}}>{"(" + getTimeAgo(hl.timestamp) + ") " + hl.text}</p>
         )}
         <br></br>
+        <p>Choose a country to trade for this one:</p>
+        <br></br>
+        {getCountries(props.login).map(country => 
+            <div>
+                <input type="radio" id="offeredCountry" name="offeredCountry" value=""/>
+                <label for="offeredCountry">{" " + countries[country].names[0] + " "}
+                    <img width="20" src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + countries[country].code + ".svg"} style={{border: "1px solid black", boxSizing: "border-box"}}/>
+                </label>
+            </div>
+        )}
+        <br></br>
         {(countries[selectedCountry].owner != null) ? 
         <div>
             <p>Offer points (Negative to ask for points)</p>
@@ -157,9 +168,7 @@ const App = (props) => {
         <input type="button" value="Claim"/>
         }
         {/*<input type="button" value="Bid"/>*/}
-        <br></br>
-        <input type="radio" id="offeredCountry" value=""/>
-        <label for="offeredCountry">hi</label>
+        
     </div>;
 
     function getCountries(team) {
