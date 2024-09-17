@@ -16,7 +16,7 @@ function getLogin() {
 }
 
 function refresh() {
-    fetch("http://" + window.location.hostname + (window.location.port != "" ? ":" + window.location.port : "")).then((data) => {
+    fetch("http://" + window.location.hostname + (window.location.port != "" ? ":" + window.location.port : "") + "/data").then((data) => {
         data.json().then((data) => {
             root.render(
                 <React.StrictMode>
