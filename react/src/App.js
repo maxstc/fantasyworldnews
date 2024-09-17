@@ -19,7 +19,7 @@ const App = (props) => {
 
     let headlines = [];
     for (let i = 0; i < props.data.headlines.length; i++) {
-        if (Date.now() - props.data.headlines[i].timestamp < 1000*60*60*24*2 && props.data.headlines[i].mentionedCountries.length > 0) {
+        if (Date.now() - props.data.headlines[i].timestamp < 1000*60*60*24*7 && props.data.headlines[i].mentionedCountries.length > 0) {
             headlines.push(props.data.headlines[i]);
         }
     }
@@ -140,7 +140,7 @@ const App = (props) => {
     <div>
         <h1>{countries[selectedCountry].names[0]} <img width="40" src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + countries[selectedCountry].code + ".svg"} style={{border: "1px solid black", boxSizing: "border-box"}}/></h1>
         <p>{(countries[selectedCountry].owner != null) ? teams[countries[selectedCountry].owner].name : "Unowned"}</p>
-        <p>Last 48 hours: {countries[selectedCountry].recentScore} points</p>
+        <p>Last week: {countries[selectedCountry].recentScore} points</p>
         <br></br>
         <p>Recent headlines:</p>
         {getRecentHeadlines(selectedCountry).map(hl => 
