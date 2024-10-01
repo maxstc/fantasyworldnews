@@ -134,6 +134,33 @@ const App = (props) => {
         return newHeadlines.slice(0,3);
     }
 
+    function tradeCountry() {
+        let proposerCountry = null;
+        for (let i = 0; i < document.getElementsByClassName("offeredCountrySelector").length; i++) {
+            if (document.getElementsByClassName("offeredCountrySelector")[i].checked) {
+                proposerCountry = document.getElementsByClassName("offeredCountrySelector")[i].value;
+            }
+        }
+        fetch("http://" + window.location.hostname + (window.location.port != "" ? ":" + window.location.port : "") + "/trade", {
+            method: "post",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                proposerTeam: props.login,
+                proposerCountry: countries[proposerCountry],
+                targetTeam: countries[selectedCountry].owner,
+                targetCountry: countries[selectedCountry],
+                proposerPointsOffered: (document.getElementById("pointsOfferedCounter") === null ? 0 : document.getElementById("pointsOfferedCounter").value)
+            })
+            }).then((data) => {
+            data.json().then((data) => {
+                console.log(data);
+            })
+        });
+    }
+
     const sideActions = (selectedCountry === "") ?
     <p></p>
     :
@@ -151,7 +178,7 @@ const App = (props) => {
         <br></br>
         {getCountries(props.login).map(country => 
             <div>
-                <input type="radio" id="offeredCountry" name="offeredCountry" value=""/>
+                <input type="radio" id="offeredCountry" name="offeredCountry" value={country} class="offeredCountrySelector"/>
                 <label for="offeredCountry">{" " + countries[country].names[0] + " "}
                     <img width="20" src={"http://purecatamphetamine.github.io/country-flag-icons/3x2/" + countries[country].code + ".svg"} style={{border: "1px solid black", boxSizing: "border-box"}}/>
                 </label>
@@ -161,11 +188,11 @@ const App = (props) => {
         {(countries[selectedCountry].owner != null) ? 
         <div>
             <p>Offer points (Negative to ask for points)</p>
-            <input type="number" step="1"/> <br></br>
-            <input type="button" value="Offer Trade"/>
+            <input type="number" step="1" id="pointsOfferedCounter"/> <br></br>
+            <input type="button" value="Offer Trade" onClick={()=>{tradeCountry()}}/>
         </div>
         :
-        <input type="button" value="Claim"/>
+        <input type="button" value="Claim" onClick={()=>{tradeCountry()}}/>
         }
         {/*<input type="button" value="Bid"/>*/}
         
