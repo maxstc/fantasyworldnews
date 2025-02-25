@@ -141,7 +141,7 @@ const App = (props) => {
                 proposerCountry = document.getElementsByClassName("offeredCountrySelector")[i].value;
             }
         }
-        fetch("http://" + window.location.hostname + (window.location.port != "" ? ":" + window.location.port : "") + "/trade", {
+        fetch(props.getUrl() + "/trade", {
             method: "post",
             headers: {
                 "Accept": "application/json",

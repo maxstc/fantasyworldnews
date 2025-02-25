@@ -78,6 +78,8 @@ function handleTrade(reqBody) {
         proposerPointsOffered: proposerPointsOffered,
         status: status
     });
+
+    return {success: true, message: "Success"};
 }
 
 // function handleBid(reqBody) {
@@ -197,7 +199,14 @@ function updateDB() {
     // }
 }
 
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.post("/trade", (req, res) => {
+    res.set("Access-Control-Allow-Origin", "http://localhost:3000");
     res.json(handleTrade(req.body));
 });
 
@@ -210,10 +219,12 @@ app.post("/trade", (req, res) => {
 // })
 
 app.post("/declinetrade", (req, res) => {
+    res.set("Access-Control-Allow-Origin", "http://localhost:3000");
     res.json(handleDeclineTrade(req.body));
 });
 
 app.post("/accepttrade", (req, res) => {
+    res.set("Access-Control-Allow-Origin", "http://localhost:3000");
     res.json(handleAcceptTrade(req.body));
 });
 
@@ -245,7 +256,7 @@ app.get("/data", async (req, res) => {
     }));
 });
 
-app.use(express.static("react/build/"));
+app.use(express.static("client/"));
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);

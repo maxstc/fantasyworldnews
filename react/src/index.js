@@ -15,12 +15,24 @@ function getLogin() {
     return "0";
 }
 
+function getUrl() {
+    if (window.location.port === "") {
+        return "http://" + window.location.hostname;
+    }
+    else if (window.location.port === "3000") {
+        return "http://" + window.location.hostname + ":41399";
+    }
+    else {
+        return "http://" + window.location.hostname + ":" + window.location.port;
+    }
+}
+
 function refresh() {
-    fetch("http://" + window.location.hostname + (window.location.port != "" ? ":" + window.location.port : "") + "/data").then((data) => {
+    fetch(getUrl() + "/data").then((data) => {
         data.json().then((data) => {
             root.render(
                 <React.StrictMode>
-                    <App data={data} login={getLogin()} refresh={refresh}/>
+                    <App data={data} login={getLogin()} refresh={refresh} getUrl={getUrl}/>
                 </React.StrictMode>
             );
         })
