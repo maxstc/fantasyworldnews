@@ -21,19 +21,24 @@
         tr:nth-child(even) {
             background-color: #eeeeee;
         }
+
+        .clickable {
+            cursor: pointer;
+        }
         </style>
 </head>
 <body>
     <table id="countryLeaderboard">
         <tr>
             <th>Flag</th>
-            <th>Country</th>
-            <th>Score</th>
-            <th>Owner</th>
+            <th onclick="sortCountryLeaderboardByCountry()" class="clickable">Country</th>
+            <th onclick="sortCountryLeaderboardByScore()" class="clickable">Score</th>
+            <th onclick="sortCountryLeaderboardByOwner()" class="clickable">Owner</th>
         </tr>
     </table>
 </body>
 <script src="globalVars.js"></script>
 <script src="pollForData.js"></script>
 <script src="countryLeaderboardBuilder.js"></script>
+<script src="sortCountryLeaderboard.js"></script>
 </html>
