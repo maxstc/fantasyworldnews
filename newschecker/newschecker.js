@@ -35,7 +35,7 @@ async function checkNews() {
 }
 
 async function processHeadline(text) {
-    let cursor = db.collection("headlines").find({text: text});
+    let cursor = db.collection("headlines").find({text: text}); //check if headline already exists
     cursor = await cursor.toArray();
     if (cursor.length === 0) {
         console.log("new headline: " + text);
