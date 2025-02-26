@@ -20,6 +20,7 @@
         * {
             font-family: sans-serif;
             margin: 0px;
+            scrollbar-width: none;
         }
 
         table {
@@ -44,6 +45,11 @@
 
         .clickable {
             cursor: pointer;
+        }
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent; /* make scrollbar transparent */
         }
         </style>
 </head>
