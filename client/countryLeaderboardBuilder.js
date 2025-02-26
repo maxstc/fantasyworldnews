@@ -5,7 +5,7 @@ function buildCountryLeaderboard(data) {
     lb.innerHTML = `
 <thead>
     <tr>
-        <th>Flag</th>
+        <th></th>
         <th onclick="sortCountryLeaderboardByCountry()" class="clickable">Country</th>
         <th onclick="sortCountryLeaderboardByScore()" class="clickable">Score</th>
         <th onclick="sortCountryLeaderboardByOwner()" class="clickable">Owner</th>
