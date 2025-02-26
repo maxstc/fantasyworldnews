@@ -5,12 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fantasy World News</title>
     <style>
+        body {
+            height: 100vh;
+        }
+
         * {
             font-family: sans-serif;
         }
 
         table {
             border-collapse: collapse;
+        }
+
+        tbody {
+            overflow-y: scroll;
+            height: 500px;
+            display: block;
         }
         
         td, th {
@@ -29,16 +39,21 @@
 </head>
 <body>
     <table id="countryLeaderboard">
-        <tr>
-            <th>Flag</th>
-            <th onclick="sortCountryLeaderboardByCountry()" class="clickable">Country</th>
-            <th onclick="sortCountryLeaderboardByScore()" class="clickable">Score</th>
-            <th onclick="sortCountryLeaderboardByOwner()" class="clickable">Owner</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Flag</th>
+                <th onclick="sortCountryLeaderboardByCountry()" class="clickable">Country</th>
+                <th onclick="sortCountryLeaderboardByScore()" class="clickable">Score</th>
+                <th onclick="sortCountryLeaderboardByOwner()" class="clickable">Owner</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
     </table>
 </body>
 <script src="globalVars.js"></script>
-<script src="pollForData.js"></script>
 <script src="countryLeaderboardBuilder.js"></script>
 <script src="sortCountryLeaderboard.js"></script>
+<script src="pollForData.js"></script>
 </html>

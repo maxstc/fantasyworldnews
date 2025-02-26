@@ -1,12 +1,19 @@
-function buildCountryLeaderboard() {
+let countryLeaderboardIsBuilt = false;
+
+function buildCountryLeaderboard(data) {
     let lb = document.getElementById("countryLeaderboard");
     lb.innerHTML = `
-<tr>
-    <th>Flag</th>
-    <th onclick="sortCountryLeaderboardByCountry();" class="clickable">Country</th>
-    <th onclick="sortCountryLeaderboardByScore();" class="clickable">Score</th>
-    <th onclick="sortCountryLeaderboardByOwner();" class="clickable">Owner</th>
-</tr>
+<thead>
+    <tr>
+        <th>Flag</th>
+        <th onclick="sortCountryLeaderboardByCountry()" class="clickable">Country</th>
+        <th onclick="sortCountryLeaderboardByScore()" class="clickable">Score</th>
+        <th onclick="sortCountryLeaderboardByOwner()" class="clickable">Owner</th>
+    </tr>
+</thead>
+<tbody>
+    
+</tbody>
 `
     let countries = data.countries;
     if (countryLeaderboardSortStyle === "score") {
@@ -92,6 +99,91 @@ function buildCountryLeaderboard() {
         row.appendChild(countryName);
         row.appendChild(score);
         row.appendChild(countryOwner);
-        lb.appendChild(row);
+        lb.children[1].appendChild(row);
+    }
+}
+
+function refreshCountryLeaderboard(data) {
+    if (!countryLeaderboardIsBuilt) {
+        buildCountryLeaderboard(data);
+        countryLeaderboardIsBuilt = true;
+        return;
+    }
+    let lb = document.getElementById("countryLeaderboard");
+    let countries = data.countries;
+    if (countryLeaderboardSortStyle === "score") {
+        //sort by score, then name
+        countries.sort((a, b) => {
+            a.score = a.names[0].length;
+            b.score = b.names[0].length;
+            if (a.score === b.score) {
+                if (a.names[0] < b.names[0]) {
+                    return -1;
+                }
+                else if (a.names[0] > b.names[0]) {
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            }
+            else {
+                return a.score - b.score;
+            }
+        });
+    }
+    else if (countryLeaderboardSortStyle === "owner") {
+        //sort by owner, then score, then name
+        countries.sort((a, b) => {
+            a.score = a.names[0].length;
+            b.score = b.names[0].length;
+            if (a.owner === b.owner) {
+                if (a.score === b.score) {
+                    if (a.names[0] < b.names[0]) {
+                        return -1;
+                    }
+                    else if (a.names[0] > b.names[0]) {
+                        return 1;
+                    }
+                    else {
+                        return 0;
+                    }
+                }
+                else {
+                    return a.score - b.score;
+                }
+            }
+            else {
+                if (a.owner < b.owner) {
+                    return -1;
+                }
+                else if (a.owner > b.owner) {
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            }
+        });
+    }
+    else {
+        //sort by name
+        countries.sort((a, b) => {
+           if (a.names[0] < b.names[0]) {
+                return -1;
+            }
+            else if (a.names[0] > b.names[0]) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        });
+    }
+    for (let i = 0; i < countries.length; i++) {
+        lb.children[1].children[i].children[0].innerHTML = countries[i].flag;
+        lb.children[1].children[i].children[1].innerHTML = countries[i].names[0];
+        lb.children[1].children[i].children[2].innerHTML = countries[i].names[0].length;
+        lb.children[1].children[i].children[3].innerHTML = "owner";
     }
 }
