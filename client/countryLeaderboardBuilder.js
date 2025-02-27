@@ -187,3 +187,15 @@ function refreshCountryLeaderboard(data) {
         lb.children[1].children[i].children[3].innerHTML = "owner";
     }
 }
+
+function sortCountryLeaderboardByCountry() {
+    countryLeaderboardSortStyle = "name";
+}
+
+function sortCountryLeaderboardByOwner() {
+    countryLeaderboardSortStyle = "owner";
+}
+
+function sortCountryLeaderboardByScore() {
+    countryLeaderboardSortStyle = "score";
+}

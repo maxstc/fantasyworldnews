@@ -9,6 +9,7 @@ async function pollForData() {
 
 function dataRefresh(data) {
     refreshCountryLeaderboard(data);
+    refreshPlayerLeaderboard(data);
 }
 
 pollForData();
