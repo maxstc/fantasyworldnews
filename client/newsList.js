@@ -1,13 +1,45 @@
-let previousNews = [];
+function sortHeadlines(hls) {
+    hls.sort((a,b) => {
+        return b.timestamp - a.timestamp;
+    });
+}
 
-function updateNews(data) {
-    //look for the top headline
-    let newsTable = document.getElementById("news").children[1];
-    if (previousNews.length === 0) {
-        //fully populate table
-        previousNews = newsTable;
+function timeDiffText(now, then) {
+    let diff = now - then;
+    let seconds = Math.floor(diff / 1000);
+    let minutes = Math.floor(seconds / 60);
+    let hours = Math.floor(minutes / 60);
+    let days = Math.floor(hours / 24);
+    if (minutes === 0) {
+        return seconds + "s";
+    }
+    else if (hours === 0) {
+        return minutes + "m";
+    }
+    else if (days === 0) {
+        return hours + "h";
     }
     else {
-        let lastKnownHeadlineId = previousNews[0];
+        return days + "d";
+    }
+}
+
+function buildHeadlineRow(now, hl) {
+    let timeDiff = timeDiffText(now, hl.timestamp);
+    return timeDiff + " - " + hl.text;
+}
+
+function buildNewsList(data) {
+    let nl = document.getElementById("news"); //news list
+    let hls = data.headlines; //headlines
+    sortHeadlines(hls);
+    let now = Date.now();
+
+    for (let i = 0; i < hls.length; i++) {
+        let row = document.createElement("tr");
+        let text = document.createElement("td");
+        text.innerHTML = buildHeadlineRow(now, hls[i]);
+        row.appendChild(text);
+        nl.children[1].appendChild(row);
     }
 }
