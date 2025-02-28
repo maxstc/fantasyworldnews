@@ -54,6 +54,10 @@
             width: 0px;
             background: transparent; /* make scrollbar transparent */
         }
+
+        #news {
+            width: 500px;
+        }
         </style>
 </head>
 <body>
@@ -87,9 +91,20 @@
             </tbody>
         </table>
     </div>
+    <div></div>
+    <div>
+        <table id="news">
+            <thead>
+                <tr>
+                    <th>Recent Changes</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            </tbody>
+        </table>
+    </div>
 </body>
-<script src="globalVars.js"></script>
-<script src="countryLeaderboardBuilder.js"></script>
-<script src="playerLeaderboardBuilder.js"></script>
-<script src="pollForData.js"></script>
+<script src="countryLeaderboard.js"></script>
+<script src="getData.js"></script>
 </html>

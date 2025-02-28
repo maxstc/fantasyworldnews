@@ -1,17 +1,17 @@
-polling = true;
+// polling = true;
 
-async function pollForData() {
-    if (!polling) { return; }
-    const response = await fetch("data");
-    const json = await response.json();
-    dataRefresh(json);
-}
+// async function pollForData() {
+//     if (!polling) { return; }
+//     const response = await fetch("data");
+//     const json = await response.json();
+//     dataRefresh(json);
+// }
 
-function dataRefresh(data) {
-    refreshCountryLeaderboard(data);
-    refreshPlayerLeaderboard(data);
-}
+// function dataRefresh(data) {
+//     refreshCountryLeaderboard(data);
+//     refreshPlayerLeaderboard(data);
+// }
 
-pollForData();
+// pollForData();
 
-setInterval(pollForData, 1000);
+// setInterval(pollForData, 1000);
