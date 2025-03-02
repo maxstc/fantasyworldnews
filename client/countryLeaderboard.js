@@ -20,7 +20,7 @@ function sortCountries(countries, sortStyle) {
                 }
             }
             else {
-                return a.score - b.score;
+                return b.score - a.score;
             }
         });
     }
@@ -42,7 +42,7 @@ function sortCountries(countries, sortStyle) {
                     }
                 }
                 else {
-                    return a.score - b.score;
+                    return b.score - a.score;
                 }
             }
             else {
