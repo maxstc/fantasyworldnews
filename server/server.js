@@ -2,12 +2,12 @@ let port = 41399;
 
 const MAX_COUNTRIES = 4;
 
-const { MongoClient } = require("mongodb");
+import { MongoClient } from "mongodb";
 const client = new MongoClient("mongodb://127.0.0.1:27017");
 client.connect();
 const db = client.db("gamedata");
 
-const express = require("express");
+import express from "express";
 const app = express();
 app.use(express.json());
 
