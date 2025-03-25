@@ -58,6 +58,40 @@ function sortCountries(countries, sortStyle) {
             }
         });
     }
+    else if (sortStyle === "continent") {
+        //sort by continent, then score, then name
+        countries.sort((a, b) => {
+            a.score = a.names[0].length;
+            b.score = b.names[0].length;
+            if (a.continent === b.continent) {
+                if (a.score === b.score) {
+                    if (a.names[0] < b.names[0]) {
+                        return -1;
+                    }
+                    else if (a.names[0] > b.names[0]) {
+                        return 1;
+                    }
+                    else {
+                        return 0;
+                    }
+                }
+                else {
+                    return b.score - a.score;
+                }
+            }
+            else {
+                if (a.continent < b.continent) {
+                    return -1;
+                }
+                else if (a.continent > b.continent) {
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            }
+        });
+    }
     else { //==="name"
         //sort by name
         countries.sort((a, b) => {
@@ -88,10 +122,13 @@ function buildCountryLeaderboard(data) {
         countryName.innerHTML = countries[i].names[0];
         let countryOwner = document.createElement("td");
         countryOwner.innerHTML = "";
+        let continent = document.createElement("td");
+        continent.innerHTML = countries[i].continent;
         let score = document.createElement("td");
         score.innerHTML = countries[i].names[0].length;
         row.appendChild(flag);
         row.appendChild(countryName);
+        row.appendChild(continent);
         row.appendChild(score);
         row.appendChild(countryOwner);
         clb.children[1].appendChild(row);
@@ -122,5 +159,10 @@ function sortCountryLeaderboardByOwner() {
 
 function sortCountryLeaderboardByScore() {
     countryLeaderboardSortStyle = "score";
+    refreshCountryLeaderboard(storedData);
+}
+
+function sortCountryLeaderboardByScore() {
+    countryLeaderboardSortStyle = "continent";
     refreshCountryLeaderboard(storedData);
 }

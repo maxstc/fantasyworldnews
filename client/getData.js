@@ -6,6 +6,7 @@ function analyzeData(json) {
     for (let i = 0; i < json.length; i++) {
         output.teams[json.teams[i]._id] = json.teams[i];
     }
+    return output;
 }
 
 async function getData() {

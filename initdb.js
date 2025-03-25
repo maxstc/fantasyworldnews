@@ -1,4 +1,6 @@
-const { MongoClient } = require("mongodb");
+import { MongoClient } from "mongodb";
+import { countries } from "./server/countries.js";
+
 async function main() {
     const client = new MongoClient("mongodb://127.0.0.1:27017");
     await client.connect();
@@ -10,16 +12,13 @@ async function main() {
     const colTradeHistory = db.collection("tradeHistory");
     const colHeadlines = db.collection("headlines");
 
-    const countries = require("./server/countries.js").countries;
-
     for (let i = 0; i < countries.length; i++) {
         colCountries.insertOne({
             code: countries[i].countrycode,
             flag: countries[i].flag,
             names: countries[i].name,
-            owner: null,
-            latestHeadlineIndices: [],
-            malus: 0
+            continent: countries[i].continent,
+            owner: null
         });
     }
     console.log("done")
