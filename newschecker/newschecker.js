@@ -1,5 +1,5 @@
-const cheerio = require("cheerio");
-const { MongoClient } = require("mongodb");
+import cheerio from "cheerio";
+import { MongoClient } from "mongodb";
 let db;
 
 let lastUpdate = Date.now();
