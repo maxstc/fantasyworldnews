@@ -116,6 +116,8 @@ function buildCountryLeaderboard(data) {
 
     for (let i = 0; i < countries.length; i++) {
         let row = document.createElement("tr");
+        row.className = "clickable";
+        row.onclick = ()=>{openTradeWindow(countries[i].code)};
         let flag = document.createElement("td");
         flag.innerHTML = countries[i].flag;
         let countryName = document.createElement("td");
