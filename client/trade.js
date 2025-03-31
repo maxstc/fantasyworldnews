@@ -8,4 +8,4 @@ let tradeWindow = `
 function openTradeWindow(countryCode) {
     alert("Trade for " + countryCode);
     document.getElementById("trade").innerHTML = tradeWindow;
-}
+}                           

@@ -1,6 +1,14 @@
 teams[]
     name STRING
     score NUMBER
+    lineup{}
+        Europe STRING (countrycode)
+        North America STRING (countrycode)
+        South America STRING (countrycode)
+        Africa STRING (countrycode)
+        Asia STRING (countrycode)
+        Oceania STRING (countrycode)
+        Wildcard STRING (countrycode)
 trades[]
     timestamp NUMBER
     proposerTeam INDEX
