@@ -117,13 +117,13 @@ function buildCountryLeaderboard(data) {
     for (let i = 0; i < countries.length; i++) {
         let row = document.createElement("tr");
         row.className = "clickable";
-        row.onclick = ()=>{openTradeWindow(countries[i].code)};
+        row.onclick = ()=>{openTradeWindow(countries[i].code, countries[i].owner, countries[i].flag + " " + countries[i].names[0])};
         let flag = document.createElement("td");
         flag.innerHTML = countries[i].flag;
         let countryName = document.createElement("td");
         countryName.innerHTML = countries[i].names[0];
         let countryOwner = document.createElement("td");
-        countryOwner.innerHTML = "";
+        countryOwner.innerHTML = (countries[i].owner == null) ? "" : countries[i].owner;
         let continent = document.createElement("td");
         continent.innerHTML = countries[i].continent;
         let score = document.createElement("td");
