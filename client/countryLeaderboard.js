@@ -144,8 +144,9 @@ function refreshCountryLeaderboard(data) {
     for (let i = 0; i < countries.length; i++) {
         clb.children[1].children[i].children[0].innerHTML = countries[i].flag;
         clb.children[1].children[i].children[1].innerHTML = countries[i].names[0];
-        clb.children[1].children[i].children[2].innerHTML = countries[i].names[0].length;
-        clb.children[1].children[i].children[3].innerHTML = "owner";
+        clb.children[1].children[i].children[2].innerHTML = countries[i].continent;
+        clb.children[1].children[i].children[3].innerHTML = countries[i].names[0].length;
+        clb.children[1].children[i].children[4].innerHTML = "owner";
     }
 }
 
@@ -164,7 +165,7 @@ function sortCountryLeaderboardByScore() {
     refreshCountryLeaderboard(storedData);
 }
 
-function sortCountryLeaderboardByScore() {
+function sortCountryLeaderboardByContinent() {
     countryLeaderboardSortStyle = "continent";
     refreshCountryLeaderboard(storedData);
 }
