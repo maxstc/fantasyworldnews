@@ -1,4 +1,5 @@
 let countryLeaderboardSortStyle = "score";
+//score, owner, continent, name
 
 let storedData = {};
 
