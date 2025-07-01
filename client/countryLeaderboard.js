@@ -4,108 +4,17 @@ let countryLeaderboardSortStyle = "score";
 let storedData = {};
 
 function sortCountries(countries, sortStyle) {
-    if (sortStyle === "score") {
-        //sort by score, then name
-        countries.sort((a, b) => {
-            a.score = a.names[0].length;
-            b.score = b.names[0].length;
-            if (a.score === b.score) {
-                if (a.names[0] < b.names[0]) {
-                    return -1;
-                }
-                else if (a.names[0] > b.names[0]) {
-                    return 1;
-                }
-                else {
-                    return 0;
-                }
-            }
-            else {
-                return b.score - a.score;
-            }
-        });
+    if (sortStyle === "score") {//doesnt work cause score isnt calculated yet :P
+        fwnSort(countries, ["score","code"]);
     }
     else if (sortStyle === "owner") {
-        //sort by owner, then score, then name
-        countries.sort((a, b) => {
-            a.score = a.names[0].length;
-            b.score = b.names[0].length;
-            if (a.owner === b.owner) {
-                if (a.score === b.score) {
-                    if (a.names[0] < b.names[0]) {
-                        return -1;
-                    }
-                    else if (a.names[0] > b.names[0]) {
-                        return 1;
-                    }
-                    else {
-                        return 0;
-                    }
-                }
-                else {
-                    return b.score - a.score;
-                }
-            }
-            else {
-                if (a.owner < b.owner) {
-                    return -1;
-                }
-                else if (a.owner > b.owner) {
-                    return 1;
-                }
-                else {
-                    return 0;
-                }
-            }
-        });
+        fwnSort(countries, ["owner","score","code"]);
     }
     else if (sortStyle === "continent") {
-        //sort by continent, then score, then name
-        countries.sort((a, b) => {
-            a.score = a.names[0].length;
-            b.score = b.names[0].length;
-            if (a.continent === b.continent) {
-                if (a.score === b.score) {
-                    if (a.names[0] < b.names[0]) {
-                        return -1;
-                    }
-                    else if (a.names[0] > b.names[0]) {
-                        return 1;
-                    }
-                    else {
-                        return 0;
-                    }
-                }
-                else {
-                    return b.score - a.score;
-                }
-            }
-            else {
-                if (a.continent < b.continent) {
-                    return -1;
-                }
-                else if (a.continent > b.continent) {
-                    return 1;
-                }
-                else {
-                    return 0;
-                }
-            }
-        });
+        fwnSort(countries, ["continent","score","code"]);
     }
     else { //==="name"
-        //sort by name
-        countries.sort((a, b) => {
-           if (a.names[0] < b.names[0]) {
-                return -1;
-            }
-            else if (a.names[0] > b.names[0]) {
-                return 1;
-            }
-            else {
-                return 0;
-            }
-        });
+        fwnSort(countries, ["code"]);
     }
 }
 
@@ -147,7 +56,7 @@ function refreshCountryLeaderboard(data) {
         clb.children[1].children[i].children[1].innerHTML = countries[i].names[0];
         clb.children[1].children[i].children[2].innerHTML = countries[i].continent;
         clb.children[1].children[i].children[3].innerHTML = countries[i].names[0].length;
-        clb.children[1].children[i].children[4].innerHTML = "owner";
+        clb.children[1].children[i].children[4].innerHTML = countries[i].owner;
     }
 }
 

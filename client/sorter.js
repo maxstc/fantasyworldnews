@@ -1,4 +1,5 @@
 function fwnSortRec(a, b, order, i) {
+    //all attributes in 'order' are equal, so they're equal
     if (i >= order.length) {
         return 0;
     }
@@ -10,11 +11,15 @@ function fwnSortRec(a, b, order, i) {
             return 1;
         }
         else {
+            //if this attribute is equal, check the next one
             return fwnSortRec(a, b, order, i+1);
         }
     }
 }
 
+//sort an array of objects by a list of attributes in that order
+//ex: fwnSort(cars, ["make","model","year"])
+//this will group by make, then by model, then by year
 function fwnSort(arr, order) {
     arr.sort((a,b) => {
         return fwnSortRec(a, b, order, 0);
