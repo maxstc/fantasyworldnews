@@ -1,7 +1,10 @@
+//default port of web server if not specified in args
 let port = 41399;
 
+//max number of countries a player can have
 const MAX_COUNTRIES = 10;
 
+//connect to mongodb
 import { MongoClient } from "mongodb";
 const client = new MongoClient("mongodb://127.0.0.1:27017");
 client.connect();
@@ -77,10 +80,12 @@ function handleTrade(reqBody) {
     return {success: true, message: "Success"};
 }
 
+//called when a proposee declines a trade or a proposer cancels a trade
 function handleDeclineTrade(reqBody) {
     db.collection("trades").updateOne({_id: reqBody.tradeId}, {$set: {status: "declined"}});
 }
 
+//called when a proposee accepts a trade
 function handleAcceptTrade(reqBody) {
     db.collection("trades").updateOne({_id: reqBody.tradeId}, {$set: {status: "accepted"}});
     let trade = db.collection("trades").findOne({_id: reqBody.tradeId}).next();
@@ -93,6 +98,7 @@ function removeInvalidTrades(country) {
     db.collection("trades").updateMany({proposerCountry: country, status: "pending"}, {$set: {status: "canceled"}});
 }
 
+//swap two countries
 function doSwap(proposerTeam, targetTeam, proposerCountry, targetCountry) {
     db.collection("countries").updateOne({code: targetCountry}, {$set: {owner: proposerTeam}});
     removeInvalidTrades(targetCountry);
@@ -100,8 +106,9 @@ function doSwap(proposerTeam, targetTeam, proposerCountry, targetCountry) {
     removeInvalidTrades(proposerCountry);
 }
 
-function updateDB() {
-
+//check for expired trades
+function checkExpirings() {
+    //not yet implemented
 }
 
 app.use((req, res, next) => {
@@ -110,16 +117,19 @@ app.use((req, res, next) => {
     next();
 });
 
+//propose a trade
 app.post("/trade", (req, res) => {
     res.set("Access-Control-Allow-Origin", "http://localhost:3000");
     res.json(handleTrade(req.body));
 });
 
+//decline a trade you received or cancel a trade you sent
 app.post("/declinetrade", (req, res) => {
     res.set("Access-Control-Allow-Origin", "http://localhost:3000");
     res.json(handleDeclineTrade(req.body));
 });
 
+//accept a trade you received
 app.post("/accepttrade", (req, res) => {
     res.set("Access-Control-Allow-Origin", "http://localhost:3000");
     res.json(handleAcceptTrade(req.body));
@@ -159,4 +169,5 @@ app.listen(port, () => {
     console.log(`Server started on port ${port}`);
 });
 
-setInterval(()=>{updateDB()}, 1000);
+//check for expired trades
+setInterval(()=>{checkExpirings()}, 1000);

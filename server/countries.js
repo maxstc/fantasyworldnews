@@ -1,3 +1,5 @@
+//list of countries, country names/adjectives, country codes, and continents
+
 const countries = [
   {
     "flag": "🇦🇩",
