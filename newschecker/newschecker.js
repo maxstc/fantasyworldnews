@@ -56,7 +56,7 @@ async function processHeadline(text) {
             }
             if (matches.length > 0) {
                 mentioned.push({
-                    country: x._id,
+                    country: x.code,
                     mentionedNames: matches
                 });
                 db.collection("teams").updateOne({_id: x.owner}, {$inc: {score: 1}});
