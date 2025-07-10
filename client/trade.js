@@ -2,7 +2,7 @@ function getOwnedCountries() {
     let output = [];
     for (let i = 0; i < data.countries.length; i++) {
         if (data.countries[i].owner === "max") {
-            output.push(countries[i]);
+            output.push(data.countries[i]);
         }
     }
     return output;
