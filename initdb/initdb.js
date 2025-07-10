@@ -24,7 +24,7 @@ async function main() {
             names: countries[i].name, //for example Russia, Russian for Russia
             continent: countries[i].continent,
             owner: null, //index of the owner
-            displayName: countries[i].name[0] //display name
+            displayName: countries[i].displayName //display name
         });
     }
     console.log("done")
