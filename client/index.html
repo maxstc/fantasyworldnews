@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fantasy World News</title>
+    <!--convert country flags to small images for chrome/other browsers which dont show flags for country emojis-->
     <script type="module" defer>
         import { polyfillCountryFlagEmojis } from "https://cdn.skypack.dev/country-flag-emoji-polyfill";
         polyfillCountryFlagEmojis();
@@ -64,6 +65,7 @@
         </style>
 </head>
 <body>
+    <!--Country Leaderboard-->
     <div>
         <table id="countryLeaderboard">
             <thead>
@@ -80,6 +82,7 @@
             </tbody>
         </table>
     </div>
+    <!--Player Leaderboard-->
     <div>
         <table id="playerLeaderboard">
             <thead>
@@ -94,6 +97,7 @@
             </tbody>
         </table>
     </div>
+    <!--Headlines/Log-->
     <div>
         <table id="news">
             <thead>
@@ -106,6 +110,7 @@
             </tbody>
         </table>
     </div>
+    <!--User's Lineup-->
     <div>
         <table>
             <thead>
@@ -138,6 +143,7 @@
             <br>
         </p>
     </div>
+    <!--Trade Submission-->
     <div>
         <table>
             <thead>
