@@ -4,7 +4,7 @@ let countryLeaderboardSortStyle = "score";
 let storedData = {};
 
 function sortCountries(countries, sortStyle) {
-    if (sortStyle === "score") {//doesnt work cause score isnt calculated yet :P
+    if (sortStyle === "score") {
         fwnSort(countries, ["-score","code"]);
     }
     else if (sortStyle === "owner") {
