@@ -9,11 +9,11 @@ function analyzeData(json) {
         //check if is in last week (ms * s * m * h * d)
         if (output.headlines[i].timestamp - Date.now() < 1000*60*60*24*7) {
             //for each mentioned country in the headline
-            for (let j = 0; j < output.headlines.mentionedCountries.length; j++) {
+            for (let j = 0; j < output.headlines[i].mentionedCountries.length; j++) {
                 //find that country
-                for (let k = 0; k < outout.countries.length; k++) {
-                    if (output.countries[k].code === output.headlines.mentionedCountries[j].country) {
-                        output.countries.score++;
+                for (let k = 0; k < output.countries.length; k++) {
+                    if (output.countries[k].code === output.headlines[i].mentionedCountries[j].country) {
+                        output.countries[k].score++;
                     }
                 }
             }

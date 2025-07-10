@@ -4,15 +4,30 @@ function fwnSortRec(a, b, order, i) {
         return 0;
     }
     else {
-        if (a[order[i]] < b[order[i]]) {
-            return -1;
-        }
-        else if (a[order[i]] > b[order[i]]) {
-            return 1;
+        if (order[i][0] === "-") {
+            //invert order
+            if (a[order[i].substring(1)] < b[order[i].substring(1)]) {
+                return 1;
+            }
+            else if (a[order[i].substring(1)] > b[order[i].substring(1)]) {
+                return -1;
+            }
+            else {
+                //if this attribute is equal, check the next one
+                return fwnSortRec(a, b, order, i+1);
+            }
         }
         else {
-            //if this attribute is equal, check the next one
-            return fwnSortRec(a, b, order, i+1);
+            if (a[order[i]] < b[order[i]]) {
+                return -1;
+            }
+            else if (a[order[i]] > b[order[i]]) {
+                return 1;
+            }
+            else {
+                //if this attribute is equal, check the next one
+                return fwnSortRec(a, b, order, i+1);
+            }
         }
     }
 }

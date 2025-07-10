@@ -5,13 +5,13 @@ let storedData = {};
 
 function sortCountries(countries, sortStyle) {
     if (sortStyle === "score") {//doesnt work cause score isnt calculated yet :P
-        fwnSort(countries, ["score","code"]);
+        fwnSort(countries, ["-score","code"]);
     }
     else if (sortStyle === "owner") {
-        fwnSort(countries, ["owner","score","code"]);
+        fwnSort(countries, ["owner","-score","code"]);
     }
     else if (sortStyle === "continent") {
-        fwnSort(countries, ["continent","score","code"]);
+        fwnSort(countries, ["continent","-score","code"]);
     }
     else { //==="name"
         fwnSort(countries, ["code"]);
@@ -37,7 +37,7 @@ function buildCountryLeaderboard(data) {
         let continent = document.createElement("td");
         continent.innerHTML = countries[i].continent;
         let score = document.createElement("td");
-        score.innerHTML = countries[i].names[0].length;
+        score.innerHTML = countries[i].score;
         row.appendChild(flag);
         row.appendChild(countryName);
         row.appendChild(continent);
@@ -55,7 +55,7 @@ function refreshCountryLeaderboard(data) {
         clb.children[1].children[i].children[0].innerHTML = countries[i].flag;
         clb.children[1].children[i].children[1].innerHTML = countries[i].names[0];
         clb.children[1].children[i].children[2].innerHTML = countries[i].continent;
-        clb.children[1].children[i].children[3].innerHTML = countries[i].names[0].length;
+        clb.children[1].children[i].children[3].innerHTML = countries[i].score;
         clb.children[1].children[i].children[4].innerHTML = countries[i].owner;
     }
 }

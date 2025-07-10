@@ -1,6 +1,6 @@
 //webscrape to check for new headlines every minute
 
-import cheerio from "cheerio";
+import * as cheerio from "cheerio";
 import { MongoClient } from "mongodb";
 let db;
 
