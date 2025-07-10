@@ -1,6 +1,38 @@
 let playerLeaderboardIsBuilt = false;
 let playerLeaderboardSortStyle = "score";
 
+//take a teamname and return "<countries in lineup>--<countries on bench>" (in order of recent score)
+function getCountries(data, team) {
+    let lineupCountries = [];
+    let benchCountries = [];
+    for (let i = 0; i < data.countries.length; i++) {
+        if (data.countries[i].owner === team.name) {
+            if (team.lineup["Europe"] === data.countries[i].code
+                || team.lineup["North America"] === data.countries[i].code
+                || team.lineup["South America"] === data.countries[i].code
+                || team.lineup["Africa"] === data.countries[i].code
+                || team.lineup["Asia"] === data.countries[i].code
+                || team.lineup["Oceania"] === data.countries[i].code
+                || team.lineup["Wildcard"] === data.countries[i].code
+            ) {
+                lineupCountries.push(data.countries[i]);
+            }
+            else {
+                benchCountries.push(data.countries[i]);
+            }
+        }
+    }
+    let output = "";
+    for (let i = 0; i < lineupCountries.length; i++) {
+        output += lineupCountries[i].flag;
+    }
+    output += "--"
+    for (let i = 0; i < benchCountries.length; i++) {
+        output += benchCountries[i].flag;
+    }
+    return output;
+}
+
 function buildPlayerLeaderboard(data) {
     let lb = document.getElementById("playerLeaderboard");
     lb.innerHTML = `
@@ -31,6 +63,7 @@ function buildPlayerLeaderboard(data) {
         let score = document.createElement("td");
         score.innerHTML = teams[i].score;
         let countries = document.createElement("td");
+        countries.innerHTML = getCountries(data, teams[i]);
         row.appendChild(name);
         row.appendChild(score);
         row.appendChild(countries);

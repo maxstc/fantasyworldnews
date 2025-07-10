@@ -36,7 +36,7 @@ function fwnSortRec(a, b, order, i) {
 //sort an array of objects by a list of attributes in that order
 //ex: fwnSort(cars, ["make","model","year"])
 //this will group by make, then by model, then by year
-//place - in front of an attribute for descending order
+//place '-' in front of an attribute for descending order
 //ex: fwnSort(cars, ["make","model","-year"])
 //this will sort year in descending order but the others ascending
 function fwnSort(arr, order) {
