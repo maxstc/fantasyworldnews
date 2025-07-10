@@ -5,16 +5,16 @@ let storedData = {};
 
 function sortCountries(countries, sortStyle) {
     if (sortStyle === "score") {
-        fwnSort(countries, ["-score","code"]);
+        fwnSort(countries, ["-score","displayName"]);
     }
     else if (sortStyle === "owner") {
-        fwnSort(countries, ["owner","-score","code"]);
+        fwnSort(countries, ["owner","-score","displayName"]);
     }
     else if (sortStyle === "continent") {
-        fwnSort(countries, ["continent","-score","code"]);
+        fwnSort(countries, ["continent","-score","displayName"]);
     }
     else { //==="name"
-        fwnSort(countries, ["code"]);
+        fwnSort(countries, ["displayName"]);
     }
 }
 
@@ -27,11 +27,11 @@ function buildCountryLeaderboard(data) {
     for (let i = 0; i < countries.length; i++) {
         let row = document.createElement("tr");
         row.className = "clickable";
-        row.onclick = ()=>{openTradeWindow(countries[i].code, countries[i].owner, countries[i].flag + " " + countries[i].names[0])};
+        row.onclick = ()=>{openTradeWindow(countries[i].code, countries[i].owner, countries[i].flag + " " + countries[i].displayName)};
         let flag = document.createElement("td");
         flag.innerHTML = countries[i].flag;
         let countryName = document.createElement("td");
-        countryName.innerHTML = countries[i].names[0];
+        countryName.innerHTML = countries[i].displayName;
         let countryOwner = document.createElement("td");
         countryOwner.innerHTML = (countries[i].owner == null) ? "" : countries[i].owner;
         let continent = document.createElement("td");
@@ -53,7 +53,7 @@ function refreshCountryLeaderboard(data) {
     sortCountries(countries, countryLeaderboardSortStyle);
     for (let i = 0; i < countries.length; i++) {
         clb.children[1].children[i].children[0].innerHTML = countries[i].flag;
-        clb.children[1].children[i].children[1].innerHTML = countries[i].names[0];
+        clb.children[1].children[i].children[1].innerHTML = countries[i].displayName;
         clb.children[1].children[i].children[2].innerHTML = countries[i].continent;
         clb.children[1].children[i].children[3].innerHTML = countries[i].score;
         clb.children[1].children[i].children[4].innerHTML = countries[i].owner;

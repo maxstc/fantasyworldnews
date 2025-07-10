@@ -23,7 +23,8 @@ async function main() {
             flag: countries[i].flag, //emoji flag
             names: countries[i].name, //for example Russia, Russian for Russia
             continent: countries[i].continent,
-            owner: null //index of the owner
+            owner: null, //index of the owner
+            displayName: countries[i].name[0] //display name
         });
     }
     console.log("done")
