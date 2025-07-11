@@ -59,7 +59,19 @@ async function processHeadline(text) {
                     country: x.code,
                     mentionedNames: matches
                 });
-                db.collection("teams").updateOne({_id: x.owner}, {$inc: {score: 1}});
+                db.collection("teams").find({name: x.owner}).forEach((y) => {
+                    //check that its in their lineup, benched countries dont give points
+                    if (y.lineup["Europe"] === x.code
+                        || y.lineup["North America"] === x.code
+                        || y.lineup["South America"] === x.code
+                        || y.lineup["Africa"] === x.code
+                        || y.lineup["Asia"] === x.code
+                        || y.lineup["Oceania"] === x.code
+                        || y.lineup["Wildcard"] === x.code
+                    ) {
+                        db.collection("teams").updateOne({_id: y._id}, {$inc: {score: 1}});
+                    }
+                });
             }
         });
         db.collection("headlines").insertOne({
