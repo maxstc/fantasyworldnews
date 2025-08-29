@@ -4,10 +4,6 @@ for (x in continents) {
     validSlots[continents[x]] = ["None"];
 }
 
-document.getElementById("submitLineup").onclick = () => {
-    //when you click submit lineup
-}
-
 //add this player's european countries to validEurope and each other continent + wildcard
 function populateValidity(data, team) {
     console.log(team.name);
@@ -25,14 +21,38 @@ function populateValidity(data, team) {
                 document.getElementById("select" + noSpace).innerHTML += "<option value=null>None</option>";
             }
             else {
-                document.getElementById("select" + noSpace).innerHTML += "<option value=\"" + slots[y] + "\">" + slots[y].displayName + "</option>";
+                document.getElementById("select" + noSpace).innerHTML += "<option value=\"" + slots[y].code + "\">" + slots[y].displayName + "</option>";
             }
         }
     }
 }
 
-function postLineup() {
+function getLineupSelection() {
+    let output = {};
+    for (x in continents) {
+        output[continents[x].replace(/\s+/g, "")] = document.getElementById("select" + continents[x].replace(/\s+/g, "")).value;
+    }
+    return output;
+}
 
+function postLineup() {
+    document.getElementById("submitLineup").setAttribute("disabled", "true");
+    fetch("lineup", {
+        method: "POST",
+        body: JSON.stringify({
+            "team": "max",
+            "lineup": getLineupSelection()
+        }),
+        headers: {
+            "Content-type": "application/json"
+        }
+    }).then((res) => res.json())
+    .then((json) => console.log(json));
+}
+
+document.getElementById("submitLineup").onclick = () => {
+    //when you click submit lineup
+    postLineup();
 }
 
 function buildLineup(data) {
