@@ -29,6 +29,7 @@ async function getData() {
     buildCountryLeaderboard(data);
     buildPlayerLeaderboard(data);
     buildNewsList(data);
+    buildLineup(data);
 }
 
 getData();
