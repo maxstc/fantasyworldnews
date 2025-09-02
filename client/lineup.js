@@ -30,7 +30,8 @@ function populateValidity(data, team) {
 function getLineupSelection() {
     let output = {};
     for (x in continents) {
-        output[continents[x].replace(/\s+/g, "")] = document.getElementById("select" + continents[x].replace(/\s+/g, "")).value;
+        let value = document.getElementById("select" + continents[x].replace(/\s+/g, "")).value;
+        output[continents[x].replace(/\s+/g, "")] = value === "null" ? null : value;
     }
     return output;
 }
