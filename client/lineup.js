@@ -17,11 +17,20 @@ function populateValidity(data, team) {
         let noSpace = continents[x].replace(/\s+/g, "");
         let slots = validSlots[continents[x]];
         for (y in slots) {
+            let selected = "";
+            console.log(slots[y].code + "-" + team.lineup[continents[x]]);
+            if (slots[y].code === team.lineup[continents[x]]) {
+                selected = "selected";
+            }
+
             if (slots[y] === "None") {
-                document.getElementById("select" + noSpace).innerHTML += "<option value=null>None</option>";
+                if (team.lineup[continents[x]] === null) {
+                    selected = "selected";
+                }
+                document.getElementById("select" + noSpace).innerHTML += "<option value=null " + selected + ">None</option>";
             }
             else {
-                document.getElementById("select" + noSpace).innerHTML += "<option value=\"" + slots[y].code + "\">" + slots[y].displayName + "</option>";
+                document.getElementById("select" + noSpace).innerHTML += "<option value=\"" + slots[y].code + "\"" + selected + ">" + slots[y].displayName + "</option>";
             }
         }
     }
