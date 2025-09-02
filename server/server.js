@@ -164,7 +164,7 @@ app.get("/data", async (req, res) => {
 });
 
 app.post("/lineup", async (req, res) => {
-    // db.collection("teams").findOne({name: req.body.team},{$set: {lineup: req.body.lineup}});
+    db.collection("teams").updateOne({name: req.body.team}, {$set: {lineup: req.body.lineup}});
     console.log(req.body.lineup);
     res.json({success: true, message: "Success"});
 })

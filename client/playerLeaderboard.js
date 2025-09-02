@@ -24,11 +24,11 @@ function getCountries(data, team) {
     }
     let output = "";
     for (let i = 0; i < lineupCountries.length; i++) {
-        output += lineupCountries[i].flag;
+        output += lineupCountries[i].flag + " ";
     }
-    output += "--"
+    output += "- "
     for (let i = 0; i < benchCountries.length; i++) {
-        output += benchCountries[i].flag;
+        output += benchCountries[i].flag + " ";
     }
     return output;
 }

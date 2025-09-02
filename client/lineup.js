@@ -57,7 +57,7 @@ function postLineup() {
             "Content-type": "application/json"
         }
     }).then((res) => res.json())
-    .then((json) => console.log(json));
+    .then((json) => {console.log(json); location.reload()});
 }
 
 document.getElementById("submitLineup").onclick = () => {
