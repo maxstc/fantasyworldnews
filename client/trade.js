@@ -21,6 +21,7 @@ function openTradeWindow(targetCountry, targetTeam, display) {
 `
 <input type="radio" id="trade1" name="giveCountry" value="${ownedCountries[i].code}">
 <label for="trade1">${ownedCountries[i].names[0]}</label>
+<br>
 `;
     }
     if (ownedCountries.length < 10) {
