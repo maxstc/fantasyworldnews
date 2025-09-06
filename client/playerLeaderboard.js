@@ -63,6 +63,7 @@ function buildPlayerLeaderboard(data) {
         let score = document.createElement("td");
         score.innerHTML = teams[i].score;
         let countries = document.createElement("td");
+        countries.classList.add("flag-shadow");
         countries.innerHTML = getCountries(data, teams[i]);
         row.appendChild(name);
         row.appendChild(score);

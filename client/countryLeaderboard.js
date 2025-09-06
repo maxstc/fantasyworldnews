@@ -30,6 +30,7 @@ function buildCountryLeaderboard(data) {
         row.onclick = ()=>{openTradeWindow(countries[i].code, countries[i].owner, countries[i].flag + " " + countries[i].displayName)};
         let flag = document.createElement("td");
         flag.innerHTML = countries[i].flag;
+        flag.classList.add("flag-shadow");
         let countryName = document.createElement("td");
         countryName.innerHTML = countries[i].displayName;
         let countryOwner = document.createElement("td");

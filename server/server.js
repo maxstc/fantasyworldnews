@@ -100,6 +100,33 @@ function removeInvalidTrades(country) {
 
 //swap two countries
 function doSwap(proposerTeam, targetTeam, proposerCountry, targetCountry) {
+    //check if countries are in lineups
+    db.collection("teams").find({name: proposerTeam}).forEach((y) => {
+        //check that its in their lineup, benched countries dont give points
+        let newLineup = y.lineup;
+        if (y.lineup["Europe"] === proposerCountry) {
+            newLineup["Europe"] = null;
+        }
+        if (y.lineup["North America"] === proposerCountry) {
+            newLineup["North America"] = null;
+        }
+        if (y.lineup["South America"] === proposerCountry) {
+            newLineup["South America"] = null;
+        }
+        if (y.lineup["Africa"] === proposerCountry) {
+            newLineup["Africa"] = null;
+        }
+        if (y.lineup["Asia"] === proposerCountry) {
+            newLineup["Asia"] = null;
+        }
+        if (y.lineup["Oceania"] === proposerCountry) {
+            newLineup["Oceania"] = null;
+        }
+        if (y.lineup["Wildcard"] === proposerCountry) {
+            newLineup["Wildcard"] = null;
+        }
+        db.collection("teams").updateOne({name: proposerTeam}, {$set:{lineup: newLineup}});
+    });
     db.collection("countries").updateOne({code: targetCountry}, {$set: {owner: proposerTeam}});
     removeInvalidTrades(targetCountry);
     db.collection("countries").updateOne({code: proposerCountry}, {$set: {owner: targetTeam}});
