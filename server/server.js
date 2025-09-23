@@ -169,7 +169,6 @@ app.get("/", (req, res) => {
 
 app.get("/team/:teamName", async (req, res) => {
     //set the teamName to a session cookie and redirect them to index.html
-    console.log(req.params.teamName);
     let id = await db.collection("teams").find({name: req.params.teamName}).next();
     if (id === null) {
         res.end("name not found :( make sure it's correct (case sensitive) and don't include <> in your team name (for example, /team/max)");
@@ -192,7 +191,6 @@ app.get("/data", async (req, res) => {
 
 app.post("/lineup", async (req, res) => {
     db.collection("teams").updateOne({name: req.body.team}, {$set: {lineup: req.body.lineup}});
-    console.log(req.body.lineup);
     res.json({success: true, message: "Success"});
 })
 
