@@ -47,6 +47,7 @@ function handleTrade(reqBody) {
             }
         }
         //check the proposer has the country they are trying to give up
+        //EAT THE PROMISE
         if (db.collection("countries").find({code: proposerCountry}).next().owner != proposerTeam) {
             return {success: false, message: "You don't own the country you tried to swap."};
         }
