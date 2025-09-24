@@ -21,7 +21,7 @@ if (process.argv.length > 2) {
 
 //adds a proposal to the list of proposals
 //does not execute a trade
-function handleTrade(reqBody) {
+async function handleTrade(reqBody) {
     let timestamp = Date.now();
     let proposerTeam = reqBody.proposerTeam;
     let targetTeam = reqBody.targetTeam;
@@ -29,11 +29,9 @@ function handleTrade(reqBody) {
     let targetCountry = reqBody.targetCountry;
     let status = "pending";
 
-    console.log(reqBody);
-
     if (targetTeam === null) { //swapping to an unselected country
         //check the country is unclaimed
-        if (db.collection("countries").find({code: targetCountry}).next().owner != null) {
+        if ((await db.collection("countries").find({code: targetCountry}).next()).owner != null) {
             return {success: false, message: "The country you tried to claim has an owner."};
         }
         //check if the proposer has less than the maximum number of countries
@@ -43,33 +41,33 @@ function handleTrade(reqBody) {
             }
             else {
                 doSwap(proposerTeam, targetTeam, proposerCountry, targetCountry);
-                return {success: true};
+                return {success: true, message: "Success"};
             }
         }
         //check the proposer has the country they are trying to give up
         //EAT THE PROMISE
-        if (db.collection("countries").find({code: proposerCountry}).next().owner != proposerTeam) {
+        if ((await db.collection("countries").find({code: proposerCountry}).next()).owner != proposerTeam) {
             return {success: false, message: "You don't own the country you tried to swap."};
         }
 
         doSwap(proposerTeam, targetTeam, proposerCountry, targetCountry);
-        return {success: true};
+        return {success: true, message: "Success"};
     }
 
-    if (db.collection("countries").find({code: targetCountry}).next().owner != targetTeam) {
+    if ((await db.collection("countries").find({code: targetCountry}).next()).owner != targetTeam) {
         return {success: false, message: "The person you tried to swap with no longer has that country."};
     }
-    if (db.collection("countries").find({code: proposerCountry}).next().owner != proposerTeam) {
+    if ((await db.collection("countries").find({code: proposerCountry}).next()).owner != proposerTeam) {
         return {success: false, message: "You don't have the country you tried to swap."};
     }
 
     //check if proposal already exists between these two players
-    if (db.collection("trades").find({proposerTeam: proposerTeam, targetTeam: targetTeam, status: "pending"}).next() != null) {
+    if ((await db.collection("trades").find({proposerTeam: proposerTeam, targetTeam: targetTeam, status: "pending"}).next()) != null) {
         return {success: false, message: "You already have a trade pending with this player"};
     }
 
     //add this proposal
-    db.collection("trades").insertOne({
+    await db.collection("trades").insertOne({
         timestamp: timestamp,
         proposerTeam: proposerTeam,
         targetTeam: targetTeam,
