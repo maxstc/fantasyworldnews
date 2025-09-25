@@ -144,9 +144,9 @@ app.use((req, res, next) => {
 });
 
 //propose a trade
-app.post("/trade", (req, res) => {
+app.post("/trade", async (req, res) => {
     res.set("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.json(handleTrade(req.body));
+    res.json(await handleTrade(req.body));
 });
 
 //decline a trade you received or cancel a trade you sent
