@@ -8,8 +8,8 @@ function getCountries(data, team) {
     for (let i = 0; i < data.countries.length; i++) {
         if (data.countries[i].owner === team.name) {
             if (team.lineup["Europe"] === data.countries[i].code
-                || team.lineup["North America"] === data.countries[i].code
-                || team.lineup["South America"] === data.countries[i].code
+                || team.lineup["NorthAmerica"] === data.countries[i].code
+                || team.lineup["SouthAmerica"] === data.countries[i].code
                 || team.lineup["Africa"] === data.countries[i].code
                 || team.lineup["Asia"] === data.countries[i].code
                 || team.lineup["Oceania"] === data.countries[i].code
