@@ -6,7 +6,6 @@ for (x in continents) {
 
 //add this player's european countries to validEurope and each other continent + wildcard
 function populateValidity(data, team) {
-    console.log(team.name);
     for (x in data.countries) {
         if (data.countries[x].owner === team.name) {
             validSlots["Wildcard"].push(data.countries[x]);
@@ -18,8 +17,7 @@ function populateValidity(data, team) {
         let slots = validSlots[continents[x]];
         for (y in slots) {
             let selected = "";
-            console.log(slots[y].code + "-" + team.lineup[continents[x]]);
-            if (slots[y].code === team.lineup[continents[x]]) {
+            if (slots[y].code === team.lineup[noSpace]) {
                 selected = "selected";
             }
 
@@ -57,7 +55,7 @@ function postLineup() {
             "Content-type": "application/json"
         }
     }).then((res) => res.json())
-    .then((json) => {console.log(json); location.reload()});
+    .then((json) => {alert(json.message); location.reload()});
 }
 
 document.getElementById("submitLineup").onclick = () => {
