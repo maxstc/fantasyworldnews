@@ -48,7 +48,7 @@ function postLineup() {
     fetch("lineup", {
         method: "POST",
         body: JSON.stringify({
-            "team": "max",
+            "team": userTeam,
             "lineup": getLineupSelection()
         }),
         headers: {
