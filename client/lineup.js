@@ -64,5 +64,9 @@ document.getElementById("submitLineup").onclick = () => {
 }
 
 function buildLineup(data) {
-    populateValidity(data, data.teams[1]);
+    for (i in teams) {
+        if (teams[i].name === userTeam) {
+            populateValidity(data, teams[i]);
+        }
+    }
 }
