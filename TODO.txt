@@ -1,1 +1,2 @@
 -change the way slots work (have there be a part of the DB to store slot validity (?))
+-disallow trading for a country you already have? or self trades?
