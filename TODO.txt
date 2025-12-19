@@ -2,3 +2,5 @@
 -disallow trading for a country you already have? or self trades?
 -highlight matches in headlines
 -auto refresh
+-fix owner ordering in country leaderboard
+-fix all ordering in player leaderboard
