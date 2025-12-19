@@ -174,7 +174,7 @@ app.get("/team/:teamName", async (req, res) => {
         return;
     }
     id = id._id.toString();
-    res.cookie("login", id);
+    res.cookie("login", req.params.teamName);
     res.redirect("/index.html");
 });
 
