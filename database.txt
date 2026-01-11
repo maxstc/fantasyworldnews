@@ -15,15 +15,13 @@ trades[]
     targetTeam INDEX
     proposerCountry INDEX
     targetCountry INDEX
-    proposerPointsOffered NUMBER
-    status STRING pending, canceled, accepted, declined, bidpending, bidsuccess, bidfail
+    status STRING pending, canceled, accepted, declined
 countries[]
     code STRING
     flag STRING
     names[] STRING
     owner INDEX
-    lastSwapTimestamp NUMBER
-    malus NUMBER
+    continent STRING
 headlines[]
     text STRING
     timestamp NUMBER

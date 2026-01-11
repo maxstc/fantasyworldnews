@@ -40,7 +40,7 @@ function handleTrade(reqBody) {
             }
             else {
                 doSwap(proposerTeam, targetTeam, proposerCountry, targetCountry);
-                return {success: true};
+                return {success: true, message: "Success"};
             }
         }
         //check the proposer has the country they are trying to give up

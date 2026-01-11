@@ -2,7 +2,7 @@ function getOwnedCountries() {
     let output = [];
     for (let i = 0; i < data.countries.length; i++) {
         if (data.countries[i].owner === "max") {
-            output.push(countries[i]);
+            output.push(data.countries[i]);
         }
     }
     return output;
@@ -21,6 +21,7 @@ function openTradeWindow(targetCountry, targetTeam, display) {
 `
 <input type="radio" id="trade1" name="giveCountry" value="${ownedCountries[i].code}">
 <label for="trade1">${ownedCountries[i].names[0]}</label>
+<br>
 `;
     }
     if (ownedCountries.length < 10) {
