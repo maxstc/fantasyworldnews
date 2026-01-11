@@ -1,6 +1,8 @@
 //webscrape to check for new headlines every minute
 
+//webscraping libary
 import * as cheerio from "cheerio";
+//db library
 import { MongoClient } from "mongodb";
 let db;
 
@@ -9,19 +11,19 @@ let lastUpdate = Date.now();
 
 //connect to DB
 async function main() {
-  const client = new MongoClient("mongodb://127.0.0.1:27017");
-  await client.connect();
-  db = client.db("gamedata");
+    const client = new MongoClient("mongodb://127.0.0.1:27017");
+    await client.connect();
+    db = client.db("gamedata");
 }
 
 //check if he haven't updated in 1 minute. if so, check for new headlines
 async function tick() {
-  let now = Date.now();
-  if (Math.floor(lastUpdate / 60000) < Math.floor(now / 60000)) {
-    console.log("Checking news at " + new Date());
-    checkNews();
-    lastUpdate = now;
-  }
+    let now = Date.now();
+    if (Math.floor(lastUpdate / 60000) < Math.floor(now / 60000)) {
+        console.log("Checking news at " + new Date());
+        checkNews();
+        lastUpdate = now;
+    }
 }
 
 //check for new headlines

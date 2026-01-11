@@ -40,16 +40,19 @@ async function handleTrade(reqBody) {
                 return {success: false, message: "You already have the maximum number of countries claimed."};
             }
             else {
+                //TODO add a trade to the list of trades in the db
                 doSwap(proposerTeam, targetTeam, proposerCountry, targetCountry);
                 return {success: true, message: "Success"};
             }
         }
         //check the proposer has the country they are trying to give up
+        //TODO did i fix this? XD
         //EAT THE PROMISE
         if ((await db.collection("countries").find({code: proposerCountry}).next()).owner != proposerTeam) {
             return {success: false, message: "You don't own the country you tried to swap."};
         }
 
+        //TODO add a trade to the list of trades in the db
         doSwap(proposerTeam, targetTeam, proposerCountry, targetCountry);
         return {success: true, message: "Success"};
     }
@@ -80,6 +83,7 @@ async function handleTrade(reqBody) {
 }
 
 //called when a proposee declines a trade or a proposer cancels a trade
+//TODO add checks to this
 function handleDeclineTrade(reqBody) {
     db.collection("trades").updateOne({_id: reqBody.tradeId}, {$set: {status: "declined"}});
 }
@@ -163,9 +167,10 @@ function doSwap(proposerTeam, targetTeam, proposerCountry, targetCountry) {
 
 //check for expired trades
 function checkExpirings() {
-    //not yet implemented
+    //TODO not yet implemented
 }
 
+//TODO Remove the react stuff
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -179,15 +184,15 @@ app.post("/trade", async (req, res) => {
 });
 
 //decline a trade you received or cancel a trade you sent
-app.post("/declinetrade", (req, res) => {
+app.post("/declinetrade", async (req, res) => {
     res.set("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.json(handleDeclineTrade(req.body));
+    res.json(await handleDeclineTrade(req.body));
 });
 
 //accept a trade you received
-app.post("/accepttrade", (req, res) => {
+app.post("/accepttrade", async (req, res) => {
     res.set("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.json(handleAcceptTrade(req.body));
+    res.json(await handleAcceptTrade(req.body));
 });
 
 app.get("/", (req, res) => {
@@ -218,6 +223,7 @@ app.get("/data", async (req, res) => {
     }));
 });
 
+//TODO check the user & the lineup contents
 app.post("/lineup", async (req, res) => {
     db.collection("teams").updateOne({name: req.body.team}, {$set: {lineup: req.body.lineup}});
     res.json({success: true, message: "Success"});
