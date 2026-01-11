@@ -1,7 +1,7 @@
 function getOwnedCountries() {
     let output = [];
     for (let i = 0; i < data.countries.length; i++) {
-        if (data.countries[i].owner === "max") {
+        if (data.countries[i].owner === userTeam) {
             output.push(data.countries[i]);
         }
     }
@@ -53,7 +53,7 @@ function submitTrade(targetCountry, targetTeam) {
     fetch("trade", {
         method: "POST",
         body: JSON.stringify({
-            "proposerTeam": "max",
+            "proposerTeam": userTeam,
             "targetTeam": (targetTeam == "null") ? null : targetTeam,
             "targetCountry": targetCountry,
             "proposerCountry": getProposerCountry()

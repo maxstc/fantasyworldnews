@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fantasy World News</title>
+    <!--convert country flags to small images for chrome/other browsers which dont show flags for country emojis-->
     <script type="module" defer>
         import { polyfillCountryFlagEmojis } from "https://cdn.skypack.dev/country-flag-emoji-polyfill";
         polyfillCountryFlagEmojis();
@@ -61,51 +62,28 @@
         #news {
             width: 500px;
         }
+
+        .flag-shadow {
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;
+        }
         </style>
 </head>
 <body>
+    <!--Active Trades List-->
+    <div id="activetrades"></div>
+    <!--Trade Submission-->
     <div>
-        <table id="countryLeaderboard">
+        <table>
             <thead>
                 <tr>
-                    <th></th>
-                    <th onclick="sortCountryLeaderboardByCountry()" class="clickable">Country</th>
-                    <th onclick="sortCountryLeaderboardByContinent()" class="clickable">Continent</th>
-                    <th onclick="sortCountryLeaderboardByScore()" class="clickable">Score</th>
-                    <th onclick="sortCountryLeaderboardByOwner()" class="clickable">Owner</th>
+                    <th>Trade</th>
                 </tr>
-            </thead>
-            <tbody>
-    
-            </tbody>
+            </thead>    
         </table>
+        <p id="trade">
+        </p>
     </div>
-    <div>
-        <table id="playerLeaderboard">
-            <thead>
-                <tr>
-                    <th onclick="sortPlayerLeaderboardByPlayer()" class="clickable">Player</th>
-                    <th onclick="sortPlayerLeaderboardByScore()" class="clickable">Score</th>
-                    <th>Countries</th>
-                </tr>
-            </thead>
-            <tbody>
-    
-            </tbody>
-        </table>
-    </div>
-    <div>
-        <table id="news">
-            <thead>
-                <tr>
-                    <th>Recent Changes</th>
-                </tr>
-            </thead>
-            <tbody>
-    
-            </tbody>
-        </table>
-    </div>
+    <!--User's Lineup-->
     <div>
         <table>
             <thead>
@@ -136,23 +114,63 @@
             <label for="selectWildcard">Wildcard:</label>
             <select name="selectWildcard" id="selectWildcard"></select>
             <br>
+            <button id="submitLineup">Submit</button>
         </p>
     </div>
+    <!--Country Leaderboard-->
     <div>
-        <table>
+        <table id="countryLeaderboard">
             <thead>
                 <tr>
-                    <th>Trade</th>
+                    <th></th>
+                    <th onclick="sortCountryLeaderboardByCountry()" class="clickable">Country</th>
+                    <th onclick="sortCountryLeaderboardByContinent()" class="clickable">Continent</th>
+                    <th onclick="sortCountryLeaderboardByScore()" class="clickable">Score</th>
+                    <th onclick="sortCountryLeaderboardByOwner()" class="clickable">Owner</th>
                 </tr>
-            </thead>    
+            </thead>
+            <tbody>
+    
+            </tbody>
         </table>
-        <p id="trade">
-        </p>
+    </div>
+    <!--Player Leaderboard-->
+    <div>
+        <table id="playerLeaderboard">
+            <thead>
+                <tr>
+                    <th onclick="sortPlayerLeaderboardByPlayer()" class="clickable">Player</th>
+                    <th onclick="sortPlayerLeaderboardByScore()" class="clickable">Score</th>
+                    <th>Countries</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            </tbody>
+        </table>
+    </div>
+    <!--Headlines/Log-->
+    <div>
+        <table id="news">
+            <thead>
+                <tr>
+                    <th>Recent Changes</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            </tbody>
+        </table>
     </div>
 </body>
 <script>let data = {};</script>
+<script>let userTeam = document.cookie.split("=")[1];if(document.cookie==""){alert("Please sign in!\nGo to <url>/team/<your name>")}</script>
+<script src="sorter.js"></script>
+<script src="activeTrades.js"></script>
 <script src="trade.js"></script>
 <script src="countryLeaderboard.js"></script>
+<script src="playerLeaderboard.js"></script>
 <script src="newsList.js"></script>
+<script src="lineup.js"></script>
 <script src="getData.js"></script>
 </html>
