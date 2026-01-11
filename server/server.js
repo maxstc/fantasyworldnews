@@ -124,6 +124,7 @@ function doSwap(proposerTeam, targetTeam, proposerCountry, targetCountry) {
         if (y.lineup["Wildcard"] === proposerCountry) {
             newLineup["Wildcard"] = null;
         }
+        console.log(newLineup);
         db.collection("teams").updateOne({name: proposerTeam}, {$set:{lineup: newLineup}});
     });
     //do the same for the target team/country
@@ -151,6 +152,7 @@ function doSwap(proposerTeam, targetTeam, proposerCountry, targetCountry) {
         if (y.lineup["Wildcard"] === targetCountry) {
             newLineup["Wildcard"] = null;
         }
+        console.log(newLineup);
         db.collection("teams").updateOne({name: targetTeam}, {$set:{lineup: newLineup}});
     });
     db.collection("countries").updateOne({code: targetCountry}, {$set: {owner: proposerTeam}});
@@ -209,7 +211,8 @@ app.get("/data", async (req, res) => {
     res.set("Access-Control-Allow-Origin", "http://localhost:3000");
     res.send(JSON.stringify({
         teams: await db.collection("teams").find().toArray(),
-        trades: await db.collection("teams").find({$or: [{targetTeam: req.body.teamName}, {proposerTeam: req.body.teamName}]}).toArray(),
+        //trades: await db.collection("trades").find({$or: [{targetTeam: req.body.teamName}, {proposerTeam: req.body.teamName}]}).toArray(),
+        trades: await db.collection("trades").find().toArray(),
         countries: await db.collection("countries").find().toArray(),
         headlines: await db.collection("headlines").find().toArray()
     }));

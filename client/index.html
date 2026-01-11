@@ -69,6 +69,8 @@
         </style>
 </head>
 <body>
+    <!--Active Trades List-->
+    <div id="activetrades"></div>
     <!--Trade Submission-->
     <div>
         <table>
@@ -164,6 +166,7 @@
 <script>let data = {};</script>
 <script>let userTeam = document.cookie.split("=")[1];if(document.cookie==""){alert("Please sign in!\nGo to <url>/team/<your name>")}</script>
 <script src="sorter.js"></script>
+<script src="activeTrades.js"></script>
 <script src="trade.js"></script>
 <script src="countryLeaderboard.js"></script>
 <script src="playerLeaderboard.js"></script>

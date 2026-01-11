@@ -30,6 +30,7 @@ async function getData() {
     buildPlayerLeaderboard(data);
     buildNewsList(data);
     buildLineup(data);
+    buildActiveTrades(data);
 }
 
 getData();

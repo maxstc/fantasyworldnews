@@ -4,3 +4,5 @@
 -auto refresh
 -fix owner ordering in country leaderboard
 -fix all ordering in player leaderboard
+-add new news sources
+-refresh after claim
