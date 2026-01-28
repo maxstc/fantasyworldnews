@@ -38,7 +38,7 @@ function buildNewsList(data) {
     for (let i = 0; i < hls.length; i++) {
         let row = document.createElement("tr");
         let text = document.createElement("td");
-        text.innerHTML = buildHeadlineRow(now, hls[i]);
+        text.innerHTML = `<a href="https://archive.is/${hls[i].link}" target="_blank" rel="noopener noreferrer">${buildHeadlineRow(now, hls[i])}</a>`;
         row.appendChild(text);
         nl.children[1].appendChild(row);
     }

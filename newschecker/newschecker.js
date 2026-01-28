@@ -33,7 +33,7 @@ async function checkNews() {
         const responseText = await response.text();
         let doc = cheerio.load(responseText);
         doc(".container__headline-text").map(async (index, element) => {
-            await processHeadline(doc(element).text());
+            await processHeadline(doc(element).text(), doc(element).parent().parent().parent().attr("href"));
         });
     }
     catch (err) {
@@ -43,7 +43,7 @@ async function checkNews() {
 }
 
 //read in a headline, dish out points, and add to log
-async function processHeadline(text) {
+async function processHeadline(text, link) {
     let cursor = db.collection("headlines").find({text: text}); //check if headline already exists
     cursor = await cursor.toArray();
     if (cursor.length === 0) {
@@ -79,12 +79,15 @@ async function processHeadline(text) {
         db.collection("headlines").insertOne({
             text: text,
             timestamp: Date.now(),
-            mentionedCountries: mentioned
+            mentionedCountries: mentioned,
+            link: "https://cnn.com" + link
         });
     }
 }
 
 main();
+
+checkNews();
 
 //tick once per second
 setInterval(() => {tick()}, 1000);
