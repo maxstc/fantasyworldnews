@@ -1,4 +1,4 @@
-const db = require("../db");
+const db = require("../../db");
 
 exports.dashboardData = async (req, res) => {
     res.set("Access-Control-Allow-Origin", "http://localhost:3000");
