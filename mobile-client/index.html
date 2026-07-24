@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+body {
+    margin: 0;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: 8rem 1fr 10rem;
+    font-family: Inter;
+    font-weight: 600;
+}
+header {
+    display: flex;
+    justify-content: center; /* horizontal */
+    align-items: center;     /* vertical */
+    text-align: center;
+    border-bottom: 3px solid gray;
+    font-size: 4rem;
+}
+nav {
+    display: flex;
+    justify-content: center; /* horizontal */
+    align-items: center;     /* vertical */
+    text-align: center;
+    border-top: 3px solid gray;
+}
+nav button {
+    flex: 1;
+    font-size: 4rem;
+    height: 100%;
+}
+    </style>
+</head>
+<body>
+<!--HEADER-->
+    <header>
+        News
+    </header>
+<!--MAIN-->
+    <main>
+        <h1>Home</h1>
+        <p>Welcome!</p>
+    </main>
+<!--FOOTER NAV-->
+    <nav>
+        <script>
+function onNavButtonClick(option) {
+    let header = document.getElementsByTagName("header")[0];
+    if (option === "news") {
+        header.innerHTML = "News";
+    }
+    else if (option === "search") {
+        header.innerHTML = "Search";
+    }
+    else if (option === "leaderboard") {
+        header.innerHTML = "Leaderboard";
+    }
+    else if (option === "trade") {
+        header.innerHTML = "Trade";
+    }
+    else if (option === "options") {
+        header.innerHTML = "Options";
+    }
+}
+        </script>
+        <button onclick="onNavButtonClick('news')">📰</a>
+        <button onclick="onNavButtonClick('search')">🔍</a>
+        <button onclick="onNavButtonClick('leaderboard')">🏆</a>
+        <button onclick="onNavButtonClick('trade')">🔄</a>
+        <button onclick="onNavButtonClick('options')">⚙️</a>
+    </nav>
+</body>
+</html>
