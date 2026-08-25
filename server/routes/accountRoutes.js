@@ -1,8 +1,17 @@
 import express from "express";
 const router = express.Router();
-import { login, signup } from "../controllers/accountController.js";
+import { db } from "../db.js";
 
-router.post("/login", login);
 router.post("/signup", signup);
 
-export { router };
+async function signup (req, res) {
+    res.status(200).json({ success: true });
+};
+
+router.post("/login", login);
+
+async function login (req, res) {
+    res.status(200).json({ success: true });
+};
+
+export { router }; 
