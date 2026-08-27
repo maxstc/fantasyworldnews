@@ -15,7 +15,7 @@ if (process.argv.length > 2) {
     port = parseInt(process.argv[2]);
 }
 
-import { router as accountRoutes } from "./routes/accountRoutes.js";
+import { router as accountRoutes } from "./routes/account/controller.js";
 
 app.use("/api/account", accountRoutes);
 
