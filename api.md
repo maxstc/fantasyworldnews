@@ -263,3 +263,117 @@ The list of countries, ordered according to what you want your lineup to be
 true if the request was successful.
 #### `String message`
 Message to display if request unsuccessful. `null` if request unsuccessful.
+
+# Game
+
+Creating new games and sending, accepting, and declining invites to new games
+
+## `POST /api/game/create`
+
+Creates a new game
+
+### Parameters
+
+#### `String token`
+Your session token
+
+### Returns
+
+#### `Boolean success`
+true if the request was successful.
+#### `String message`
+Message to display if request unsuccessful. `null` if request unsuccessful.
+#### `String gameID`
+The game ID if successful.
+
+## `POST /api/game/invite`
+
+Invites a player to a game
+
+### Parameters
+
+#### `String token`
+Your session token
+#### `String gameID`
+The game ID
+#### `String playerID`
+The ID of the player to invite
+
+### Returns
+
+#### `Boolean success`
+true if the request was successful.
+#### `String message`
+Message to display if request unsuccessful. `null` if request unsuccessful.
+
+## `POST /api/game/accept`
+
+Accepts an invite to a game
+
+### Parameters
+
+#### `String token`
+Your session token
+#### `String inviteID`
+The ID of the invite
+
+### Returns
+
+#### `Boolean success`
+true if the request was successful.
+#### `String message`
+Message to display if request unsuccessful. `null` if request unsuccessful.
+
+## `POST /api/game/get-invites`
+
+Fetches a list of invites an account has received
+
+### Parameters
+
+#### `String token`
+Your session token
+
+### Returns
+
+#### `Boolean success`
+true if the request was successful.
+#### `String message`
+Message to display if request unsuccessful. `null` if request unsuccessful.
+#### `String[] inviteIDs`
+A list of IDs of invites, if successful.
+
+## `POST /api/game/decline`
+
+Declines an invite to a game
+
+### Parameters
+
+#### `String token`
+Your session token
+#### `String inviteID`
+The invite ID
+
+### Returns
+
+#### `Boolean success`
+true if the request was successful.
+#### `String message`
+Message to display if request unsuccessful. `null` if request unsuccessful.
+
+## `POST /api/game/get-games`
+
+Gets a list of games an account is in
+
+### Parameters
+
+#### `String token`
+Your session token
+
+### Returns
+
+#### `Boolean success`
+true if the request was successful.
+#### `String message`
+Message to display if request unsuccessful. `null` if request unsuccessful.
+#### `String[] gameIDs`
+A list of game IDs, if successful

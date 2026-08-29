@@ -15,9 +15,19 @@ if (process.argv.length > 2) {
     port = parseInt(process.argv[2]);
 }
 
-import { router as accountRoutes } from "./routes/account/controller.js";
+import { router as accountRoute } from "./routes/account/_controller.js";
+import { router as dashboardRoute } from "./routes/dashboard/_controller.js";
+import { router as gameRoute } from "./routes/game/_controller.js";
+import { router as infoRoute } from "./routes/info/_controller.js";
+import { router as lineupRoute } from "./routes/lineup/_controller.js";
+import { router as tradeRoute } from "./routes/trade/_controller.js";
 
-app.use("/api/account", accountRoutes);
+app.use("/api/account", accountRoute);
+app.use("/api/dashboard", dashboardRoute);
+app.use("/api/game", gameRoute);
+app.use("/api/info", infoRoute);
+app.use("/api/lineup", lineupRoute);
+app.use("/api/trade", tradeRoute);
 
 app.get("/", (req, res) => {
     res.redirect("/index.html");
