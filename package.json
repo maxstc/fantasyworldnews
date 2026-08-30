@@ -10,9 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "argon2": "^0.45.1",
     "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^17.4.2",
     "express": "^4.18.2",
-    "mongodb": "^6.5.0"
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^6.5.0",
+    "pg": "^8.23.0",
+    "validator": "^13.15.35"
   },
   "type": "module"
 }

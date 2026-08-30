@@ -2,3 +2,4 @@ node_modules/
 gamedata.json
 backups/
 server/alpha-key.js
+.env
