@@ -1,3 +1,5 @@
+//Written by Max
+
 import pool from "../../db.js";
 import validator from "validator";
 import argon2 from "argon2";
@@ -5,6 +7,26 @@ import jwt from "jsonwebtoken";
 
 export async function signup (req, res) {
     try {
+        //Check that all params are there
+        if (req.body.password === undefined) {
+            return res.status(400).json({
+                success: false, 
+                message: "Request missing field: \"password\""
+            });
+        }
+        if (req.body.username === undefined) {
+            return res.status(400).json({
+                success: false, 
+                message: "Request missing field: \"username\""
+            });
+        }
+        if (req.body.email === undefined) {
+            return res.status(400).json({
+                success: false, 
+                message: "Request missing field: \"email\""
+            });
+        }
+
         //Check that password isn't too short
         if (req.body.password.length < 12) {
             return res.status(400).json({
