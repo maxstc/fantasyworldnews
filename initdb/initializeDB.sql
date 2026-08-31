@@ -35,6 +35,7 @@ CREATE TABLE country_ownerships (
     player_id BIGINT NOT NULL,
     country_id SMALLINT NOT NULL REFERENCES countries(id),
     game_id BIGINT NOT NULL,
+    lineup_space continent_name,
     UNIQUE (player_id, country_id),
     UNIQUE (game_id, country_id),
     FOREIGN KEY (player_id, game_id) REFERENCES players(id, game_id)
