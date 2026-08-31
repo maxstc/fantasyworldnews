@@ -5,3 +5,5 @@ import { login } from "./login.js";
 
 router.post("/signup", signup);
 router.post("/login", login);
+
+export { router };

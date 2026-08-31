@@ -7,3 +7,5 @@ import { decline } from "./decline.js";
 router.post("/propose", propose);
 router.post("/accept", accept);
 router.post("/decline", decline);
+
+export { router };
