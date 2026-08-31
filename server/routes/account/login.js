@@ -45,7 +45,7 @@ export async function login (req, res) {
                 message: "Username not found",
                 token: null,
             });
-        };
+        }
 
         // Don't authorize if password doesn't match hash
         const hashedPassword = usernameQuery.rows[0].password_hash;
@@ -55,7 +55,7 @@ export async function login (req, res) {
                 message: `Password incorrect.`,
                 token: null,
             });
-        };
+        }
 
         // By this point request is valid
         
@@ -87,5 +87,5 @@ export async function login (req, res) {
     //Check that pas
     // const result = await pool.query("SELECT NOW()");
     // res.status(200).json({ success: true });
-};
+}
 
