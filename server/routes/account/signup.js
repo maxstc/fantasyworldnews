@@ -7,6 +7,23 @@ import jwt from "jsonwebtoken";
 
 const minPasswordLength = 12;
 export const maxPasswordLength = 64;
+export const tokenLifetime = "1h";
+
+// -------SQL BEST PRACTICE------- 
+// const client = await pool.connect();
+
+// try {
+//   await client.query("BEGIN");
+
+//   // multiple queries...
+
+//   await client.query("COMMIT");
+// } catch (error) {
+//   await client.query("ROLLBACK");
+//   throw error;
+// } finally {
+//   client.release();
+// }
 
 export async function signup (req, res) {
     try {
@@ -95,7 +112,7 @@ export async function signup (req, res) {
         const sessionToken = jwt.sign(
             { username: normalizedUsername },
             process.env.JWT_SECRET,
-            { expiresIn: "1h" }
+            { expiresIn: tokenLifetime }
         );
 
         //Reply with token

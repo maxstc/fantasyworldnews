@@ -1,9 +1,10 @@
+// Written by David
 import pool from "../../db.js";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import { maxPasswordLength } from "./signup.js";
+import { tokenLifetime } from "./signup.js";
 
-const tokenLifetime = "1h";
 
 export async function login (req, res) {
     try {
@@ -88,17 +89,3 @@ export async function login (req, res) {
     res.status(200).json({ success: true });
 };
 
-// const client = await pool.connect();
-
-// try {
-//   await client.query("BEGIN");
-
-//   // multiple queries...
-
-//   await client.query("COMMIT");
-// } catch (error) {
-//   await client.query("ROLLBACK");
-//   throw error;
-// } finally {
-//   client.release();
-// }
