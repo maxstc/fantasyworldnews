@@ -3,3 +3,5 @@ gamedata.json
 backups/
 server/alpha-key.js
 .env
+
+server/routes/account/api.sh
