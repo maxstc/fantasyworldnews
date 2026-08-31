@@ -44,7 +44,7 @@ export async function signup (req, res) {
         }
 
         //Check that email is valid
-        if (!validator.isEmail(email)) {
+        if (!validator.isEmail(req.body.email)) {
             return res.status(400).json({
                 success: false, 
                 message: "Invalid email."
