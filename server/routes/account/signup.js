@@ -57,7 +57,7 @@ export async function signup (req, res) {
         //Check that username is valid
         //alphanumeric or . or _
         const usernameRegex = /^[a-z0-9_.]+$/;
-        if (!usernameRegex.test(username)) {
+        if (!usernameRegex.test(normalizedUsername)) {
             return res.status(400).json({
                 success: false, 
                 message: "Invalid username."
