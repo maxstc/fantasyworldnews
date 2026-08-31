@@ -69,7 +69,7 @@ export async function login (req, res) {
         //Reply with token
         return res.status(200).json({ 
             success: true,
-            message: `Loged in successfully as ${normalizedUsername}.`,
+            message: `Logged in successfully as ${normalizedUsername}.`,
             token: sessionToken,
         });
     }
@@ -85,7 +85,7 @@ export async function login (req, res) {
     //Check that username isn't taken
 
     //Check that pas
-    const result = await pool.query("SELECT NOW()");
-    res.status(200).json({ success: true });
+    // const result = await pool.query("SELECT NOW()");
+    // res.status(200).json({ success: true });
 };
 
