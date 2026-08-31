@@ -5,6 +5,9 @@ import validator from "validator";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 
+const minPasswordLength = 12;
+export const maxPasswordLength = 64;
+
 export async function signup (req, res) {
     try {
         //Check that all params are there
@@ -28,23 +31,23 @@ export async function signup (req, res) {
         }
 
         //Check that password isn't too short
-        if (req.body.password.length < 12) {
+        if (req.body.password.length < minPasswordLength) {
             return res.status(400).json({
                 success: false, 
-                message: "Password must be at least 12 characters."
+                message: `Password must be at least ${minPasswordLength} characters.`
             });
         }
 
         //Check that password isn't too long
-        if (req.body.password.length > 64) {
+        if (req.body.password.length > maxPasswordLength) {
             return res.status(400).json({
                 success: false, 
-                message: "Password must be at less than 65 characters."
+                message: `Password must be at less than ${maxPasswordLength} characters.`
             });
         }
 
         //Check that email is valid
-        if (!validator.isEmail(email)) {
+        if (!validator.isEmail(req.body.email)) {
             return res.status(400).json({
                 success: false, 
                 message: "Invalid email."

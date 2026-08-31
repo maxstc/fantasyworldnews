@@ -1,7 +1,45 @@
 import pool from "../../db.js";
+import { maxPasswordLength } from "./signup.js"
 
 export async function login (req, res) {
-    //Check that password is long and complex enough
+    try {
+        //Check that all params are there
+        if (req.body.password === undefined) {
+            return res.status(400).json({
+                success: false, 
+                message: "Request missing field: \"password\""
+            });
+        }
+
+        if (req.body.username === undefined) {
+            return res.status(400).json({
+                success: false, 
+                message: "Request missing field: \"username\""
+            });
+        }
+
+        // check that password is not exceedingly long
+        if (req.body.password.length > maxPasswordLength) {
+            return res.status(400).json({
+                success: false, 
+                message: `Password exceeds ${maxPasswordLength} characters`
+            });
+        }
+
+        //Reply with token
+        return res.status(200).json({ 
+            success: true,
+            token: sessionToken
+        });
+    }
+    catch (error) {
+        //Some error happened
+        console.error(error);
+        return res.status(400).json({
+            success: false,
+            message: "JS error."
+        });
+    }
 
     //Check that username isn't taken
 
