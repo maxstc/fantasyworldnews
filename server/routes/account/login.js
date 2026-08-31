@@ -1,5 +1,9 @@
 import pool from "../../db.js";
-import { maxPasswordLength } from "./signup.js"
+import argon2 from "argon2";
+import jwt from "jsonwebtoken";
+import { maxPasswordLength } from "./signup.js";
+
+const tokenLifetime = "1h";
 
 export async function login (req, res) {
     try {
@@ -7,13 +11,15 @@ export async function login (req, res) {
         if (req.body.password === undefined) {
             return res.status(400).json({
                 success: false, 
-                message: "Request missing field: \"password\""
+                message: "Request missing field: \"password\"",
+                token: null,
             });
         }
         if (req.body.username === undefined) {
             return res.status(400).json({
                 success: false, 
-                message: "Request missing field: \"username\""
+                message: "Request missing field: \"username\"",
+                token: null,
             });
         }
 
@@ -21,17 +27,50 @@ export async function login (req, res) {
         if (req.body.password.length > maxPasswordLength) {
             return res.status(400).json({
                 success: false, 
-                message: `Password exceeds ${maxPasswordLength} characters`
+                message: `Password exceeds ${maxPasswordLength} characters`,
+                token: null,
             });
         }
 
-        // 
-        // if (req.body.password.length > maxPasswordLength) {
-        //     return res.status(400).json({
-        //         success: false, 
-        //         message: `Password exceeds ${maxPasswordLength} characters`
-        //     });
-        // }
+        // Check that username exists
+        const normalizedUsername = req.body.username.toLowerCase();
+        const usernameQuery = await pool.query(
+            "SELECT * FROM accounts WHERE username = $1",
+            [normalizedUsername]
+        );
+        if (usernameQuery.rowCount === 0) {
+            return res.status(400).json({
+                success: false,
+                message: "Username not found",
+                token: null,
+            });
+        };
+
+        // Don't authorize if password doesn't match hash
+        const hashedPassword = usernameQuery.rows[0].password_hash;
+        if (! (await argon2.verify(hashedPassword, req.body.password))){
+            return res.status(400).json({
+                success: false,
+                message: `Password incorrect.`,
+                token: null,
+            });
+        };
+
+        // By this point request is valid
+        
+        //Generate the token
+        const sessionToken = jwt.sign(
+            { username: normalizedUsername },
+            process.env.JWT_SECRET,
+            { expiresIn: tokenLifetime }
+        );
+
+        //Reply with token
+        return res.status(200).json({ 
+            success: true,
+            message: `Loged in successfully as ${normalizedUsername}.`,
+            token: sessionToken,
+        });
     }
     catch (error) {
         //Some error happened
