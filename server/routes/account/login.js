@@ -10,7 +10,6 @@ export async function login (req, res) {
                 message: "Request missing field: \"password\""
             });
         }
-
         if (req.body.username === undefined) {
             return res.status(400).json({
                 success: false, 
@@ -26,11 +25,13 @@ export async function login (req, res) {
             });
         }
 
-        //Reply with token
-        return res.status(200).json({ 
-            success: true,
-            token: sessionToken
-        });
+        // 
+        // if (req.body.password.length > maxPasswordLength) {
+        //     return res.status(400).json({
+        //         success: false, 
+        //         message: `Password exceeds ${maxPasswordLength} characters`
+        //     });
+        // }
     }
     catch (error) {
         //Some error happened
