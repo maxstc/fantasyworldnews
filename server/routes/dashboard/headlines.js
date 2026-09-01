@@ -11,13 +11,11 @@ export async function headlines (req, res) {
         if (lastHeadline === undefined) {
             return res.status(400).json({
                 message: "Request missing field: \"lastHeadline\"",
-                headlines: null,
             });
         }
         if (numHeadlines === undefined) {
             return res.status(400).json({
                 message: "Request missing field: \"numHeadlines\"",
-                headlines: null,
             });
         }
 
@@ -50,12 +48,10 @@ export async function headlines (req, res) {
         console.error(error);
         return res.status(400).json({
             message: "JS error.",
-            headlines: null,
         });
     }
     //Reply
     return res.status(200).json({ 
-        message: null,
         headlines: resHeadlines,
     });
 };
