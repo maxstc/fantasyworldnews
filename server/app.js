@@ -5,6 +5,7 @@ const DEFAULT_PORT = 41399;
 //max number of countries a player can have
 const MAX_COUNTRIES = 10;
 
+import "dotenv/config";
 import express from "express";
 const app = express();
 app.use(express.json());
