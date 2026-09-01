@@ -4,7 +4,9 @@ Every api call includes a `String` called `message` that contains a reason for f
 
 If an api call fails, assume that all of the "returns" are `undefined`.  
 
-Unless otherwise specified, status code `200` should be used if a request was successful and `400` if unsuccessful.
+Unless otherwise specified, status code `200` should be used if a request was successful and `400` if unsuccessful.|
+
+(REQUIRES AUTHENTICATION) means the client has to have its session/login token in the request header `Authorization` with the format `Bearer <session-token>`
 
 # `POST /api/accounts/signup`
 
