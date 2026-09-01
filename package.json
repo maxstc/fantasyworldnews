@@ -20,5 +20,8 @@
     "pg": "^8.23.0",
     "validator": "^13.15.35"
   },
-  "type": "module"
+  "type": "module",
+  "imports": {
+    "#root/*": "./*"
+  }
 }
