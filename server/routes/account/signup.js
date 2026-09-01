@@ -9,41 +9,21 @@ const minPasswordLength = 12;
 export const maxPasswordLength = 64;
 export const tokenLifetime = "1h";
 
-// -------SQL BEST PRACTICE------- 
-// const client = await pool.connect();
-
-// try {
-//   await client.query("BEGIN");
-
-//   // multiple queries...
-
-//   await client.query("COMMIT");
-// } catch (error) {
-//   await client.query("ROLLBACK");
-//   throw error;
-// } finally {
-//   client.release();
-// }
-
-
 export async function signup (req, res) {
     try {
         //Check that all params are there
         if (req.body.password === undefined) {
             return res.status(400).json({
-                success: false, 
                 message: "Request missing field: \"password\""
             });
         }
         if (req.body.username === undefined) {
             return res.status(400).json({
-                success: false, 
                 message: "Request missing field: \"username\""
             });
         }
         if (req.body.email === undefined) {
             return res.status(400).json({
-                success: false, 
                 message: "Request missing field: \"email\""
             });
         }
@@ -51,7 +31,6 @@ export async function signup (req, res) {
         //Check that password isn't too short
         if (req.body.password.length < minPasswordLength) {
             return res.status(400).json({
-                success: false, 
                 message: `Password must be at least ${minPasswordLength} characters.`
             });
         }
@@ -59,7 +38,6 @@ export async function signup (req, res) {
         //Check that password isn't too long
         if (req.body.password.length > maxPasswordLength) {
             return res.status(400).json({
-                success: false, 
                 message: `Password must be at less than ${maxPasswordLength} characters.`
             });
         }
@@ -67,7 +45,6 @@ export async function signup (req, res) {
         //Check that email is valid
         if (!validator.isEmail(req.body.email)) {
             return res.status(400).json({
-                success: false, 
                 message: "Invalid email."
             });
         }
@@ -80,7 +57,6 @@ export async function signup (req, res) {
         const usernameRegex = /^[a-z0-9_.]+$/;
         if (!usernameRegex.test(normalizedUsername)) {
             return res.status(400).json({
-                success: false, 
                 message: "Invalid username."
             });
         }
@@ -92,7 +68,6 @@ export async function signup (req, res) {
         );
         if (usernameQuery.rowCount > 0) {
             return res.status(400).json({
-                success: false, 
                 message: "Username already taken."
             });
         }
@@ -118,7 +93,6 @@ export async function signup (req, res) {
 
         //Reply with token
         return res.status(200).json({ 
-            success: true,
             token: sessionToken
         });
     }
@@ -126,8 +100,7 @@ export async function signup (req, res) {
         //Some error happened
         console.error(error);
         return res.status(400).json({
-            success: false,
-            message: "JS error."
+            message: "Uncaught JS Error."
         });
     }
 };
