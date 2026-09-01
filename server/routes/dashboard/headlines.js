@@ -45,7 +45,6 @@ export async function headlines (req, res) {
                 link: newHeadlinesQuery.rows[i].link,
             })
         }
-        console.log(resHeadlines);
 
     } catch (error) {
         console.error(error);
