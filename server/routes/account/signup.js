@@ -25,7 +25,6 @@ export const tokenLifetime = "1h";
 //   client.release();
 // }
 
-console.log(process.env.DB_NAME)
 
 export async function signup (req, res) {
     try {
