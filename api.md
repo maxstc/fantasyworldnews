@@ -17,8 +17,6 @@ The user's email
 
 ### Returns
 
-#### `Boolean success`
-true if the account was created, false otherwise
 #### `String message`
 Message associated with the request, ie "Username already taken" if the username wasn't available. `null` if success is true.
 #### `String token`
@@ -37,8 +35,6 @@ The account's password
 
 ### Returns
 
-#### `Boolean success`
-true if the account was created, false otherwise
 #### `String message`
 Message associated with the request, ie "Username already taken" if the username wasn't available. `null` if success is true.
 #### `String token`
@@ -54,18 +50,13 @@ Use this to fetch headlines for the dashboard
 
 ### Parameters
 
-#### 'integer lastHeadline`
-
+#### `integer lastHeadline`
 The latest headline you already have. `null` if you don't have any headlines yet. ie when first loading headlines, use null. As the user reaches the bottom of the list of headlines, use the last headline in the list.
-
 #### `integer numHeadlines`
-
 The number of additional headlines to load in.
 
 ### Returns
 
-#### `Boolean success`
-true if the request is successful.
 #### `String message`
 Message to display if something went wrong. `null` if request was successful.
 #### `Object[] headlines`
@@ -83,15 +74,12 @@ Use this to get the trades for a specific user
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
 #### `String gameID`
 Your gameID
 
 ### Returns
 
-#### `Boolean success`
-true if the request was successful.
 #### `String message`
 Message to display if the request failed. null if the request was successful.
 #### `Object[] trades`
@@ -115,8 +103,7 @@ Use this to get a list of player ids
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
 #### `String gameID`
 Your game ID
 
@@ -128,8 +115,7 @@ Get info about a specific player or country
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
 #### `String gameID`
 Your game ID
 #### `String playerID`
@@ -137,8 +123,6 @@ The player's ID
 
 ### Returns
 
-#### `Boolean success`
-true if successful
 #### `String message`
 Message to display if query unsuccessful. `null` if successful.
 #### `String displayName`
@@ -154,8 +138,7 @@ true if this player is you :P
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
 #### `String gameID`
 Your gameID
 #### `String countryCode`
@@ -163,8 +146,6 @@ The country code you're searching for
 
 ### Returns
 
-#### `Boolean success`
-true if successful
 #### `String message`
 Message to display if query unsuccessful. `null` if successful.
 #### `String displayName`
@@ -186,8 +167,7 @@ Propose a trade
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
 #### `String gameID`
 The game ID
 #### `proposerCountry`
@@ -197,8 +177,6 @@ The country you want
 
 ### Returns
 
-#### `Boolean success`
-true if the request was successful.
 #### `String message`
 Message to display if request unsuccessful. `null` if request unsuccessful.
 
@@ -208,8 +186,7 @@ Propose a trade
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
 #### `String gameID`
 The game ID
 #### `String tradeID`
@@ -217,8 +194,6 @@ The trade ID you're trying to accept
 
 ### Returns
 
-#### `Boolean success`
-true if the request was successful.
 #### `String message`
 Message to display if request unsuccessful. `null` if request unsuccessful.
 
@@ -228,8 +203,7 @@ Propose a trade
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
 #### `String gameID`
 The game ID
 #### `String tradeID`
@@ -237,8 +211,6 @@ The trade ID you're trying to decline
 
 ### Returns
 
-#### `Boolean success`
-true if the request was successful.
 #### `String message`
 Message to display if request unsuccessful. `null` if request unsuccessful.
 
@@ -250,8 +222,7 @@ Set your lineup
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
 #### `String gameID`
 The game ID
 #### `String[] countries`
@@ -259,8 +230,6 @@ The list of countries, ordered according to what you want your lineup to be
 
 ### Returns
 
-#### `Boolean success`
-true if the request was successful.
 #### `String message`
 Message to display if request unsuccessful. `null` if request unsuccessful.
 
@@ -274,13 +243,11 @@ Creates a new game
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
+#### No other parameters
 
 ### Returns
 
-#### `Boolean success`
-true if the request was successful.
 #### `String message`
 Message to display if request unsuccessful. `null` if request unsuccessful.
 #### `String gameID`
@@ -292,8 +259,7 @@ Invites a player to a game
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
 #### `String gameID`
 The game ID
 #### `String playerID`
@@ -301,8 +267,6 @@ The ID of the player to invite
 
 ### Returns
 
-#### `Boolean success`
-true if the request was successful.
 #### `String message`
 Message to display if request unsuccessful. `null` if request unsuccessful.
 
@@ -312,15 +276,12 @@ Accepts an invite to a game
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
 #### `String inviteID`
 The ID of the invite
 
 ### Returns
 
-#### `Boolean success`
-true if the request was successful.
 #### `String message`
 Message to display if request unsuccessful. `null` if request unsuccessful.
 
@@ -330,13 +291,11 @@ Fetches a list of invites an account has received
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
+#### No other parameters
 
 ### Returns
 
-#### `Boolean success`
-true if the request was successful.
 #### `String message`
 Message to display if request unsuccessful. `null` if request unsuccessful.
 #### `String[] inviteIDs`
@@ -348,15 +307,12 @@ Declines an invite to a game
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
 #### `String inviteID`
 The invite ID
 
 ### Returns
 
-#### `Boolean success`
-true if the request was successful.
 #### `String message`
 Message to display if request unsuccessful. `null` if request unsuccessful.
 
@@ -366,13 +322,11 @@ Gets a list of games an account is in
 
 ### Parameters
 
-#### `String token`
-Your session token
+#### Requires authentication in header
+#### No other headers
 
 ### Returns
 
-#### `Boolean success`
-true if the request was successful.
 #### `String message`
 Message to display if request unsuccessful. `null` if request unsuccessful.
 #### `String[] gameIDs`
