@@ -13,6 +13,7 @@ router.post(
 router.post(
     "/login",
     checkParamsNotUndefined(["username", "password"]),
-    login);
+    login
+);
 
 export { router };
