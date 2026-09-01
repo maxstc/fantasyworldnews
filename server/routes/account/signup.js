@@ -11,23 +11,6 @@ export const tokenLifetime = "1h";
 
 export async function signup (req, res) {
     try {
-        //Check that all params are there
-        if (req.body.password === undefined) {
-            return res.status(400).json({
-                message: "Request missing field: \"password\""
-            });
-        }
-        if (req.body.username === undefined) {
-            return res.status(400).json({
-                message: "Request missing field: \"username\""
-            });
-        }
-        if (req.body.email === undefined) {
-            return res.status(400).json({
-                message: "Request missing field: \"email\""
-            });
-        }
-
         //Check that password isn't too short
         if (req.body.password.length < minPasswordLength) {
             return res.status(400).json({

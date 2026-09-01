@@ -1,0 +1,12 @@
+export function checkParamsNotUndefined(paramNames) {
+    return (req, res, next) => {
+        for (const paramName of paramNames) {
+            if (!req.paramName) {
+                return res.status(400).json({
+                    message: `Missing parameter: ${paramName}`
+                });
+            }
+        }
+        next();
+    }
+}
