@@ -1,333 +1,214 @@
-# Accounts
+# !!! Important to Note !!!
 
-Signup and login to accounts
+Every api call includes a `String` called `message` that contains a reason for failure if the API fails. Otherwise, this value is undefined.  
 
-## `POST /api/accounts/signup`
+If an api call fails, assume that all of the "returns" are undefined.  
+
+# `POST /api/accounts/signup`
 
 Use this to create a new account
 
 ### Parameters
 
-#### `String username`
-The username the user wants
-#### `String password`
-The password the user wants
-#### `String email`
-The user's email
+- `String username` The username the user wants  
+- `String password` The password the user wants  
+- `String email` The user's email  
 
 ### Returns
 
-#### `String message`
-Message associated with the request, ie "Username already taken" if the username wasn't available. `null` if success is true.
-#### `String token`
-Login token to be stored as a cookie and to be used for authentication. `null` if the creation failed.
+- `String token` Login token to be stored as a cookie and to be used for authentication. `null` if the creation failed.  
 
-## `POST /api/accounts/login`
+# `POST /api/accounts/login`
 
 Use this to log in
 
 ### Parameters
 
-#### `String username`
-The account's username
-#### `String password`
-The account's password
+- `String username` The account's username  
+- `String password` - The account's password  
 
 ### Returns
 
-#### `String message`
-Message associated with the request, ie "Username already taken" if the username wasn't available. `null` if success is true.
-#### `String token`
-Login token to be stored as a cookie and to be used for authentication. `null` if the login failed.
+- `String token` Login token to be stored as a cookie and to be used for authentication. `null` if the login failed.  
 
-# Dashboard
-
-Get info to display on dashboard
-
-## POST `/api/dashboard/headlines`
+# POST `/api/dashboard/headlines`
 
 Use this to fetch headlines for the dashboard
 
 ### Parameters
 
-#### `integer lastHeadline`
-The latest headline you already have. `null` if you don't have any headlines yet. ie when first loading headlines, use null. As the user reaches the bottom of the list of headlines, use the last headline in the list.
-#### `integer numHeadlines`
-The number of additional headlines to load in.
+- `integer lastHeadline` The headline at the end of your list of already fetched headlines. `null` if you don't have any headlines yet. ie when first loading headlines, use `null`.  
+- `integer numHeadlines` The number of additional headlines to load in.  
 
 ### Returns
 
-#### `String message`
-Message to display if something went wrong. `null` if request was successful.
-#### `Object[] headlines`
-Array of headlines to append to your list. Ordered latest to oldest.
-#### `String headlines[i].text`
-The text of the headline.
-#### `integer headlines[i].timestamp`
-The timestamp of the article's entry into the db.
-#### `String headlines[i].link`
-A link to the article.
+- `Object[] headlines` Array of headlines to append to your list. Ordered latest to oldest.  
+- `String headlines[i].text` The text of the headline.  
+- `integer headlines[i].timestamp` The timestamp of the article's entry into the db.  
+- `String headlines[i].link` A link to the article.  
 
-## POST `/api/dashboard/trades`
+# POST `/api/dashboard/trades` (REQUIRES AUTHENTICATION)
 
 Use this to get the trades for a specific user
 
 ### Parameters
 
-#### Requires authentication in header
-#### `String gameID`
-Your gameID
+- `String gameID` Your gameID  
 
 ### Returns
 
-#### `String message`
-Message to display if the request failed. null if the request was successful.
-#### `Object[] trades`
-The list of trades for this user
-#### `integer trades[i].timestamp`
-The timestamp the trade was proposed
-#### `String trades[i].proposerTeam`
-The id of the team/player that proposed the trade
-#### `String trades[i].targetTeam`
-The id of the team/player that was proposed the trade
-#### `String trades[i].proposerCountry`
-The country code of the country the proposer will give away
-#### `String trades[i].targetCountry`
-The country code of the country the proposer wants
-#### `String status`
-The status of the trade (pending, declined, etc.)
+- `Object[] trades` The list of trades for this user  
+- `integer trades[i].timestamp` The timestamp the trade was proposed  
+- `String trades[i].proposerTeam` The id of the team/player that proposed the trade  
+- `String trades[i].targetTeam` The id of the team/player that was proposed the trade  
+- `String trades[i].proposerCountry` The country code of the country the proposer will give away  
+- `String trades[i].targetCountry` The country code of the country the proposer wants  
+- `String status` The status of the trade (pending, declined, etc.)  
 
-## POST `/api/dashboard/players`
+# POST `/api/dashboard/players` (REQUIRES AUTHENTICATION)
 
 Use this to get a list of player ids
 
 ### Parameters
 
-#### Requires authentication in header
-#### `String gameID`
-Your game ID
-
-# Info
-
-Get info about a specific player or country
-
-## `POST /api/info/player`
-
-### Parameters
-
-#### Requires authentication in header
-#### `String gameID`
-Your game ID
-#### `String playerID`
-The player's ID
+- `String gameID` Your game ID  
 
 ### Returns
 
-#### `String message`
-Message to display if query unsuccessful. `null` if successful.
-#### `String displayName`
-The player's display name
-#### `integer points`
-The number of points the player has
-#### `String[] countries`
-The country codes of the countries the player has (lineup countries are ordered)
-#### `Boolean isYou`
-true if this player is you :P
+- `String[] players` The list of player IDs in this game  
 
-## `POST /api/info/country`
+# `POST /api/info/player` (REQUIRES AUTHENTICATION)
+
+Get info about a specific player
 
 ### Parameters
 
-#### Requires authentication in header
-#### `String gameID`
-Your gameID
-#### `String countryCode`
-The country code you're searching for
+- `String gameID` Your game ID  
+- `String playerID` The player's ID  
 
 ### Returns
 
-#### `String message`
-Message to display if query unsuccessful. `null` if successful.
-#### `String displayName`
-Display name of country
-#### `String matches`
-Matching names of country
-#### `String flag`
-Flag of the country
-#### `String continent`
-Continent of country
+- `String displayName` The player's display name  
+- `integer points` The number of points the player has  
+- `String[] countries` The country codes of the countries the player has (lineup countries are ordered)  
+- `Boolean isYou` true if this player is you :P  
 
-# Trade
+# `POST /api/info/country` (REQUIRES AUTHENTICATION)
 
-Propose, accept, and decline trades
+Get info about a specific country
 
-## `POST /api/trade/propose`
+### Parameters
+
+- `String gameID` Your gameID  
+- `String countryCode` The country code you're searching for  
+
+### Returns
+
+- `String displayName` Display name of country  
+- `String matches` Matching names of country  
+- `String flag` Flag of the country  
+- `String continent` Continent of country  
+
+# `POST /api/trade/propose` (REQUIRES AUTHENTICATION)
 
 Propose a trade
 
 ### Parameters
 
-#### Requires authentication in header
-#### `String gameID`
-The game ID
-#### `proposerCountry`
-The country code you're giving away
-#### `targetCountry`
-The country you want
+- `String gameID` The game ID  
+- `proposerCountry` The country code you're giving away  
+- `targetCountry` The country you want  
 
-### Returns
+### No Returns
 
-#### `String message`
-Message to display if request unsuccessful. `null` if request unsuccessful.
-
-## `POST /api/trade/accept`
+# `POST /api/trade/accept` (REQUIRES AUTHENTICATION)
 
 Propose a trade
 
 ### Parameters
 
-#### Requires authentication in header
-#### `String gameID`
-The game ID
-#### `String tradeID`
-The trade ID you're trying to accept
+- `String gameID` The game ID  
+- `String tradeID` The trade ID you're trying to accept  
 
-### Returns
+### No Returns
 
-#### `String message`
-Message to display if request unsuccessful. `null` if request unsuccessful.
-
-## `POST /api/trade/decline`
+# `POST /api/trade/decline` (REQUIRES AUTHENTICATION)
 
 Propose a trade
 
 ### Parameters
 
-#### Requires authentication in header
-#### `String gameID`
-The game ID
-#### `String tradeID`
-The trade ID you're trying to decline
+- `String gameID` The game ID  
+- `String tradeID` The trade ID you're trying to decline  
 
-### Returns
+### No Returns
 
-#### `String message`
-Message to display if request unsuccessful. `null` if request unsuccessful.
-
-# Lineup
-
-Set your lineup
-
-## `POST /api/lineup/set`
+# `POST /api/lineup/set` (REQUIRES AUTHENTICATION)
 
 ### Parameters
 
-#### Requires authentication in header
-#### `String gameID`
-The game ID
-#### `String[] countries`
-The list of countries, ordered according to what you want your lineup to be
+- `String gameID` The game ID  
+- `String[] countries` The list of countries, ordered according to what you want your lineup to be  
 
-### Returns
+### No Returns
 
-#### `String message`
-Message to display if request unsuccessful. `null` if request unsuccessful.
-
-# Game
-
-Creating new games and sending, accepting, and declining invites to new games
-
-## `POST /api/game/create`
+# `POST /api/game/create` (REQUIRES AUTHENTICATION)
 
 Creates a new game
 
-### Parameters
-
-#### Requires authentication in header
-#### No other parameters
+### No Parameters
 
 ### Returns
 
-#### `String message`
-Message to display if request unsuccessful. `null` if request unsuccessful.
-#### `String gameID`
-The game ID if successful.
+- `String gameID` The game ID if successful.  
 
-## `POST /api/game/invite`
+# `POST /api/game/invite` (REQUIRES AUTHENTICATION)
 
 Invites a player to a game
 
 ### Parameters
 
-#### Requires authentication in header
-#### `String gameID`
-The game ID
-#### `String playerID`
-The ID of the player to invite
+- `String gameID` The game ID  
+- `String playerID` The ID of the player to invite  
 
-### Returns
+### No Returns
 
-#### `String message`
-Message to display if request unsuccessful. `null` if request unsuccessful.
-
-## `POST /api/game/accept`
+# `POST /api/game/accept` (REQUIRES AUTHENTICATION)
 
 Accepts an invite to a game
 
 ### Parameters
 
-#### Requires authentication in header
-#### `String inviteID`
-The ID of the invite
+- `String inviteID` The ID of the invite  
 
-### Returns
+### No Returns
 
-#### `String message`
-Message to display if request unsuccessful. `null` if request unsuccessful.
-
-## `POST /api/game/get-invites`
+# `POST /api/game/get-invites` (REQUIRES AUTHENTICATION)
 
 Fetches a list of invites an account has received
 
-### Parameters
-
-#### Requires authentication in header
-#### No other parameters
+### No Parameters
 
 ### Returns
 
-#### `String message`
-Message to display if request unsuccessful. `null` if request unsuccessful.
-#### `String[] inviteIDs`
-A list of IDs of invites, if successful.
+- `String[] inviteIDs` A list of IDs of invites, if successful.  
 
-## `POST /api/game/decline`
+# `POST /api/game/decline` (REQUIRES AUTHENTICATION)
 
 Declines an invite to a game
 
 ### Parameters
 
-#### Requires authentication in header
-#### `String inviteID`
-The invite ID
+- `String inviteID` The invite ID  
 
-### Returns
+### No Returns
 
-#### `String message`
-Message to display if request unsuccessful. `null` if request unsuccessful.
-
-## `POST /api/game/get-games`
+# `POST /api/game/get-games` (REQUIRES AUTHENTICATION)
 
 Gets a list of games an account is in
 
-### Parameters
-
-#### Requires authentication in header
-#### No other headers
+### No Parameters
 
 ### Returns
 
-#### `String message`
-Message to display if request unsuccessful. `null` if request unsuccessful.
-#### `String[] gameIDs`
-A list of game IDs, if successful
+- `String[] gameIDs` A list of game IDs, if successful  
