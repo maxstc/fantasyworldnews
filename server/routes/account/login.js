@@ -8,17 +8,15 @@ import { tokenLifetime } from "./signup.js";
 
 export async function login (req, res) {
     try {
-        //Check that all params are there
+        //Check that all parameters are there
         if (req.body.password === undefined) {
             return res.status(400).json({
                 message: "Request missing field: \"password\"",
-                token: null,
             });
         }
         if (req.body.username === undefined) {
             return res.status(400).json({
                 message: "Request missing field: \"username\"",
-                token: null,
             });
         }
 
@@ -26,7 +24,6 @@ export async function login (req, res) {
         if (req.body.password.length > maxPasswordLength) {
             return res.status(400).json({
                 message: `Password exceeds ${maxPasswordLength} characters`,
-                token: null,
             });
         }
 
@@ -39,7 +36,6 @@ export async function login (req, res) {
         if (usernameQuery.rowCount === 0) {
             return res.status(400).json({
                 message: "Username not found",
-                token: null,
             });
         }
 
@@ -48,7 +44,6 @@ export async function login (req, res) {
         if (! (await argon2.verify(hashedPassword, req.body.password))){
             return res.status(400).json({
                 message: `Password incorrect.`,
-                token: null,
             });
         }
 
@@ -63,7 +58,6 @@ export async function login (req, res) {
 
         //Reply with token
         return res.status(200).json({ 
-            message: `Logged in successfully as ${normalizedUsername}.`,
             token: sessionToken,
         });
     }
@@ -72,14 +66,7 @@ export async function login (req, res) {
         console.error(error);
         return res.status(400).json({
             message: "JS error.",
-            token: null
         });
     }
-
-    //Check that username isn't taken
-
-    //Check that pas
-    // const result = await pool.query("SELECT NOW()");
-    // res.status(200).json({ success: true });
 }
 

@@ -31,7 +31,7 @@ let resp = await fetch("http://localhost:41399/api/account/signup", {
         "Content-Type": "application/json",
     },
 });
-console.log(await resp.json(), "\n");
+console.log(await resp.json());
 
 console.log("Sign Up Missing Username:")
 resp = await fetch("http://localhost:41399/api/account/signup", {
