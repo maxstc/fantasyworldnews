@@ -9,23 +9,6 @@ const minPasswordLength = 12;
 export const maxPasswordLength = 64;
 export const tokenLifetime = "1h";
 
-// -------SQL BEST PRACTICE------- 
-// const client = await pool.connect();
-
-// try {
-//   await client.query("BEGIN");
-
-//   // multiple queries...
-
-//   await client.query("COMMIT");
-// } catch (error) {
-//   await client.query("ROLLBACK");
-//   throw error;
-// } finally {
-//   client.release();
-// }
-
-
 export async function signup (req, res) {
     try {
         //Check that all params are there

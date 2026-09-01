@@ -11,14 +11,12 @@ export async function login (req, res) {
         //Check that all params are there
         if (req.body.password === undefined) {
             return res.status(400).json({
-                success: false, 
                 message: "Request missing field: \"password\"",
                 token: null,
             });
         }
         if (req.body.username === undefined) {
             return res.status(400).json({
-                success: false, 
                 message: "Request missing field: \"username\"",
                 token: null,
             });
@@ -27,7 +25,6 @@ export async function login (req, res) {
         // check that password is not exceedingly long
         if (req.body.password.length > maxPasswordLength) {
             return res.status(400).json({
-                success: false, 
                 message: `Password exceeds ${maxPasswordLength} characters`,
                 token: null,
             });
@@ -41,7 +38,6 @@ export async function login (req, res) {
         );
         if (usernameQuery.rowCount === 0) {
             return res.status(400).json({
-                success: false,
                 message: "Username not found",
                 token: null,
             });
@@ -51,7 +47,6 @@ export async function login (req, res) {
         const hashedPassword = usernameQuery.rows[0].password_hash;
         if (! (await argon2.verify(hashedPassword, req.body.password))){
             return res.status(400).json({
-                success: false,
                 message: `Password incorrect.`,
                 token: null,
             });
@@ -68,7 +63,6 @@ export async function login (req, res) {
 
         //Reply with token
         return res.status(200).json({ 
-            success: true,
             message: `Logged in successfully as ${normalizedUsername}.`,
             token: sessionToken,
         });
@@ -77,8 +71,8 @@ export async function login (req, res) {
         //Some error happened
         console.error(error);
         return res.status(400).json({
-            success: false,
-            message: "JS error."
+            message: "JS error.",
+            token: null
         });
     }
 
