@@ -10,6 +10,9 @@ router.post(
     signup
 );
 
-router.post("/login", login);
+router.post(
+    "/login",
+    checkParamsNotUndefined(["username", "password"]),
+    login);
 
 export { router };

@@ -8,17 +8,6 @@ import { tokenLifetime } from "./signup.js";
 
 export async function login (req, res) {
     try {
-        //Check that all parameters are there
-        if (req.body.password === undefined) {
-            return res.status(400).json({
-                message: "Request missing field: \"password\"",
-            });
-        }
-        if (req.body.username === undefined) {
-            return res.status(400).json({
-                message: "Request missing field: \"username\"",
-            });
-        }
 
         // check that password is not exceedingly long
         if (req.body.password.length > maxPasswordLength) {
