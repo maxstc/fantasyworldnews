@@ -2,7 +2,7 @@
 
 Every api call includes a `String` called `message` that contains a reason for failure if the API fails. Otherwise, this value is undefined.  
 
-If an api call fails, assume that all of the "returns" are undefined.  
+If an api call fails, assume that all of the "returns" are `undefined`.  
 
 Unless otherwise specified, status code `200` should be used if a request was successful and `400` if unsuccessful.
 
