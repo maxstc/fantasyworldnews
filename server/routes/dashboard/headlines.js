@@ -44,7 +44,8 @@ export async function headlines (req, res) {
             })
         }
 
-    } catch (error) {
+    }
+    catch (error) {
         console.error(error);
         return res.status(400).json({
             message: "JS error.",
