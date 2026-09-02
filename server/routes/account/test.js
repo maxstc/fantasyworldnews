@@ -1,6 +1,6 @@
 // Written by David with much frustration
 // run this file from root directory or the .envs get fucked up 
-import pool from "../../db.js";
+import pool from "#root/server/db.js";
 
 async function signup(requestPassword, requestUsername, requestEmail) {
     const response = await fetch("http://localhost:41399/api/account/signup", {
