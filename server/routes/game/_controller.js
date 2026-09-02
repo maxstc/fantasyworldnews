@@ -18,7 +18,7 @@ router.post(
 router.post(
     "/invite",
     checkAuth,
-    checkParamsNotUndefined(["gameID", "playerID"]),
+    checkParamsNotUndefined(["gameID", "recipientAccountID"]),
     invite
 );
 router.post(

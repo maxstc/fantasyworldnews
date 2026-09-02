@@ -18,18 +18,18 @@ export async function login (req, res) {
 
         // Check that username exists
         const normalizedUsername = req.body.username.toLowerCase();
-        const accountsQuery = await pool.query(
+        const accountQuery = await pool.query(
             "SELECT * FROM accounts WHERE username = $1",
             [normalizedUsername]
         );
-        if (accountsQuery.rowCount === 0) {
+        if (accountQuery.rowCount === 0) {
             return res.status(400).json({
                 message: "Username not found",
             });
         }
 
         // Don't authorize if password doesn't match hash
-        const hashedPassword = accountsQuery.rows[0].password_hash;
+        const hashedPassword = accountQuery.rows[0].password_hash;
         if (! (await argon2.verify(hashedPassword, req.body.password))){
             return res.status(400).json({
                 message: `Password incorrect.`,
@@ -37,10 +37,12 @@ export async function login (req, res) {
         }
 
         // By this point request is valid
+
+        console.log(accountQuery.rows[0])
         
         //Generate the token
         const sessionToken = jwt.sign(
-            { accountID: accountsQuery.rows[0].account_id },
+            { accountID: accountQuery.rows[0].id },
             process.env.JWT_SECRET,
             { expiresIn: tokenLifetime }
         );

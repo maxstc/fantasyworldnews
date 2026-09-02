@@ -45,11 +45,11 @@ export async function signup (req, res) {
         }
 
         //Check that username isn't taken
-        const usernameQuery = await pool.query(
+        const accountQuery = await pool.query(
             "SELECT * FROM accounts WHERE username = $1",
             [normalizedUsername]
         );
-        if (usernameQuery.rowCount > 0) {
+        if (accountQuery.rowCount > 0) {
             return res.status(400).json({
                 message: "Username already taken."
             });
@@ -69,7 +69,7 @@ export async function signup (req, res) {
 
         //Generate the token
         const sessionToken = jwt.sign(
-            { username: normalizedUsername },
+            { accountID: accountQuery.rows[0].id },
             process.env.JWT_SECRET,
             { expiresIn: tokenLifetime }
         );

@@ -17,13 +17,13 @@ CREATE TABLE accounts (
 
 CREATE TYPE game_invite_status AS ENUM ('pending', 'canceled', 'accepted', 'declined');
 
-CREATE TABLE game_invites {
+CREATE TABLE game_invites (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     status game_invite_status NOT NULL DEFAULT 'pending',
     sender_account_id UUID NOT NULL REFERENCES accounts(id),
     recipient_account_id UUID NOT NULL REFERENCES accounts(id),
     game_id BIGINT NOT NULL REFERENCES games(id)
-}
+);
 
 CREATE UNIQUE INDEX game_invites_one_pending_per_recipient_game
 ON game_invites (recipient_account_id, game_id)
