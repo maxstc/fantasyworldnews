@@ -1,5 +1,5 @@
 // Written by David
-import pool from "../../db.js";
+import pool from "#root/server/db.js";
 import argon2 from "argon2";
 import jwt from "jsonwebtoken";
 import { maxPasswordLength } from "./signup.js";

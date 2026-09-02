@@ -4,7 +4,7 @@
 import jwt from "jsonwebtoken";
 
 export function checkAuth(req, res, next) {
-    if (req.get("Authorization"));
+    const authHeader = req.get('Authorization');
     if (!authHeader?.startsWith('Bearer ')) {
         return res.status(401).json({message: "Missing or malformed authorization header"});
     }
