@@ -1,23 +1,10 @@
-//default port of web server if not specified in args
-let port = 41399;
-
-//max number of countries a player can have
-const MAX_COUNTRIES = 10;
-
-//connect to mongodb
-import { MongoClient } from "mongodb";
-const client = new MongoClient("mongodb://127.0.0.1:27017");
-client.connect();
-const db = client.db("gamedata");
-
 import express from "express";
-const app = express();
-app.use(express.json());
+const router = express.Router();
+import { db } from "../db.js";
 
-//Can pass port as first argument (or leave empty for default value)
-if (process.argv.length > 2) {
-    port = parseInt(process.argv[2]);
-}
+router.post("/trade", trade);
+router.post("/declineTrade", declineTrade);
+router.post("/acceptTrade", acceptTrade);
 
 //adds a proposal to the list of proposals
 //does not execute a trade
@@ -165,75 +152,19 @@ function doSwap(proposerTeam, targetTeam, proposerCountry, targetCountry) {
     removeInvalidTrades(proposerCountry);
 }
 
-//check for expired trades
-function checkExpirings() {
-    //TODO not yet implemented
-}
-
-//TODO Remove the react stuff
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-
-//propose a trade
-app.post("/trade", async (req, res) => {
+async function trade (req, res) {
     res.set("Access-Control-Allow-Origin", "http://localhost:3000");
     res.json(await handleTrade(req.body));
-});
+};
 
-//decline a trade you received or cancel a trade you sent
-app.post("/declinetrade", async (req, res) => {
+async function declineTrade (req, res) {
     res.set("Access-Control-Allow-Origin", "http://localhost:3000");
     res.json(await handleDeclineTrade(req.body));
-});
+};
 
-//accept a trade you received
-app.post("/accepttrade", async (req, res) => {
+async function proposeTrade (req, res) {
     res.set("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.json(await handleAcceptTrade(req.body));
-});
+    res.json(await handleAccept(req.body));
+};
 
-app.get("/", (req, res) => {
-    //have them enter a team name then redirect to /team/<teamname>
-    res.redirect("/index.html");
-});
-
-app.get("/team/:teamName", async (req, res) => {
-    //set the teamName to a session cookie and redirect them to index.html
-    let id = await db.collection("teams").find({name: req.params.teamName}).next();
-    if (id === null) {
-        res.end("name not found :( make sure it's correct (case sensitive) and don't include <> in your team name (for example, /team/max)");
-        return;
-    }
-    id = id._id.toString();
-    res.cookie("login", req.params.teamName);
-    res.redirect("/index.html");
-});
-
-app.get("/data", async (req, res) => {
-    res.set("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.send(JSON.stringify({
-        teams: await db.collection("teams").find().toArray(),
-        //trades: await db.collection("trades").find({$or: [{targetTeam: req.body.teamName}, {proposerTeam: req.body.teamName}]}).toArray(),
-        trades: await db.collection("trades").find().toArray(),
-        countries: await db.collection("countries").find().toArray(),
-        headlines: await db.collection("headlines").find().toArray()
-    }));
-});
-
-//TODO check the user & the lineup contents
-app.post("/lineup", async (req, res) => {
-    db.collection("teams").updateOne({name: req.body.team}, {$set: {lineup: req.body.lineup}});
-    res.json({success: true, message: "Success"});
-})
-
-app.use(express.static("client/"));
-
-app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
-});
-
-//check for expired trades
-setInterval(()=>{checkExpirings()}, 1000);
+export { router };

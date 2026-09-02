@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<script>
+
+async function getData() {
+    const response = await fetch("data");
+    const json = await response.json();
+    return json;
+}
+const data = getData();
+
+</script>
+
+<head>
+<style>
+/*----------GLOBAL----------*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+    margin: 0;
+    min-height: 100dvh;
+    display: grid;
+    grid-template-rows: 8rem 1fr 10rem;
+    font-family: Inter;
+    font-weight: 600;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+/*----------HEADER----------*/
+
+header {
+    display: flex;
+    justify-content: center; /* horizontal */
+    align-items: center;     /* vertical */
+    text-align: center;
+    border-bottom: 3px solid gray;
+    font-size: 4rem;
+}
+
+/*----------NAV----------*/
+
+nav {
+    display: flex;
+    justify-content: center; /* horizontal */
+    align-items: center;     /* vertical */
+    text-align: center;
+    border-top: 3px solid gray;
+}
+nav button {
+    flex: 1;
+    font-size: 4rem;
+    height: 100%;
+}
+
+/*----------SPINNER----------*/
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #ddd;
+    border-top-color: gray;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 10px;
+}
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/*----------NEWS----------*/
+
+.thumbnail {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+#headlines {
+    list-style: none;
+    width: 100%;
+}
+
+.headline {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.headlineContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<!----------HEADER---------->
+
+<header>
+<!--header title will be inserted here-->
+</header>
+
+<!----------MAIN---------->
+
+<main>
+
+<!----------NEWS---------->
+
+<section id="news" hidden>
+    <ul id="headlines">
+        <!--EXAMPLE HEADLINE
+        <li class="headline">
+            <p>Headline</p>
+        </li>
+        -->
+    </ul>
+    <div class="spinner"></div>
+</section>
+
+</main>
+
+<!----------FOOTER NAV---------->
+
+<nav>
+    <script>
+function onNavButtonClick(option) {
+    let header = document.getElementsByTagName("header")[0];
+    if (option === "news") {
+        header.innerHTML = "News";
+    }
+    else if (option === "search") {
+        header.innerHTML = "Search";
+    }
+    else if (option === "leaderboard") {
+        header.innerHTML = "Leaderboard";
+    }
+    else if (option === "trade") {
+        header.innerHTML = "Trade";
+    }
+    else if (option === "options") {
+        header.innerHTML = "Options";
+    }
+    Array.from(document.getElementsByTagName("section")).forEach(section => {
+        section.hidden = true;
+    });
+    document.getElementById(option).hidden = false;
+}
+    </script>
+    <button onclick="onNavButtonClick('news')">📰</button>
+    <button onclick="onNavButtonClick('search')">🔍</button>
+    <button onclick="onNavButtonClick('leaderboard')">🏆</button>
+    <button onclick="onNavButtonClick('trade')">🔄</button>
+    <button onclick="onNavButtonClick('options')">⚙️</button>
+</nav>
+
+</body>
+
+</html>

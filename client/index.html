@@ -4,18 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fantasy World News</title>
+    <!--convert country flags to small images for chrome/other browsers which dont show flags for country emojis-->
+    <script type="module" defer>
+        import { polyfillCountryFlagEmojis } from "https://cdn.skypack.dev/country-flag-emoji-polyfill";
+        polyfillCountryFlagEmojis();
+    </script>
     <style>
+        div {
+            height: 100%;
+            overflow-y: scroll;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        body {
+            height: 100vh;
+            display: inline-block;
+            overflow-y: hidden;
+            overflow-x: scroll;
+            white-space: nowrap;
+        }
+
         * {
-            font-family: sans-serif;
+            font-family: "Twemoji Country Flags", sans-serif;
+            margin: 0px;
+            scrollbar-width: none;
         }
 
         table {
             border-collapse: collapse;
         }
-        
+
+        thead {
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background-color: white;
+        }
+
         td, th {
-            border: 1px solid #eeeeee;
-            padding: 5px;
+            padding: 2px;
         }
         
         tr:nth-child(even) {
@@ -25,20 +53,160 @@
         .clickable {
             cursor: pointer;
         }
-        </style>
+
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent; /* make scrollbar transparent */
+        }
+
+        #news {
+            width: 500px;
+        }
+
+        .flag-shadow {
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, -1px -1px black, 1px 1px black, -1px 1px black, 1px -1px black;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
 </head>
 <body>
-    <table id="countryLeaderboard">
-        <tr>
-            <th>Flag</th>
-            <th onclick="sortCountryLeaderboardByCountry()" class="clickable">Country</th>
-            <th onclick="sortCountryLeaderboardByScore()" class="clickable">Score</th>
-            <th onclick="sortCountryLeaderboardByOwner()" class="clickable">Owner</th>
-        </tr>
-    </table>
+    <!--Active Trades List-->
+    <div id="activetrades"></div>
+    <!--Trade Submission-->
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Trade</th>
+                </tr>
+            </thead>    
+        </table>
+        <p id="trade">
+        </p>
+    </div>
+    <!--User's Lineup-->
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Lineup</th> 
+                </tr>
+            </thead>    
+        </table>
+        <p>
+            <label for="selectEurope">Europe:</label>
+            <select name="selectEurope" id="selectEurope"></select>
+            <br>
+            <label for="selectNorthAmerica">North America:</label>
+            <select name="selectNorthAmerica" id="selectNorthAmerica"></select>
+            <br>
+            <label for="selectSouthAmerica">South America:</label>
+            <select name="selectSouthAmerica" id="selectSouthAmerica"></select>
+            <br>
+            <label for="selectAfrica">Africa:</label>
+            <select name="selectAfrica" id="selectAfrica"></select>
+            <br>
+            <label for="selectAsia">Asia:</label>
+            <select name="selectAsia" id="selectAsia"></select>
+            <br>
+            <label for="selectOceania">Oceania:</label>
+            <select name="selectOceania" id="selectOceania"></select>
+            <br>
+            <label for="selectWildcard">Wildcard:</label>
+            <select name="selectWildcard" id="selectWildcard"></select>
+            <br>
+            <button id="submitLineup">Submit</button>
+        </p>
+    </div>
+    <!--Country Leaderboard-->
+    <div>
+        <table id="countryLeaderboard">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th onclick="sortCountryLeaderboardByCountry()" class="clickable">Country</th>
+                    <th onclick="sortCountryLeaderboardByContinent()" class="clickable">Continent</th>
+                    <th onclick="sortCountryLeaderboardByScore()" class="clickable">Score</th>
+                    <th onclick="sortCountryLeaderboardByOwner()" class="clickable">Owner</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            </tbody>
+        </table>
+    </div>
+    <!--Player Leaderboard-->
+    <div>
+        <table id="playerLeaderboard">
+            <thead>
+                <tr>
+                    <th onclick="sortPlayerLeaderboardByPlayer()" class="clickable">Player</th>
+                    <th onclick="sortPlayerLeaderboardByScore()" class="clickable">Score</th>
+                    <th>Countries</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            </tbody>
+        </table>
+    </div>
+    <!--Headlines/Log-->
+    <div>
+        <table id="news">
+            <thead>
+                <tr>
+                    <th>Recent Changes</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            </tbody>
+        </table>
+    </div>
+    <div id="links">
+        <table>
+            <thead>
+                <tr>
+                    <th>Links</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <a href="">Log Out</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="">How to Play</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="">What's the Deal with Archive Links?</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="">Disclaimer</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
-<script src="globalVars.js"></script>
-<script src="pollForData.js"></script>
-<script src="countryLeaderboardBuilder.js"></script>
-<script src="sortCountryLeaderboard.js"></script>
+<script>let data = {};</script>
+<script>let userTeam = document.cookie.split("=")[1];if(document.cookie==""){alert("Please sign in!\nGo to <url>/team/<your name>")}</script>
+<script src="sorter.js"></script>
+<script src="activeTrades.js"></script>
+<script src="trade.js"></script>
+<script src="countryLeaderboard.js"></script>
+<script src="playerLeaderboard.js"></script>
+<script src="newsList.js"></script>
+<script src="lineup.js"></script>
+<script src="getData.js"></script>
 </html>

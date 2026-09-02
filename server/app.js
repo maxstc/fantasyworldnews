@@ -1,0 +1,39 @@
+//default port of web server if not specified in args
+const DEFAULT_PORT = 41399;
+
+//TODO move this to a "game rules" file
+//max number of countries a player can have
+const MAX_COUNTRIES = 10;
+
+import "dotenv/config";
+import express from "express";
+const app = express();
+app.use(express.json());
+
+//Can pass port as first argument (or leave empty for default value)
+let port = DEFAULT_PORT;
+if (process.argv.length > 2) {
+    port = parseInt(process.argv[2]);
+}
+
+import { router as accountRoute } from "./routes/account/_controller.js";
+import { router as dashboardRoute } from "./routes/dashboard/_controller.js";
+import { router as gameRoute } from "./routes/game/_controller.js";
+import { router as infoRoute } from "./routes/info/_controller.js";
+import { router as lineupRoute } from "./routes/lineup/_controller.js";
+import { router as tradeRoute } from "./routes/trade/_controller.js";
+
+app.use("/api/account", accountRoute);
+app.use("/api/dashboard", dashboardRoute);
+app.use("/api/game", gameRoute);
+app.use("/api/info", infoRoute);
+app.use("/api/lineup", lineupRoute);
+app.use("/api/trade", tradeRoute);
+
+app.get("/", (req, res) => {
+    res.redirect("/index.html");
+});
+
+app.use(express.static("client/"));
+
+app.listen(port, () => { console.log(`Server running on port ${port}`) });

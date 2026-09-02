@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy World News</title>
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function submitSignUp() {
+            fetch("signup", {
+                method: "POST",
+                body: JSON.stringify({
+                    username: document.querySelector("#sign-up-username").value,
+                    password: document.querySelector("#sign-up-password").value,
+                    alphaKey: document.querySelector("#sign-up-alpha-key").value
+                }),
+                headers: {
+                    "Content-type": "application/json"
+                }
+            });
+        }
+        function submitLogIn() {
+            fetch("login", {
+                method: "POST",
+                body: JSON.stringify({
+                    username: document.querySelector("#log-in-username").value,
+                    password: document.querySelector("#log-in-password").value
+                }),
+                headers: {
+                    "Content-type": "application/json"
+                }
+            });
+        }
+    </script>
+    <h1>Sign Up</h1>
+    <input placeholder="Username" id="sign-up-username">
+    <input placeholder="Password" id="sign-up-password">
+    <input placeholder="Alpha Key" id="sign-up-alpha-key">
+    <br><br>
+    <button>Sign Up</button>
+    <h1>Log In</h1>
+    <input placeholder="Username" id="sign-up-username">
+    <input placeholder="Password" id="sign-up-password">
+    <br><br>
+    <button>Log In</button>
+</body>
+</html>

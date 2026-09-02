@@ -1,58 +1,18 @@
-const cheerio = require("cheerio");
-
-const { MongoClient } = require("mongodb");
-let db;
-let colTeams;
-let colTrades;
-let colCountries;
-let colTradeHistory;
-let colHeadlines;
-
-async function main() {
-    const client = new MongoClient("mongodb://127.0.0.1:27017");
-    await client.connect();
-
-    db = client.db("gamedata");
-    colTeams = db.collection("teams");
-    colTrades = db.collection("trades");
-    colCountries = db.collection("countries");
-    colTradeHistory = db.collection("tradeHistory");
-    colHeadlines = db.collection("headlines");
-
-    const response = await fetch("https://www.cnn.com/world");
-    const responseText = await response.text();
-    let doc = cheerio.load(responseText);
-    doc(".container__headline-text").map(async (index, element) => {
-        await processHeadline(doc(element).text());
-    });
+async function test() {
+    const fetchResult = await fetch("http://localhost:41399/api/dashboard/trades", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZhcnRsb3JkIiwiaWF0IjoxNzg4MzE5MDg4LCJleHAiOjE3ODgzMjI2ODh9.E20Pgpnny7Ndzsb2cjBi1YL5RLQLZhxYoHya754heV4"
+        },
+        body: JSON.stringify({
+            username: "fartlord",
+            password: "fart1234567890",
+            email: "fartlord@email.net"
+        })
+    })
+    const jsonResult = await fetchResult.json();
+    console.log(jsonResult);
 }
 
-async function processHeadline(text) {
-    let cursor = colHeadlines.find({text: text});
-    cursor = await cursor.toArray();
-    if (cursor.length === 0) {
-        console.log("new headline: " + text);
-        let mentioned = [];
-        await colCountries.find().forEach((x) => {
-            let matches = [];
-            for (let i = 0; i < x.names.length; i++) {
-                if (text.includes(x.names[i])) {
-                    matches.push(x.names[i]);
-                }
-            }
-            if (matches.length > 0) {
-                mentioned.push({
-                    country: x._id,
-                    mentionedNames: matches
-                });
-            }
-        });
-        colHeadlines.insertOne({
-            text: text,
-            timestamp: Date.now(),
-            mentionedCountries: mentioned
-        });
-    }
-}
-
-main();
+test();

@@ -1,3 +1,5 @@
+//list of countries, country names/adjectives, country codes, and continents
+
 const countries = [
   {
     "flag": "🇦🇩",
@@ -5,7 +7,9 @@ const countries = [
       "Andorra",
       "Andorran"
     ],
-    "countrycode": "AD"
+    "countrycode": "AD",
+    "continent": "Europe",
+    "displayName": "Andorra"
   },
   {
     "flag": "🇦🇪",
@@ -13,7 +17,9 @@ const countries = [
       "United Arab Emirates",
       "Emirati"
     ],
-    "countrycode": "AE"
+    "countrycode": "AE",
+    "continent": "Asia",
+    "displayName": "United Arab Emirates"
   },
   {
     "flag": "🇦🇫",
@@ -21,7 +27,9 @@ const countries = [
       "Afghanistan",
       "Afghan"
     ],
-    "countrycode": "AF"
+    "countrycode": "AF",
+    "continent": "Asia",
+    "displayName": "Afghanistan"
   },
   {
     "flag": "🇦🇬",
@@ -29,7 +37,9 @@ const countries = [
       "Antigua and Barbuda",
       "Antiguan, Barbudan"
     ],
-    "countrycode": "AG"
+    "countrycode": "AG",
+    "continent": "North America",
+    "displayName": "Antigua and Barbuda"
   },
   {
     "flag": "🇦🇮",
@@ -37,7 +47,9 @@ const countries = [
       "Anguilla",
       "Anguillian"
     ],
-    "countrycode": "AI"
+    "countrycode": "AI",
+    "continent": "North America",
+    "displayName": "Anguilla"
   },
   {
     "flag": "🇦🇱",
@@ -45,7 +57,9 @@ const countries = [
       "Albania",
       "Albanian"
     ],
-    "countrycode": "AL"
+    "countrycode": "AL",
+    "continent": "Europe",
+    "displayName": "Albania"
   },
   {
     "flag": "🇦🇲",
@@ -53,7 +67,9 @@ const countries = [
       "Armenia",
       "Armenian"
     ],
-    "countrycode": "AM"
+    "countrycode": "AM",
+    "continent": "Asia",
+    "displayName": "Armenia"
   },
   {
     "flag": "🇦🇴",
@@ -61,7 +77,9 @@ const countries = [
       "Angola",
       "Angolan"
     ],
-    "countrycode": "AO"
+    "countrycode": "AO",
+    "continent": "Africa",
+    "displayName": "Angola"
   },
   {
     "flag": "🇦🇷",
@@ -69,7 +87,9 @@ const countries = [
       "Argentina",
       "Argentine"
     ],
-    "countrycode": "AR"
+    "countrycode": "AR",
+    "continent": "South America",
+    "displayName": "Argentina"
   },
   {
     "flag": "🇦🇹",
@@ -77,7 +97,9 @@ const countries = [
       "Austria",
       "Austrian"
     ],
-    "countrycode": "AT"
+    "countrycode": "AT",
+    "continent": "Europe",
+    "displayName": "Austria"
   },
   {
     "flag": "🇦🇺",
@@ -85,7 +107,9 @@ const countries = [
       "Australia",
       "Australian"
     ],
-    "countrycode": "AU"
+    "countrycode": "AU",
+    "continent": "Oceania",
+    "displayName": "Australia"
   },
   {
     "flag": "🇦🇿",
@@ -93,7 +117,9 @@ const countries = [
       "Azerbaijan",
       "Azerbaijani"
     ],
-    "countrycode": "AZ"
+    "countrycode": "AZ",
+    "continent": "Asia",
+    "displayName": "Azerbaijan"
   },
   {
     "flag": "🇧🇦",
@@ -101,7 +127,9 @@ const countries = [
       "Bosnia and Herzegovina",
       "Bosnian, Herzegovinian"
     ],
-    "countrycode": "BA"
+    "countrycode": "BA",
+    "continent": "Europe",
+    "displayName": "Bosnia and Herzegovina"
   },
   {
     "flag": "🇧🇧",
@@ -109,7 +137,9 @@ const countries = [
       "Barbados",
       "Barbadian"
     ],
-    "countrycode": "BB"
+    "countrycode": "BB",
+    "continent": "North America",
+    "displayName": "Barbados"
   },
   {
     "flag": "🇧🇩",
@@ -117,7 +147,9 @@ const countries = [
       "Bangladesh",
       "Bangladeshi"
     ],
-    "countrycode": "BD"
+    "countrycode": "BD",
+    "continent": "Asia",
+    "displayName": "Bangladesh"
   },
   {
     "flag": "🇧🇪",
@@ -125,7 +157,9 @@ const countries = [
       "Belgium",
       "Belgian"
     ],
-    "countrycode": "BE"
+    "countrycode": "BE",
+    "continent": "Europe",
+    "displayName": "Belgium"
   },
   {
     "flag": "🇧🇫",
@@ -133,7 +167,9 @@ const countries = [
       "Burkina Faso",
       "Burkinabe"
     ],
-    "countrycode": "BF"
+    "countrycode": "BF",
+    "continent": "Africa",
+    "displayName": "Burkina Faso"
   },
   {
     "flag": "🇧🇬",
@@ -141,7 +177,9 @@ const countries = [
       "Bulgaria",
       "Bulgarian"
     ],
-    "countrycode": "BG"
+    "countrycode": "BG",
+    "continent": "Europe",
+    "displayName": "Bulgaria"
   },
   {
     "flag": "🇧🇭",
@@ -149,7 +187,9 @@ const countries = [
       "Bahrain",
       "Bahraini"
     ],
-    "countrycode": "BH"
+    "countrycode": "BH",
+    "continent": "Asia",
+    "displayName": "Bahrain"
   },
   {
     "flag": "🇧🇮",
@@ -157,7 +197,9 @@ const countries = [
       "Burundi",
       "Burundian"
     ],
-    "countrycode": "BI"
+    "countrycode": "BI",
+    "continent": "Africa",
+    "displayName": "Burundi"
   },
   {
     "flag": "🇧🇯",
@@ -165,7 +207,9 @@ const countries = [
       "Benin",
       "Beninese"
     ],
-    "countrycode": "BJ"
+    "countrycode": "BJ",
+    "continent": "Africa",
+    "displayName": "Benin"
   },
   {
     "flag": "🇧🇳",
@@ -173,7 +217,9 @@ const countries = [
       "Brunei",
       "Bruneian"
     ],
-    "countrycode": "BN"
+    "countrycode": "BN",
+    "continent": "Asia",
+    "displayName": "Brunei"
   },
   {
     "flag": "🇧🇴",
@@ -181,7 +227,9 @@ const countries = [
       "Bolivia",
       "Bolivian"
     ],
-    "countrycode": "BO"
+    "countrycode": "BO",
+    "continent": "South America",
+    "displayName": "Bolivia"
   },
   {
     "flag": "🇧🇷",
@@ -189,7 +237,9 @@ const countries = [
       "Brazil",
       "Brazilian"
     ],
-    "countrycode": "BR"
+    "countrycode": "BR",
+    "continent": "South America",
+    "displayName": "Brazil"
   },
   {
     "flag": "🇧🇸",
@@ -197,7 +247,9 @@ const countries = [
       "Bahamas",
       "Bahamian"
     ],
-    "countrycode": "BS"
+    "countrycode": "BS",
+    "continent": "North America",
+    "displayName": "Bahamas"
   },
   {
     "flag": "🇧🇹",
@@ -205,7 +257,9 @@ const countries = [
       "Bhutan",
       "Bhutanese"
     ],
-    "countrycode": "BT"
+    "countrycode": "BT",
+    "continent": "Asia",
+    "displayName": "Bhutan"
   },
   {
     "flag": "🇧🇼",
@@ -213,7 +267,9 @@ const countries = [
       "Botswana",
       "Motswana"
     ],
-    "countrycode": "BW"
+    "countrycode": "BW",
+    "continent": "Africa",
+    "displayName": "Botswana"
   },
   {
     "flag": "🇧🇾",
@@ -221,7 +277,9 @@ const countries = [
       "Belarus",
       "Belarusian"
     ],
-    "countrycode": "BY"
+    "countrycode": "BY",
+    "continent": "Europe",
+    "displayName": "Belarus"
   },
   {
     "flag": "🇧🇿",
@@ -229,7 +287,9 @@ const countries = [
       "Belize",
       "Belizean"
     ],
-    "countrycode": "BZ"
+    "countrycode": "BZ",
+    "continent": "North America",
+    "displayName": "Belize"
   },
   {
     "flag": "🇨🇦",
@@ -237,7 +297,9 @@ const countries = [
       "Canada",
       "Canadian"
     ],
-    "countrycode": "CA"
+    "countrycode": "CA",
+    "continent": "North America",
+    "displayName": "Canada"
   },
   {
     "flag": "🇨🇩",
@@ -245,7 +307,9 @@ const countries = [
       "DR Congo",
       "Congolese"
     ],
-    "countrycode": "CD"
+    "countrycode": "CD",
+    "continent": "Africa",
+    "displayName": "DR Congo"
   },
   {
     "flag": "🇨🇫",
@@ -253,7 +317,9 @@ const countries = [
       "Central African Republic",
       "Central African"
     ],
-    "countrycode": "CF"
+    "countrycode": "CF",
+    "continent": "Africa",
+    "displayName": "Central African Republic"
   },
   {
     "flag": "🇨🇬",
@@ -261,7 +327,9 @@ const countries = [
       "Republic of the Congo",
       "Congolese"
     ],
-    "countrycode": "CG"
+    "countrycode": "CG",
+    "continent": "Africa",
+    "displayName": "Republic of the Congo"
   },
   {
     "flag": "🇨🇭",
@@ -269,7 +337,9 @@ const countries = [
       "Switzerland",
       "Swiss"
     ],
-    "countrycode": "CH"
+    "countrycode": "CH",
+    "continent": "Europe",
+    "displayName": "Switzerland"
   },
   {
     "flag": "🇨🇮",
@@ -277,7 +347,9 @@ const countries = [
       "Ivory Coast",
       "Ivorian"
     ],
-    "countrycode": "CI"
+    "countrycode": "CI",
+    "continent": "Africa",
+    "displayName": "Ivory Coast"
   },
   {
     "flag": "🇨🇱",
@@ -285,7 +357,9 @@ const countries = [
       "Chile",
       "Chilean"
     ],
-    "countrycode": "CL"
+    "countrycode": "CL",
+    "continent": "South America",
+    "displayName": "Chile"
   },
   {
     "flag": "🇨🇲",
@@ -293,7 +367,9 @@ const countries = [
       "Cameroon",
       "Cameroonian"
     ],
-    "countrycode": "CM"
+    "countrycode": "CM",
+    "continent": "Africa",
+    "displayName": "Cameroon"
   },
   {
     "flag": "🇨🇳",
@@ -301,7 +377,9 @@ const countries = [
       "China",
       "Chinese"
     ],
-    "countrycode": "CN"
+    "countrycode": "CN",
+    "continent": "Asia",
+    "displayName": "China"
   },
   {
     "flag": "🇨🇴",
@@ -309,7 +387,9 @@ const countries = [
       "Colombia",
       "Colombian"
     ],
-    "countrycode": "CO"
+    "countrycode": "CO",
+    "continent": "South America",
+    "displayName": "Colombia"
   },
   {
     "flag": "🇨🇷",
@@ -317,7 +397,9 @@ const countries = [
       "Costa Rica",
       "Costa Rican"
     ],
-    "countrycode": "CR"
+    "countrycode": "CR",
+    "continent": "North America",
+    "displayName": "Costa Rica"
   },
   {
     "flag": "🇨🇺",
@@ -325,7 +407,9 @@ const countries = [
       "Cuba",
       "Cuban"
     ],
-    "countrycode": "CU"
+    "countrycode": "CU",
+    "continent": "North America",
+    "displayName": "Cuba"
   },
   {
     "flag": "🇨🇻",
@@ -333,7 +417,9 @@ const countries = [
       "Cape Verde",
       "Cape Verdian"
     ],
-    "countrycode": "CV"
+    "countrycode": "CV",
+    "continent": "Africa",
+    "displayName": "Cape Verde"
   },
   {
     "flag": "🇨🇾",
@@ -341,7 +427,9 @@ const countries = [
       "Cyprus",
       "Cypriot"
     ],
-    "countrycode": "CY"
+    "countrycode": "CY",
+    "continent": "Asia",
+    "displayName": "Cyprus"
   },
   {
     "flag": "🇨🇿",
@@ -349,7 +437,9 @@ const countries = [
       "Czechia",
       "Czech"
     ],
-    "countrycode": "CZ"
+    "countrycode": "CZ",
+    "continent": "Europe",
+    "displayName": "Czechia"
   },
   {
     "flag": "🇩🇪",
@@ -357,7 +447,9 @@ const countries = [
       "Germany",
       "German"
     ],
-    "countrycode": "DE"
+    "countrycode": "DE",
+    "continent": "Europe",
+    "displayName": "Germany"
   },
   {
     "flag": "🇩🇯",
@@ -365,7 +457,9 @@ const countries = [
       "Djibouti",
       "Djibouti"
     ],
-    "countrycode": "DJ"
+    "countrycode": "DJ",
+    "continent": "Africa",
+    "displayName": "Djibouti"
   },
   {
     "flag": "🇩🇰",
@@ -373,7 +467,9 @@ const countries = [
       "Denmark",
       "Danish"
     ],
-    "countrycode": "DK"
+    "countrycode": "DK",
+    "continent": "Europe",
+    "displayName": "Denmark"
   },
   {
     "flag": "🇩🇲",
@@ -381,7 +477,9 @@ const countries = [
       "Dominica",
       "Dominican"
     ],
-    "countrycode": "DM"
+    "countrycode": "DM",
+    "continent": "North America",
+    "displayName": "Dominica"
   },
   {
     "flag": "🇩🇴",
@@ -389,7 +487,9 @@ const countries = [
       "Dominican Republic",
       "Dominican"
     ],
-    "countrycode": "DO"
+    "countrycode": "DO",
+    "continent": "North America",
+    "displayName": "Dominican Republic"
   },
   {
     "flag": "🇩🇿",
@@ -397,7 +497,9 @@ const countries = [
       "Algeria",
       "Algerian"
     ],
-    "countrycode": "DZ"
+    "countrycode": "DZ",
+    "continent": "Africa",
+    "displayName": "Algeria"
   },
   {
     "flag": "🇪🇨",
@@ -405,7 +507,9 @@ const countries = [
       "Ecuador",
       "Ecuadorean"
     ],
-    "countrycode": "EC"
+    "countrycode": "EC",
+    "continent": "South America",
+    "displayName": "Ecuador"
   },
   {
     "flag": "🇪🇪",
@@ -413,7 +517,9 @@ const countries = [
       "Estonia",
       "Estonian"
     ],
-    "countrycode": "EE"
+    "countrycode": "EE",
+    "continent": "Europe",
+    "displayName": "Estonia"
   },
   {
     "flag": "🇪🇬",
@@ -421,7 +527,9 @@ const countries = [
       "Egypt",
       "Egyptian"
     ],
-    "countrycode": "EG"
+    "countrycode": "EG",
+    "continent": "Africa",
+    "displayName": "Egypt"
   },
   {
     "flag": "🇪🇷",
@@ -429,7 +537,9 @@ const countries = [
       "Eritrea",
       "Eritrean"
     ],
-    "countrycode": "ER"
+    "countrycode": "ER",
+    "continent": "Africa",
+    "displayName": "Eritrea"
   },
   {
     "flag": "🇪🇸",
@@ -437,7 +547,9 @@ const countries = [
       "Spain",
       "Spanish"
     ],
-    "countrycode": "ES"
+    "countrycode": "ES",
+    "continent": "Europe",
+    "displayName": "Spain"
   },
   {
     "flag": "🇪🇹",
@@ -445,7 +557,9 @@ const countries = [
       "Ethiopia",
       "Ethiopian"
     ],
-    "countrycode": "ET"
+    "countrycode": "ET",
+    "continent": "Africa",
+    "displayName": "Ethiopia"
   },
   {
     "flag": "🇫🇮",
@@ -453,7 +567,9 @@ const countries = [
       "Finland",
       "Finnish"
     ],
-    "countrycode": "FI"
+    "countrycode": "FI",
+    "continent": "Europe",
+    "displayName": "Finland"
   },
   {
     "flag": "🇫🇯",
@@ -461,7 +577,9 @@ const countries = [
       "Fiji",
       "Fijian"
     ],
-    "countrycode": "FJ"
+    "countrycode": "FJ",
+    "continent": "Oceania",
+    "displayName": "Fiji"
   },
   {
     "flag": "🇫🇲",
@@ -469,7 +587,9 @@ const countries = [
       "Micronesia",
       "Micronesian"
     ],
-    "countrycode": "FM"
+    "countrycode": "FM",
+    "continent": "Oceania",
+    "displayName": "Micronesia"
   },
   {
     "flag": "🇫🇷",
@@ -477,7 +597,9 @@ const countries = [
       "France",
       "French"
     ],
-    "countrycode": "FR"
+    "countrycode": "FR",
+    "continent": "Europe",
+    "displayName": "France"
   },
   {
     "flag": "🇬🇦",
@@ -485,7 +607,9 @@ const countries = [
       "Gabon",
       "Gabonese"
     ],
-    "countrycode": "GA"
+    "countrycode": "GA",
+    "continent": "Africa",
+    "displayName": "Gabon"
   },
   {
     "flag": "🇬🇧",
@@ -493,7 +617,9 @@ const countries = [
       "United Kingdom",
       "British"
     ],
-    "countrycode": "GB"
+    "countrycode": "GB",
+    "continent": "Europe",
+    "displayName": "United Kingdom"
   },
   {
     "flag": "🇬🇩",
@@ -501,7 +627,9 @@ const countries = [
       "Grenada",
       "Grenadian"
     ],
-    "countrycode": "GD"
+    "countrycode": "GD",
+    "continent": "North America",
+    "displayName": "Grenada"
   },
   {
     "flag": "🇬🇪",
@@ -509,7 +637,9 @@ const countries = [
       "Georgia",
       "Georgian"
     ],
-    "countrycode": "GE"
+    "countrycode": "GE",
+    "continent": "Asia",
+    "displayName": "Georgia"
   },
   {
     "flag": "🇬🇭",
@@ -517,7 +647,9 @@ const countries = [
       "Ghana",
       "Ghanaian"
     ],
-    "countrycode": "GH"
+    "countrycode": "GH",
+    "continent": "Africa",
+    "displayName": "Ghana"
   },
   {
     "flag": "🇬🇲",
@@ -525,7 +657,9 @@ const countries = [
       "Gambia",
       "Gambian"
     ],
-    "countrycode": "GM"
+    "countrycode": "GM",
+    "continent": "Africa",
+    "displayName": "Gambia"
   },
   {
     "flag": "🇬🇳",
@@ -533,7 +667,9 @@ const countries = [
       "Guinea",
       "Guinean"
     ],
-    "countrycode": "GN"
+    "countrycode": "GN",
+    "continent": "Africa",
+    "displayName": "Guinea"
   },
   {
     "flag": "🇬🇶",
@@ -541,7 +677,9 @@ const countries = [
       "Equatorial Guinea",
       "Equatorial Guinean"
     ],
-    "countrycode": "GQ"
+    "countrycode": "GQ",
+    "continent": "Africa",
+    "displayName": "Equatorial Guinea"
   },
   {
     "flag": "🇬🇷",
@@ -549,7 +687,9 @@ const countries = [
       "Greece",
       "Greek"
     ],
-    "countrycode": "GR"
+    "countrycode": "GR",
+    "continent": "Europe",
+    "displayName": "Greece"
   },
   {
     "flag": "🇬🇹",
@@ -557,7 +697,9 @@ const countries = [
       "Guatemala",
       "Guatemalan"
     ],
-    "countrycode": "GT"
+    "countrycode": "GT",
+    "continent": "North America",
+    "displayName": "Guatemala"
   },
   {
     "flag": "🇬🇼",
@@ -565,7 +707,9 @@ const countries = [
       "Guinea-Bissau",
       "Guinea-Bissauan"
     ],
-    "countrycode": "GW"
+    "countrycode": "GW",
+    "continent": "Africa",
+    "displayName": "Guinea-Bissau"
   },
   {
     "flag": "🇬🇾",
@@ -573,7 +717,9 @@ const countries = [
       "Guyana",
       "Guyanese"
     ],
-    "countrycode": "GY"
+    "countrycode": "GY",
+    "continent": "South America",
+    "displayName": "Guyana"
   },
   {
     "flag": "🇭🇳",
@@ -581,7 +727,9 @@ const countries = [
       "Honduras",
       "Honduran"
     ],
-    "countrycode": "HN"
+    "countrycode": "HN",
+    "continent": "North America",
+    "displayName": "Honduras"
   },
   {
     "flag": "🇭🇷",
@@ -589,7 +737,9 @@ const countries = [
       "Croatia",
       "Croatian"
     ],
-    "countrycode": "HR"
+    "countrycode": "HR",
+    "continent": "Europe",
+    "displayName": "Croatia"
   },
   {
     "flag": "🇭🇹",
@@ -597,7 +747,9 @@ const countries = [
       "Haiti",
       "Haitian"
     ],
-    "countrycode": "HT"
+    "countrycode": "HT",
+    "continent": "North America",
+    "displayName": "Haiti"
   },
   {
     "flag": "🇭🇺",
@@ -605,7 +757,9 @@ const countries = [
       "Hungary",
       "Hungarian"
     ],
-    "countrycode": "HU"
+    "countrycode": "HU",
+    "continent": "Europe",
+    "displayName": "Hungary"
   },
   {
     "flag": "🇮🇩",
@@ -613,7 +767,9 @@ const countries = [
       "Indonesia",
       "Indonesian"
     ],
-    "countrycode": "ID"
+    "countrycode": "ID",
+    "continent": "Asia",
+    "displayName": "Indonesia"
   },
   {
     "flag": "🇮🇪",
@@ -621,7 +777,9 @@ const countries = [
       "Ireland",
       "Irish"
     ],
-    "countrycode": "IE"
+    "countrycode": "IE",
+    "continent": "Europe",
+    "displayName": "Ireland"
   },
   {
     "flag": "🇮🇱",
@@ -629,7 +787,9 @@ const countries = [
       "Israel",
       "Israeli"
     ],
-    "countrycode": "IL"
+    "countrycode": "IL",
+    "continent": "Asia",
+    "displayName": "Israel"
   },
   {
     "flag": "🇮🇳",
@@ -637,7 +797,9 @@ const countries = [
       "India",
       "Indian"
     ],
-    "countrycode": "IN"
+    "countrycode": "IN",
+    "continent": "Asia",
+    "displayName": "India"
   },
   {
     "flag": "🇮🇶",
@@ -645,7 +807,9 @@ const countries = [
       "Iraq",
       "Iraqi"
     ],
-    "countrycode": "IQ"
+    "countrycode": "IQ",
+    "continent": "Asia",
+    "displayName": "Iraq"
   },
   {
     "flag": "🇮🇷",
@@ -653,7 +817,9 @@ const countries = [
       "Iran",
       "Iranian"
     ],
-    "countrycode": "IR"
+    "countrycode": "IR",
+    "continent": "Asia",
+    "displayName": "Iran"
   },
   {
     "flag": "🇮🇸",
@@ -661,7 +827,9 @@ const countries = [
       "Iceland",
       "Icelander"
     ],
-    "countrycode": "IS"
+    "countrycode": "IS",
+    "continent": "Europe",
+    "displayName": "Iceland"
   },
   {
     "flag": "🇮🇹",
@@ -669,7 +837,9 @@ const countries = [
       "Italy",
       "Italian"
     ],
-    "countrycode": "IT"
+    "countrycode": "IT",
+    "continent": "Europe",
+    "displayName": "Italy"
   },
   {
     "flag": "🇯🇲",
@@ -677,7 +847,9 @@ const countries = [
       "Jamaica",
       "Jamaican"
     ],
-    "countrycode": "JM"
+    "countrycode": "JM",
+    "continent": "North America",
+    "displayName": "Jamaica"
   },
   {
     "flag": "🇯🇴",
@@ -685,7 +857,9 @@ const countries = [
       "Jordan",
       "Jordanian"
     ],
-    "countrycode": "JO"
+    "countrycode": "JO",
+    "continent": "Asia",
+    "displayName": "Jordan"
   },
   {
     "flag": "🇯🇵",
@@ -693,7 +867,9 @@ const countries = [
       "Japan",
       "Japanese"
     ],
-    "countrycode": "JP"
+    "countrycode": "JP",
+    "continent": "Asia",
+    "displayName": "Japan"
   },
   {
     "flag": "🇰🇪",
@@ -701,7 +877,9 @@ const countries = [
       "Kenya",
       "Kenyan"
     ],
-    "countrycode": "KE"
+    "countrycode": "KE",
+    "continent": "Africa",
+    "displayName": "Kenya"
   },
   {
     "flag": "🇰🇬",
@@ -709,7 +887,9 @@ const countries = [
       "Kyrgyzstan",
       "Kirghiz"
     ],
-    "countrycode": "KG"
+    "countrycode": "KG",
+    "continent": "Asia",
+    "displayName": "Kyrgyzstan"
   },
   {
     "flag": "🇰🇭",
@@ -717,7 +897,9 @@ const countries = [
       "Cambodia",
       "Cambodian"
     ],
-    "countrycode": "KH"
+    "countrycode": "KH",
+    "continent": "Asia",
+    "displayName": "Cambodia"
   },
   {
     "flag": "🇰🇮",
@@ -725,7 +907,9 @@ const countries = [
       "Kiribati",
       "I-Kiribati"
     ],
-    "countrycode": "KI"
+    "countrycode": "KI",
+    "continent": "Oceania",
+    "displayName": "Kiribati"
   },
   {
     "flag": "🇰🇲",
@@ -733,7 +917,9 @@ const countries = [
       "Comoros",
       "Comoran"
     ],
-    "countrycode": "KM"
+    "countrycode": "KM",
+    "continent": "Africa",
+    "displayName": "Comoros"
   },
   {
     "flag": "🇰🇳",
@@ -741,7 +927,9 @@ const countries = [
       "Saint Kitts and Nevis",
       "Kittitian, Nevisian"
     ],
-    "countrycode": "KN"
+    "countrycode": "KN",
+    "continent": "North America",
+    "displayName": "Saint Kitts and Nevis"
   },
   {
     "flag": "🇰🇵",
@@ -749,7 +937,9 @@ const countries = [
       "North Korea",
       "North Korean"
     ],
-    "countrycode": "KP"
+    "countrycode": "KP",
+    "continent": "Asia",
+    "displayName": "North Korea"
   },
   {
     "flag": "🇰🇷",
@@ -757,7 +947,9 @@ const countries = [
       "South Korea",
       "South Korean"
     ],
-    "countrycode": "KR"
+    "countrycode": "KR",
+    "continent": "Asia",
+    "displayName": "South Korea"
   },
   {
     "flag": "🇰🇼",
@@ -765,7 +957,9 @@ const countries = [
       "Kuwait",
       "Kuwaiti"
     ],
-    "countrycode": "KW"
+    "countrycode": "KW",
+    "continent": "Asia",
+    "displayName": "Kuwait"
   },
   {
     "flag": "🇰🇾",
@@ -773,7 +967,9 @@ const countries = [
       "Cayman Islands",
       "Caymanian"
     ],
-    "countrycode": "KY"
+    "countrycode": "KY",
+    "continent": "North America",
+    "displayName": "Cayman Islands"
   },
   {
     "flag": "🇰🇿",
@@ -781,7 +977,9 @@ const countries = [
       "Kazakhstan",
       "Kazakhstani"
     ],
-    "countrycode": "KZ"
+    "countrycode": "KZ",
+    "continent": "Asia",
+    "displayName": "Kazakhstan"
   },
   {
     "flag": "🇱🇦",
@@ -789,7 +987,9 @@ const countries = [
       "Laos",
       "Laotian"
     ],
-    "countrycode": "LA"
+    "countrycode": "LA",
+    "continent": "Asia",
+    "displayName": "Laos"
   },
   {
     "flag": "🇱🇧",
@@ -797,7 +997,9 @@ const countries = [
       "Lebanon",
       "Lebanese"
     ],
-    "countrycode": "LB"
+    "countrycode": "LB",
+    "continent": "Asia",
+    "displayName": "Lebanon"
   },
   {
     "flag": "🇱🇨",
@@ -805,7 +1007,9 @@ const countries = [
       "Saint Lucia",
       "Saint Lucian"
     ],
-    "countrycode": "LC"
+    "countrycode": "LC",
+    "continent": "North America",
+    "displayName": "Saint Lucia"
   },
   {
     "flag": "🇱🇮",
@@ -813,7 +1017,9 @@ const countries = [
       "Liechtenstein",
       "Liechtensteiner"
     ],
-    "countrycode": "LI"
+    "countrycode": "LI",
+    "continent": "Europe",
+    "displayName": "Liechtenstein"
   },
   {
     "flag": "🇱🇰",
@@ -821,7 +1027,9 @@ const countries = [
       "Sri Lanka",
       "Sri Lankan"
     ],
-    "countrycode": "LK"
+    "countrycode": "LK",
+    "continent": "Asia",
+    "displayName": "Sri Lanka"
   },
   {
     "flag": "🇱🇷",
@@ -829,7 +1037,9 @@ const countries = [
       "Liberia",
       "Liberian"
     ],
-    "countrycode": "LR"
+    "countrycode": "LR",
+    "continent": "Africa",
+    "displayName": "Liberia"
   },
   {
     "flag": "🇱🇸",
@@ -837,7 +1047,9 @@ const countries = [
       "Lesotho",
       "Mosotho"
     ],
-    "countrycode": "LS"
+    "countrycode": "LS",
+    "continent": "Africa",
+    "displayName": "Lesotho"
   },
   {
     "flag": "🇱🇹",
@@ -845,7 +1057,9 @@ const countries = [
       "Lithuania",
       "Lithuanian"
     ],
-    "countrycode": "LT"
+    "countrycode": "LT",
+    "continent": "Europe",
+    "displayName": "Lithuania"
   },
   {
     "flag": "🇱🇺",
@@ -853,7 +1067,9 @@ const countries = [
       "Luxembourg",
       "Luxembourger"
     ],
-    "countrycode": "LU"
+    "countrycode": "LU",
+    "continent": "Europe",
+    "displayName": "Luxembourg"
   },
   {
     "flag": "🇱🇻",
@@ -861,7 +1077,9 @@ const countries = [
       "Latvia",
       "Latvian"
     ],
-    "countrycode": "LV"
+    "countrycode": "LV",
+    "continent": "Europe",
+    "displayName": "Latvia"
   },
   {
     "flag": "🇱🇾",
@@ -869,7 +1087,9 @@ const countries = [
       "Libya",
       "Libyan"
     ],
-    "countrycode": "LY"
+    "countrycode": "LY",
+    "continent": "Africa",
+    "displayName": "Libya"
   },
   {
     "flag": "🇲🇦",
@@ -877,7 +1097,9 @@ const countries = [
       "Morocco",
       "Moroccan"
     ],
-    "countrycode": "MA"
+    "countrycode": "MA",
+    "continent": "Africa",
+    "displayName": "Morocco"
   },
   {
     "flag": "🇲🇨",
@@ -885,7 +1107,9 @@ const countries = [
       "Monaco",
       "Monegasque"
     ],
-    "countrycode": "MC"
+    "countrycode": "MC",
+    "continent": "Europe",
+    "displayName": "Monaco"
   },
   {
     "flag": "🇲🇩",
@@ -893,7 +1117,9 @@ const countries = [
       "Moldova",
       "Moldovan"
     ],
-    "countrycode": "MD"
+    "countrycode": "MD",
+    "continent": "Europe",
+    "displayName": "Moldova"
   },
   {
     "flag": "🇲🇪",
@@ -901,7 +1127,9 @@ const countries = [
       "Montenegro",
       "Montenegrin"
     ],
-    "countrycode": "ME"
+    "countrycode": "ME",
+    "continent": "Europe",
+    "displayName": "Montenegro"
   },
   {
     "flag": "🇲🇬",
@@ -909,7 +1137,9 @@ const countries = [
       "Madagascar",
       "Malagasy"
     ],
-    "countrycode": "MG"
+    "countrycode": "MG",
+    "continent": "Africa",
+    "displayName": "Madagascar"
   },
   {
     "flag": "🇲🇭",
@@ -917,7 +1147,9 @@ const countries = [
       "Marshall Islands",
       "Marshallese"
     ],
-    "countrycode": "MH"
+    "countrycode": "MH",
+    "continent": "Oceania",
+    "displayName": "Marshall Islands"
   },
   {
     "flag": "🇲🇰",
@@ -925,7 +1157,9 @@ const countries = [
       "North Macedonia",
       "Macedonian"
     ],
-    "countrycode": "MK"
+    "countrycode": "MK",
+    "continent": "Europe",
+    "displayName": "North Macedonia"
   },
   {
     "flag": "🇲🇱",
@@ -933,7 +1167,9 @@ const countries = [
       "Mali",
       "Malian"
     ],
-    "countrycode": "ML"
+    "countrycode": "ML",
+    "continent": "Africa",
+    "displayName": "Mali"
   },
   {
     "flag": "🇲🇲",
@@ -941,7 +1177,9 @@ const countries = [
       "Myanmar",
       "Burmese"
     ],
-    "countrycode": "MM"
+    "countrycode": "MM",
+    "continent": "Asia",
+    "displayName": "Myanmar"
   },
   {
     "flag": "🇲🇳",
@@ -949,7 +1187,9 @@ const countries = [
       "Mongolia",
       "Mongolian"
     ],
-    "countrycode": "MN"
+    "countrycode": "MN",
+    "continent": "Asia",
+    "displayName": "Mongolia"
   },
   {
     "flag": "🇲🇷",
@@ -957,7 +1197,9 @@ const countries = [
       "Mauritania",
       "Mauritanian"
     ],
-    "countrycode": "MR"
+    "countrycode": "MR",
+    "continent": "Africa",
+    "displayName": "Mauritania"
   },
   {
     "flag": "🇲🇹",
@@ -965,7 +1207,9 @@ const countries = [
       "Malta",
       "Maltese"
     ],
-    "countrycode": "MT"
+    "countrycode": "MT",
+    "continent": "Europe",
+    "displayName": "Malta"
   },
   {
     "flag": "🇲🇺",
@@ -973,7 +1217,9 @@ const countries = [
       "Mauritius",
       "Mauritian"
     ],
-    "countrycode": "MU"
+    "countrycode": "MU",
+    "continent": "Africa",
+    "displayName": "Mauritius"
   },
   {
     "flag": "🇲🇻",
@@ -981,7 +1227,9 @@ const countries = [
       "Maldives",
       "Maldivan"
     ],
-    "countrycode": "MV"
+    "countrycode": "MV",
+    "continent": "Asia",
+    "displayName": "Maldives"
   },
   {
     "flag": "🇲🇼",
@@ -989,7 +1237,9 @@ const countries = [
       "Malawi",
       "Malawian"
     ],
-    "countrycode": "MW"
+    "countrycode": "MW",
+    "continent": "Africa",
+    "displayName": "Malawi"
   },
   {
     "flag": "🇲🇽",
@@ -997,7 +1247,9 @@ const countries = [
       "Mexico",
       "Mexican"
     ],
-    "countrycode": "MX"
+    "countrycode": "MX",
+    "continent": "North America",
+    "displayName": "Mexico"
   },
   {
     "flag": "🇲🇾",
@@ -1005,7 +1257,9 @@ const countries = [
       "Malaysia",
       "Malaysian"
     ],
-    "countrycode": "MY"
+    "countrycode": "MY",
+    "continent": "Asia",
+    "displayName": "Malaysia"
   },
   {
     "flag": "🇲🇿",
@@ -1013,7 +1267,9 @@ const countries = [
       "Mozambique",
       "Mozambican"
     ],
-    "countrycode": "MZ"
+    "countrycode": "MZ",
+    "continent": "Africa",
+    "displayName": "Mozambique"
   },
   {
     "flag": "🇳🇦",
@@ -1021,7 +1277,9 @@ const countries = [
       "Namibia",
       "Namibian"
     ],
-    "countrycode": "NA"
+    "countrycode": "NA",
+    "continent": "Africa",
+    "displayName": "Namibia"
   },
   {
     "flag": "🇳🇪",
@@ -1029,7 +1287,9 @@ const countries = [
       "Niger",
       "Nigerien"
     ],
-    "countrycode": "NE"
+    "countrycode": "NE",
+    "continent": "Africa",
+    "displayName": "Niger"
   },
   {
     "flag": "🇳🇬",
@@ -1037,7 +1297,9 @@ const countries = [
       "Nigeria",
       "Nigerian"
     ],
-    "countrycode": "NG"
+    "countrycode": "NG",
+    "continent": "Africa",
+    "displayName": "Nigeria"
   },
   {
     "flag": "🇳🇮",
@@ -1045,7 +1307,9 @@ const countries = [
       "Nicaragua",
       "Nicaraguan"
     ],
-    "countrycode": "NI"
+    "countrycode": "NI",
+    "continent": "North America",
+    "displayName": "Nicaragua"
   },
   {
     "flag": "🇳🇱",
@@ -1053,7 +1317,9 @@ const countries = [
       "Netherlands",
       "Dutch"
     ],
-    "countrycode": "NL"
+    "countrycode": "NL",
+    "continent": "Europe",
+    "displayName": "Netherlands"
   },
   {
     "flag": "🇳🇴",
@@ -1061,7 +1327,9 @@ const countries = [
       "Norway",
       "Norwegian"
     ],
-    "countrycode": "NO"
+    "countrycode": "NO",
+    "continent": "Europe",
+    "displayName": "Norway"
   },
   {
     "flag": "🇳🇵",
@@ -1069,7 +1337,9 @@ const countries = [
       "Nepal",
       "Nepalese"
     ],
-    "countrycode": "NP"
+    "countrycode": "NP",
+    "continent": "Asia",
+    "displayName": "Nepal"
   },
   {
     "flag": "🇳🇷",
@@ -1077,7 +1347,9 @@ const countries = [
       "Nauru",
       "Nauruan"
     ],
-    "countrycode": "NR"
+    "countrycode": "NR",
+    "continent": "Oceania",
+    "displayName": "Nauru"
   },
   {
     "flag": "🇳🇿",
@@ -1085,7 +1357,9 @@ const countries = [
       "New Zealand",
       "New Zealander"
     ],
-    "countrycode": "NZ"
+    "countrycode": "NZ",
+    "continent": "Oceania",
+    "displayName": "New Zealand"
   },
   {
     "flag": "🇴🇲",
@@ -1093,7 +1367,9 @@ const countries = [
       "Oman",
       "Omani"
     ],
-    "countrycode": "OM"
+    "countrycode": "OM",
+    "continent": "Asia",
+    "displayName": "Oman"
   },
   {
     "flag": "🇵🇦",
@@ -1101,7 +1377,9 @@ const countries = [
       "Panama",
       "Panamanian"
     ],
-    "countrycode": "PA"
+    "countrycode": "PA",
+    "continent": "North America",
+    "displayName": "Panama"
   },
   {
     "flag": "🇵🇪",
@@ -1109,7 +1387,9 @@ const countries = [
       "Peru",
       "Peruvian"
     ],
-    "countrycode": "PE"
+    "countrycode": "PE",
+    "continent": "South America",
+    "displayName": "Peru"
   },
   {
     "flag": "🇵🇬",
@@ -1117,7 +1397,9 @@ const countries = [
       "Papua New Guinea",
       "Papua New Guinean"
     ],
-    "countrycode": "PG"
+    "countrycode": "PG",
+    "continent": "Oceania",
+    "displayName": "Papua New Guinea"
   },
   {
     "flag": "🇵🇭",
@@ -1125,7 +1407,9 @@ const countries = [
       "Philippines",
       "Filipino"
     ],
-    "countrycode": "PH"
+    "countrycode": "PH",
+    "continent": "Asia",
+    "displayName": "Philippines"
   },
   {
     "flag": "🇵🇰",
@@ -1133,7 +1417,9 @@ const countries = [
       "Pakistan",
       "Pakistani"
     ],
-    "countrycode": "PK"
+    "countrycode": "PK",
+    "continent": "Asia",
+    "displayName": "Pakistan"
   },
   {
     "flag": "🇵🇱",
@@ -1141,7 +1427,9 @@ const countries = [
       "Poland",
       "Polish"
     ],
-    "countrycode": "PL"
+    "countrycode": "PL",
+    "continent": "Europe",
+    "displayName": "Poland"
   },
   {
     "flag": "🇵🇷",
@@ -1149,7 +1437,9 @@ const countries = [
       "Puerto Rico",
       "Puerto Rican"
     ],
-    "countrycode": "PR"
+    "countrycode": "PR",
+    "continent": "North America",
+    "displayName": "Puerto Rico"
   },
   {
     "flag": "🇵🇸",
@@ -1157,7 +1447,9 @@ const countries = [
       "Palestine",
       "Palestinian"
     ],
-    "countrycode": "PS"
+    "countrycode": "PS",
+    "continent": "Asia",
+    "displayName": "Palestine"
   },
   {
     "flag": "🇵🇹",
@@ -1165,7 +1457,9 @@ const countries = [
       "Portugal",
       "Portuguese"
     ],
-    "countrycode": "PT"
+    "countrycode": "PT",
+    "continent": "Europe",
+    "displayName": "Portugal"
   },
   {
     "flag": "🇵🇼",
@@ -1173,7 +1467,9 @@ const countries = [
       "Palau",
       "Palauan"
     ],
-    "countrycode": "PW"
+    "countrycode": "PW",
+    "continent": "Oceania",
+    "displayName": "Palau"
   },
   {
     "flag": "🇵🇾",
@@ -1181,7 +1477,9 @@ const countries = [
       "Paraguay",
       "Paraguayan"
     ],
-    "countrycode": "PY"
+    "countrycode": "PY",
+    "continent": "South America",
+    "displayName": "Paraguay"
   },
   {
     "flag": "🇶🇦",
@@ -1189,7 +1487,9 @@ const countries = [
       "Qatar",
       "Qatari"
     ],
-    "countrycode": "QA"
+    "countrycode": "QA",
+    "continent": "Asia",
+    "displayName": "Qatar"
   },
   {
     "flag": "🇷🇴",
@@ -1197,7 +1497,9 @@ const countries = [
       "Romania",
       "Romanian"
     ],
-    "countrycode": "RO"
+    "countrycode": "RO",
+    "continent": "Europe",
+    "displayName": "Romania"
   },
   {
     "flag": "🇷🇸",
@@ -1205,7 +1507,9 @@ const countries = [
       "Serbia",
       "Serbian"
     ],
-    "countrycode": "RS"
+    "countrycode": "RS",
+    "continent": "Europe",
+    "displayName": "Serbia"
   },
   {
     "flag": "🇷🇺",
@@ -1213,7 +1517,9 @@ const countries = [
       "Russia",
       "Russian"
     ],
-    "countrycode": "RU"
+    "countrycode": "RU",
+    "continent": "Europe",
+    "displayName": "Russia"
   },
   {
     "flag": "🇷🇼",
@@ -1221,7 +1527,9 @@ const countries = [
       "Rwanda",
       "Rwandan"
     ],
-    "countrycode": "RW"
+    "countrycode": "RW",
+    "continent": "Africa",
+    "displayName": "Rwanda"
   },
   {
     "flag": "🇸🇦",
@@ -1229,7 +1537,9 @@ const countries = [
       "Saudi Arabia",
       "Saudi Arabian"
     ],
-    "countrycode": "SA"
+    "countrycode": "SA",
+    "continent": "Asia",
+    "displayName": "Saudi Arabia"
   },
   {
     "flag": "🇸🇧",
@@ -1237,7 +1547,9 @@ const countries = [
       "Solomon Islands",
       "Solomon Islander"
     ],
-    "countrycode": "SB"
+    "countrycode": "SB",
+    "continent": "Oceania",
+    "displayName": "Solomon Islands"
   },
   {
     "flag": "🇸🇨",
@@ -1245,7 +1557,9 @@ const countries = [
       "Seychelles",
       "Seychellois"
     ],
-    "countrycode": "SC"
+    "countrycode": "SC",
+    "continent": "Africa",
+    "displayName": "Seychelles"
   },
   {
     "flag": "🇸🇩",
@@ -1253,7 +1567,9 @@ const countries = [
       "Sudan",
       "Sudanese"
     ],
-    "countrycode": "SD"
+    "countrycode": "SD",
+    "continent": "Africa",
+    "displayName": "Sudan"
   },
   {
     "flag": "🇸🇪",
@@ -1261,7 +1577,9 @@ const countries = [
       "Sweden",
       "Swedish"
     ],
-    "countrycode": "SE"
+    "countrycode": "SE",
+    "continent": "Europe",
+    "displayName": "Sweden"
   },
   {
     "flag": "🇸🇬",
@@ -1269,7 +1587,9 @@ const countries = [
       "Singapore",
       "Singaporean"
     ],
-    "countrycode": "SG"
+    "countrycode": "SG",
+    "continent": "Asia",
+    "displayName": "Singapore"
   },
   {
     "flag": "🇸🇮",
@@ -1277,7 +1597,9 @@ const countries = [
       "Slovenia",
       "Slovene"
     ],
-    "countrycode": "SI"
+    "countrycode": "SI",
+    "continent": "Europe",
+    "displayName": "Slovenia"
   },
   {
     "flag": "🇸🇰",
@@ -1285,7 +1607,9 @@ const countries = [
       "Slovakia",
       "Slovak"
     ],
-    "countrycode": "SK"
+    "countrycode": "SK",
+    "continent": "Europe",
+    "displayName": "Slovakia"
   },
   {
     "flag": "🇸🇱",
@@ -1293,7 +1617,9 @@ const countries = [
       "Sierra Leone",
       "Sierra Leonean"
     ],
-    "countrycode": "SL"
+    "countrycode": "SL",
+    "continent": "Africa",
+    "displayName": "Sierra Leone"
   },
   {
     "flag": "🇸🇲",
@@ -1301,7 +1627,9 @@ const countries = [
       "San Marino",
       "Sammarinese"
     ],
-    "countrycode": "SM"
+    "countrycode": "SM",
+    "continent": "Europe",
+    "displayName": "San Marino"
   },
   {
     "flag": "🇸🇳",
@@ -1309,7 +1637,9 @@ const countries = [
       "Senegal",
       "Senegalese"
     ],
-    "countrycode": "SN"
+    "countrycode": "SN",
+    "continent": "Africa",
+    "displayName": "Senegal"
   },
   {
     "flag": "🇸🇴",
@@ -1317,7 +1647,9 @@ const countries = [
       "Somalia",
       "Somali"
     ],
-    "countrycode": "SO"
+    "countrycode": "SO",
+    "continent": "Africa",
+    "displayName": "Somalia"
   },
   {
     "flag": "🇸🇷",
@@ -1325,7 +1657,9 @@ const countries = [
       "Suriname",
       "Surinamer"
     ],
-    "countrycode": "SR"
+    "countrycode": "SR",
+    "continent": "South America",
+    "displayName": "Suriname"
   },
   {
     "flag": "🇸🇸",
@@ -1333,7 +1667,9 @@ const countries = [
       "South Sudan",
       "South Sudanese"
     ],
-    "countrycode": "SS"
+    "countrycode": "SS",
+    "continent": "Africa",
+    "displayName": "South Sudan"
   },
   {
     "flag": "🇸🇹",
@@ -1341,7 +1677,9 @@ const countries = [
       "São Tomé and Príncipe",
       "Sao Tomean"
     ],
-    "countrycode": "ST"
+    "countrycode": "ST",
+    "continent": "Africa",
+    "displayName": "São Tomé and Príncipe"
   },
   {
     "flag": "🇸🇻",
@@ -1349,7 +1687,9 @@ const countries = [
       "El Salvador",
       "Salvadoran"
     ],
-    "countrycode": "SV"
+    "countrycode": "SV",
+    "continent": "North America",
+    "displayName": "El Salvador"
   },
   {
     "flag": "🇸🇾",
@@ -1357,7 +1697,9 @@ const countries = [
       "Syria",
       "Syrian"
     ],
-    "countrycode": "SY"
+    "countrycode": "SY",
+    "continent": "Asia",
+    "displayName": "Syria"
   },
   {
     "flag": "🇸🇿",
@@ -1365,7 +1707,9 @@ const countries = [
       "Eswatini",
       "Swazi"
     ],
-    "countrycode": "SZ"
+    "countrycode": "SZ",
+    "continent": "Africa",
+    "displayName": "Eswatini"
   },
   {
     "flag": "🇹🇩",
@@ -1373,7 +1717,9 @@ const countries = [
       "Chad",
       "Chadian"
     ],
-    "countrycode": "TD"
+    "countrycode": "TD",
+    "continent": "Africa",
+    "displayName": "Chad"
   },
   {
     "flag": "🇹🇬",
@@ -1381,7 +1727,9 @@ const countries = [
       "Togo",
       "Togolese"
     ],
-    "countrycode": "TG"
+    "countrycode": "TG",
+    "continent": "Africa",
+    "displayName": "Togo"
   },
   {
     "flag": "🇹🇭",
@@ -1389,7 +1737,9 @@ const countries = [
       "Thailand",
       "Thai"
     ],
-    "countrycode": "TH"
+    "countrycode": "TH",
+    "continent": "Asia",
+    "displayName": "Thailand"
   },
   {
     "flag": "🇹🇯",
@@ -1397,7 +1747,9 @@ const countries = [
       "Tajikistan",
       "Tadzhik"
     ],
-    "countrycode": "TJ"
+    "countrycode": "TJ",
+    "continent": "Asia",
+    "displayName": "Tajikistan"
   },
   {
     "flag": "🇹🇰",
@@ -1405,7 +1757,9 @@ const countries = [
       "Tokelau",
       "Tokelauan"
     ],
-    "countrycode": "TK"
+    "countrycode": "TK",
+    "continent": "Oceania",
+    "displayName": "Tokelau"
   },
   {
     "flag": "🇹🇱",
@@ -1413,7 +1767,9 @@ const countries = [
       "Timor-Leste",
       "East Timorese"
     ],
-    "countrycode": "TL"
+    "countrycode": "TL",
+    "continent": "Asia",
+    "displayName": "Timor-Leste"
   },
   {
     "flag": "🇹🇲",
@@ -1421,7 +1777,9 @@ const countries = [
       "Turkmenistan",
       "Turkmen"
     ],
-    "countrycode": "TM"
+    "countrycode": "TM",
+    "continent": "Asia",
+    "displayName": "Turkmenistan"
   },
   {
     "flag": "🇹🇳",
@@ -1429,7 +1787,9 @@ const countries = [
       "Tunisia",
       "Tunisian"
     ],
-    "countrycode": "TN"
+    "countrycode": "TN",
+    "continent": "Africa",
+    "displayName": "Tunisia"
   },
   {
     "flag": "🇹🇴",
@@ -1437,7 +1797,9 @@ const countries = [
       "Tonga",
       "Tongan"
     ],
-    "countrycode": "TO"
+    "countrycode": "TO",
+    "continent": "Oceania",
+    "displayName": "Tonga"
   },
   {
     "flag": "🇹🇷",
@@ -1445,7 +1807,9 @@ const countries = [
       "Turkey",
       "Turkish"
     ],
-    "countrycode": "TR"
+    "countrycode": "TR",
+    "continent": "Asia",
+    "displayName": "Turkey"
   },
   {
     "flag": "🇹🇹",
@@ -1453,7 +1817,9 @@ const countries = [
       "Trinidad and Tobago",
       "Trinidadian"
     ],
-    "countrycode": "TT"
+    "countrycode": "TT",
+    "continent": "North America",
+    "displayName": "Trinidad and Tobago"
   },
   {
     "flag": "🇹🇻",
@@ -1461,7 +1827,9 @@ const countries = [
       "Tuvalu",
       "Tuvaluan"
     ],
-    "countrycode": "TV"
+    "countrycode": "TV",
+    "continent": "Oceania",
+    "displayName": "Tuvalu"
   },
   {
     "flag": "🇹🇼",
@@ -1469,7 +1837,9 @@ const countries = [
       "Taiwan",
       "Taiwanese"
     ],
-    "countrycode": "TW"
+    "countrycode": "TW",
+    "continent": "Asia",
+    "displayName": "Taiwan"
   },
   {
     "flag": "🇹🇿",
@@ -1477,7 +1847,9 @@ const countries = [
       "Tanzania",
       "Tanzanian"
     ],
-    "countrycode": "TZ"
+    "countrycode": "TZ",
+    "continent": "Africa",
+    "displayName": "Tanzania"
   },
   {
     "flag": "🇺🇦",
@@ -1485,7 +1857,9 @@ const countries = [
       "Ukraine",
       "Ukrainian"
     ],
-    "countrycode": "UA"
+    "countrycode": "UA",
+    "continent": "Europe",
+    "displayName": "Ukraine"
   },
   {
     "flag": "🇺🇬",
@@ -1493,7 +1867,9 @@ const countries = [
       "Uganda",
       "Ugandan"
     ],
-    "countrycode": "UG"
+    "countrycode": "UG",
+    "continent": "Africa",
+    "displayName": "Uganda"
   },
   {
     "flag": "🇺🇾",
@@ -1501,7 +1877,9 @@ const countries = [
       "Uruguay",
       "Uruguayan"
     ],
-    "countrycode": "UY"
+    "countrycode": "UY",
+    "continent": "South America",
+    "displayName": "Uruguay"
   },
   {
     "flag": "🇺🇿",
@@ -1509,7 +1887,9 @@ const countries = [
       "Uzbekistan",
       "Uzbekistani"
     ],
-    "countrycode": "UZ"
+    "countrycode": "UZ",
+    "continent": "Asia",
+    "displayName": "Uzbekistan"
   },
   {
     "flag": "🇻🇦",
@@ -1517,7 +1897,9 @@ const countries = [
       "Vatican City",
       "Vatican"
     ],
-    "countrycode": "VA"
+    "countrycode": "VA",
+    "continent": "Europe",
+    "displayName": "Vatican City"
   },
   {
     "flag": "🇻🇨",
@@ -1525,7 +1907,9 @@ const countries = [
       "Saint Vincent and the Grenadines",
       "Saint Vincentian"
     ],
-    "countrycode": "VC"
+    "countrycode": "VC",
+    "continent": "North America",
+    "displayName": "Saint Vincent and the Grenadines"
   },
   {
     "flag": "🇻🇪",
@@ -1533,7 +1917,9 @@ const countries = [
       "Venezuela",
       "Venezuelan"
     ],
-    "countrycode": "VE"
+    "countrycode": "VE",
+    "continent": "South America",
+    "displayName": "Venezuela"
   },
   {
     "flag": "🇻🇳",
@@ -1541,7 +1927,9 @@ const countries = [
       "Vietnam",
       "Vietnamese"
     ],
-    "countrycode": "VN"
+    "countrycode": "VN",
+    "continent": "Asia",
+    "displayName": "Vietnam"
   },
   {
     "flag": "🇻🇺",
@@ -1549,7 +1937,9 @@ const countries = [
       "Vanuatu",
       "Ni-Vanuatu"
     ],
-    "countrycode": "VU"
+    "countrycode": "VU",
+    "continent": "Oceania",
+    "displayName": "Vanuatu"
   },
   {
     "flag": "🇼🇸",
@@ -1557,7 +1947,9 @@ const countries = [
       "Samoa",
       "Samoan"
     ],
-    "countrycode": "WS"
+    "countrycode": "WS",
+    "continent": "Oceania",
+    "displayName": "Samoa"
   },
   {
     "flag": "🇽🇰",
@@ -1565,7 +1957,9 @@ const countries = [
       "Kosovo",
       "Kosovar"
     ],
-    "countrycode": "XK"
+    "countrycode": "XK",
+    "continent": "Europe",
+    "displayName": "Kosovo"
   },
   {
     "flag": "🇾🇪",
@@ -1573,7 +1967,9 @@ const countries = [
       "Yemen",
       "Yemeni"
     ],
-    "countrycode": "YE"
+    "countrycode": "YE",
+    "continent": "Asia",
+    "displayName": "Yemen"
   },
   {
     "flag": "🇿🇦",
@@ -1581,7 +1977,9 @@ const countries = [
       "South Africa",
       "South African"
     ],
-    "countrycode": "ZA"
+    "countrycode": "ZA",
+    "continent": "Africa",
+    "displayName": "South Africa"
   },
   {
     "flag": "🇿🇲",
@@ -1589,7 +1987,9 @@ const countries = [
       "Zambia",
       "Zambian"
     ],
-    "countrycode": "ZM"
+    "countrycode": "ZM",
+    "continent": "Africa",
+    "displayName": "Zambia"
   },
   {
     "flag": "🇿🇼",
@@ -1597,10 +1997,10 @@ const countries = [
       "Zimbabwe",
       "Zimbabwean"
     ],
-    "countrycode": "ZW"
+    "countrycode": "ZW",
+    "continent": "Africa",
+    "displayName": "Zimbabwe"
   }
-]
+];
 
-module.exports = {
-  countries: countries
-}
+export { countries };
