@@ -9,8 +9,8 @@ async function signup(requestPassword, requestUsername, requestEmail) {
         headers: {
             "Content-Type": "application/json",
         },
-    })
-    return (await response.json())
+    });
+    return (await response.json());
 }
 async function login(requestPassword, requestUsername) {
     const response = await fetch("http://localhost:41399/api/account/login", {
@@ -19,21 +19,39 @@ async function login(requestPassword, requestUsername) {
         headers: {
             "Content-Type": "application/json",
         },
-    })
-    return (await response.json())
+    });
+    return (await response.json());
+}
+
+async function country(requestGameID, requestCountryID, token) {
+    const response = await fetch("http://localhost:41399/api/info/country", {
+        method: "POST",
+        body: JSON.stringify({ gameID: requestGameID, countryID: requestCountryID }),
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    });
+    return (await response.json());
 }
 
 
 const validUsername = "user1";
 const validPassword = "123456789abc";
 const validEmail = "tomapi9511@mapsguy.com";
-console.log("Signing Up\n", await signup(validPassword, validUsername, validEmail), "\n");
-console.log("Logging In", await login(validPassword, validUsername), "\n");
+const validGameID = "1";
+const validCountryID = "2";
+
+// console.log("Signing Up\n", await signup(validPassword, validUsername, validEmail), "\n");
+const loginResponse = await login(validPassword, validUsername)
+console.log("Logging In\n", loginResponse, "\n");
+const token = loginResponse.token;
+console.log("Getting Country Info\n", await country(validGameID, validCountryID, token), "\n");
 
 
 // delete user who was created
-console.log("Deleting temporary user", "\n");
-await pool.query(
-    "DELETE FROM accounts WHERE username = $1",
-    ["user1"]
-);
+// console.log("Deleting temporary user", "\n");
+// await pool.query(
+//     "DELETE FROM accounts WHERE username = $1",
+//     ["user1"]
+// );
