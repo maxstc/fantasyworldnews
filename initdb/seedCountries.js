@@ -1,4 +1,4 @@
-import pool from "./db.js";
+import pool from "#root/server/db.js";
 import { countries } from "./countries.js";
 
 const client = await pool.connect();
@@ -6,8 +6,6 @@ const client = await pool.connect();
 const dbCheck = await client.query(`
   SELECT current_database(), current_user
 `);
-
-console.log("Actually connected to:", dbCheck.rows[0]);
 
 
 try {

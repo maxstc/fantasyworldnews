@@ -1,17 +1,8 @@
-// //connect to mongodb
-// import { MongoClient } from "mongodb";
-// const client = new MongoClient("mongodb://127.0.0.1:27017");
-// client.connect();
-// export const db = client.db("gamedata");
-
 //connect to postgres
 import "dotenv/config";
 import pg from "pg";
 
 const { Pool } = pg;
-
-console.log("DB_NAME from env:", process.env.DB_NAME);
-console.log("Working directory:", process.cwd());
 
 const pool = new Pool({
     host: process.env.DB_HOST,
