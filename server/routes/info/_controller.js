@@ -7,12 +7,12 @@ import { checkAuth } from "#root/server/middleware/checkAuth.js";
 
 router.post(
     "/player",
+    checkAuth,
     checkParamsNotUndefined(["gameID", "playerID"]),
     player
 );
 router.post(
     "/country",
-    checkAuth,
     checkParamsNotUndefined(["gameID", "countryID"]),
     country
 );
