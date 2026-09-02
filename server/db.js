@@ -10,6 +10,8 @@ import pg from "pg";
 
 const { Pool } = pg;
 
+console.log(process.env);
+
 const pool = new Pool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
