@@ -23,7 +23,10 @@ export async function headlines (req, res) {
         // so they will get the very newest headline fresh off the press and avoid off by one error
         if (lastHeadline === null) {
             const newestHeadlineQuery = await pool.query(
-                "SELECT ID FROM headlines WHERE fetched_at = (SELECT MAX(fetched_at) FROM headlines)",
+            `
+                SELECT ID FROM headlines
+                WHERE fetched_at = (SELECT MAX(fetched_at) FROM headlines)
+            `
             );
             lastHeadline = newestHeadlineQuery.rows[0].id + 1;
         }
