@@ -34,19 +34,30 @@ async function country(requestGameID, requestCountryID, token) {
     });
     return (await response.json());
 }
+async function player(requestGameID, requestPlayerID, token) {
+    const response = await fetch("http://localhost:41399/api/info/player", {
+        method: "POST",
+        body: JSON.stringify({ gameID: requestGameID, playerID: requestPlayerID }),
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+    });
+    return (await response.json());
+}
 
 
 const validUsername = "user1";
 const validPassword = "123456789abc";
 const validEmail = "tomapi9511@mapsguy.com";
 const validGameID = "1";
-const validCountryID = "2";
+const validPlayerID = "2";
 
 // console.log("Signing Up\n", await signup(validPassword, validUsername, validEmail), "\n");
 const loginResponse = await login(validPassword, validUsername)
 console.log("Logging In\n", loginResponse, "\n");
 const token = loginResponse.token;
-console.log("Getting Country Info\n", await country(validGameID, validCountryID, token), "\n");
+console.log("Getting Player Info\n", await player(validGameID, validPlayerID, token), "\n");
 
 
 // delete user who was created
