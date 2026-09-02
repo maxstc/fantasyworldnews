@@ -10,6 +10,9 @@ import pg from "pg";
 
 const { Pool } = pg;
 
+console.log("DB_NAME from env:", process.env.DB_NAME);
+console.log("Working directory:", process.cwd());
+
 const pool = new Pool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
@@ -17,6 +20,5 @@ const pool = new Pool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
 });
-
 
 export default pool;
