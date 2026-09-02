@@ -5,3 +5,4 @@ server/alpha-key.js
 .env
 
 server/routes/account/api.sh
+testing.js

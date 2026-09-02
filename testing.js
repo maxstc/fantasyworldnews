@@ -1,9 +1,9 @@
 async function test() {
-    const fetchResult = await fetch("http://localhost:41399/api/account/signup", {
+    const fetchResult = await fetch("http://localhost:41399/api/dashboard/trades", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "this is where my token would go... IF I HAD ONE!!!"
+            "Authorization": "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZhcnRsb3JkIiwiaWF0IjoxNzg4MzE5MDg4LCJleHAiOjE3ODgzMjI2ODh9.E20Pgpnny7Ndzsb2cjBi1YL5RLQLZhxYoHya754heV4"
         },
         body: JSON.stringify({
             username: "fartlord",
