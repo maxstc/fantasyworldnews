@@ -67,9 +67,14 @@ export async function signup (req, res) {
             [req.body.email, normalizedUsername, hashedPassword]
         );
 
+        const newAccountQuery = await pool.query(
+            "SELECT * FROM accounts WHERE username = $1",
+            [normalizedUsername]
+        );
+
         //Generate the token
         const sessionToken = jwt.sign(
-            { accountID: accountQuery.rows[0].id },
+            { accountID: newAccountQuery.rows[0].id },
             process.env.JWT_SECRET,
             { expiresIn: tokenLifetime }
         );

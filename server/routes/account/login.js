@@ -38,8 +38,6 @@ export async function login (req, res) {
 
         // By this point request is valid
 
-        console.log(accountQuery.rows[0])
-        
         //Generate the token
         const sessionToken = jwt.sign(
             { accountID: accountQuery.rows[0].id },
