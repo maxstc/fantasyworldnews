@@ -4,7 +4,8 @@ CREATE TYPE game_status AS ENUM ('preparing', 'in progress', 'completed');
 
 CREATE TABLE games (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    status game_status NOT NULL DEFAULT 'preparing'
+    status game_status NOT NULL DEFAULT 'preparing',
+    owner UUID NOT NULL REFERENCES accounts(id)
 );
 
 CREATE TABLE accounts (
