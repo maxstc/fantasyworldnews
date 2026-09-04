@@ -1,4 +1,8 @@
-//import countryfrom "#root/server/db.js";
+//Written by Evan
+// You will need to change this test for games specific to your DB, 
+// make sure the games have players which own a country u want to check
+// else it'll just be null
+// For myself: in game where gameID: 1, player with player_id 1 has the US.
 
 
 const response = await fetch("http://localhost:41399/api/info/country", {
@@ -9,8 +13,8 @@ const response = await fetch("http://localhost:41399/api/info/country", {
     },
 
     body: JSON.stringify({
-        gameID: "123456",
-        countryCode: "USA"
+        gameID: "1",
+        countryCode: "US"
     })
 });
 
