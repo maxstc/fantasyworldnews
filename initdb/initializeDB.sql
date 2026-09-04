@@ -1,16 +1,16 @@
+CREATE TABLE accounts (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(254) NOT NULL UNIQUE,
+    username VARCHAR(32) NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL
+);
+
 CREATE TYPE game_status AS ENUM ('preparing', 'in progress', 'completed');
 
 CREATE TABLE games (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     status game_status NOT NULL DEFAULT 'preparing',
     owner UUID NOT NULL REFERENCES accounts(id) ON DELETE CASCADE
-);
-
-CREATE TABLE accounts (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    email VARCHAR(254) NOT NULL UNIQUE,
-    username VARCHAR(32) NOT NULL UNIQUE,
-    password_hash TEXT NOT NULL
 );
 
 CREATE TYPE game_invite_status AS ENUM ('pending', 'canceled', 'accepted', 'declined');
