@@ -4,8 +4,6 @@ import pool from "#root/server/db.js";
 export async function accept (req, res) {
     const client = await pool.connect();
 
-    console.log(req.user);
-
     try {
         //start safe queries
         await client.query("BEGIN");

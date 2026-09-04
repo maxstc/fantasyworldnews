@@ -8,10 +8,11 @@ export async function create (req, res) {
         
         const gameQuery = await pool.query(
         `
-            INSERT INTO games (status) 
-            VALUES ('preparing') 
+            INSERT INTO games (status, owner) 
+            VALUES ('preparing', $1) 
             RETURNING id
-        `
+        `,
+        [req.user.accountID]
         );
 
         const gameID = gameQuery.rows[0].id;
