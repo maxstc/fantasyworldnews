@@ -4,20 +4,25 @@
 import jwt from "jsonwebtoken";
 
 export function checkAuth(req, res, next) {
-    const authHeader = req.get('Authorization');
-    if (!authHeader?.startsWith('Bearer ')) {
-        return res.status(401).json({message: "Missing or malformed authorization header"});
-    }
-    const token = authHeader.slice(7);
-    if (!token) {
-        return res.status(401).json({message: "Missing or malformed authorization header"});
-    }
     try {
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decodedToken;
-        next();
+        const authHeader = req.get('Authorization');
+        if (!authHeader?.startsWith('Bearer ')) {
+            return res.status(401).json({message: "Missing or malformed authorization header"});
+        }
+        const token = authHeader.slice(7);
+        if (!token) {
+            return res.status(401).json({message: "Missing or malformed authorization header"});
+        }
+        try {
+            const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+            req.user = decodedToken;
+            next();
+        }
+        catch (error) {
+            return res.status(401).json({ message: "Invalid token" });
+        }
     }
     catch (error) {
-        return res.status(401).json({message: "Invalid token"});
+        return res.status(401).json({ message: "Invalid token" });
     }
 }
