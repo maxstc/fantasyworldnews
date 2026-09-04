@@ -14,7 +14,8 @@ router.post(
 );
 router.post(
     "/country",
-    checkParamsNotUndefined(["gameID", "countryID"]),
+    checkAuth,
+    checkParamsNotUndefined(["gameID", "countryCode"]),
     country
 );
 

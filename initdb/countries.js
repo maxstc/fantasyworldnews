@@ -622,6 +622,21 @@ const countries = [
     "displayName": "United Kingdom"
   },
   {
+    "flag": "🇺🇸",
+    "name": [
+      "America",
+      "American",
+      "USA",
+      "U.S.A.",
+      "U.S.",
+      "US",
+      "United States"
+    ],
+    "countrycode": "US",
+    "continent": "North America",
+    "displayName": "United States"
+  },
+  {
     "flag": "🇬🇩",
     "name": [
       "Grenada",

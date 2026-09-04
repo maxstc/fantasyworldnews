@@ -8,7 +8,7 @@ Unless otherwise specified, status code `200` should be used if a request was su
 
 (REQUIRES AUTHENTICATION) means the client has to have its session/login token in the request header `Authorization` with the format `Bearer <session-token>`
 
-# `POST /api/accounts/signup`
+# `POST /api/account/signup`
 
 Use this to create a new account
 
@@ -112,6 +112,7 @@ Get info about a specific country
 - `String matches` Matching names of country  
 - `String flag` Flag of the country  
 - `String continent` Continent of country  
+- `String owner` Owner of country  
 
 # `POST /api/trade/propose` (REQUIRES AUTHENTICATION)
 
