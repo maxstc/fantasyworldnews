@@ -9,8 +9,25 @@ export async function country(req, res) {
     console.log("Request body:", req.body);
     console.log("Game ID:", req.body.gameID);
     console.log("Country Code:", req.body.countryCode);
-    //have it return the owner as well, which is playerID, go to country ownerships for that
     try {
+        const playerCheck = await pool.query(
+            `
+            SELECT p.id
+            FROM players p
+            JOIN accounts a
+                ON p.account_id = a.id
+            WHERE p.game_id = $1
+            AND a.username = $2
+            `,
+            [gameID, req.user.username]
+        );
+
+        if (playerCheck.rows.length === 0) {
+            return res.status(403).json({
+                message: "You are not a player in this game"
+            });
+        }
+
         const result = await pool.query(
             `
                 SELECT
@@ -66,6 +83,5 @@ export async function country(req, res) {
             message: "Database error"
         });
     }
-    //String[] matches
 
 }
