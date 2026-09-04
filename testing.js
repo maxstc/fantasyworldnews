@@ -1,9 +1,3 @@
-//Written by Evan
-// You will need to change this test for games specific to your DB, 
-// make sure the games have players which own a country u want to check
-// else it'll just be null
-// For myself: in game where gameID: 1, player with player_id 1 has the US.
-
 console.log("Testing /api/dashboard/players...");
 console.log("");
 
