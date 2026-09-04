@@ -8,16 +8,6 @@ export async function headlines (req, res) {
         // Check missing parameters
         const lastHeadline = req.body.lastHeadline;
         const numHeadlines = req.body.numHeadlines;
-        if (lastHeadline === undefined) {
-            return res.status(400).json({
-                message: "Request missing field: \"lastHeadline\"",
-            });
-        }
-        if (numHeadlines === undefined) {
-            return res.status(400).json({
-                message: "Request missing field: \"numHeadlines\"",
-            });
-        }
 
         // If user has no headlines yet, pretend they have a headline one newer than the latest
         // so they will get the very newest headline fresh off the press and avoid off by one error
@@ -31,7 +21,7 @@ export async function headlines (req, res) {
             lastHeadline = newestHeadlineQuery.rows[0].id + 1;
         }
 
-        // Get 'numHeadlines' headlines before the lastHeadline, but reverse so sorted from
+        // Get 'numHeadlines' headlines before the lastHeadline, but reverse it so its sorted from
         // newest to oldest
         const newHeadlinesQuery = await pool.query(
             "SELECT * FROM headlines WHERE id < $1 and id >= $2 ORDER BY id DESC",

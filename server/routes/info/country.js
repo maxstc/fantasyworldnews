@@ -8,6 +8,8 @@ export async function country(req, res) {
     
 
     try {
+        // Make sure that the user who sent the request is a player in the game they are 
+        // requesting to get info from
         const playerCheck = await pool.query(
             `
             SELECT p.id
@@ -50,6 +52,7 @@ export async function country(req, res) {
 
         const country = result.rows[0];
 
+        // who owns this country in THIS GAME????????
         const ownerResult = await pool.query(
             `
             SELECT co.player_id
