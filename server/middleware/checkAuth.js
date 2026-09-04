@@ -9,7 +9,6 @@ export function checkAuth(req, res, next) {
         return res.status(401).json({message: "Missing or malformed authorization header"});
     }
     const token = authHeader.slice(7);
-    console.log(authHeader);
     if (!token) {
         return res.status(401).json({message: "Missing or malformed authorization header"});
     }
