@@ -4,7 +4,7 @@ export async function players(req, res) {
     const gameID = req.body.gameID;
 
     try {
-        // Verify the authenticated user is actually a player in this game
+        // asks if currently auth account actually is a player in that game
         const requesterResult = await pool.query(
             `
             SELECT p.id
@@ -16,7 +16,7 @@ export async function players(req, res) {
             `,
             [gameID, req.user.username]
         );
-        //above asks if currently auth account actually is a player in that game
+        
         if (requesterResult.rows.length === 0) {
             return res.status(403).json({
                 message: "You are not a player in this game"
