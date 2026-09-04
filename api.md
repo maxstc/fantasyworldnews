@@ -112,6 +112,7 @@ Get info about a specific country
 - `String matches` Matching names of country  
 - `String flag` Flag of the country  
 - `String continent` Continent of country  
+- `String owner` Owner of country  
 
 # `POST /api/trade/propose` (REQUIRES AUTHENTICATION)
 
