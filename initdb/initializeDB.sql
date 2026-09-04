@@ -28,7 +28,7 @@ ON game_invites (recipient_account_id, game_id)
 WHERE status = 'pending';
 
 CREATE TABLE players (
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     game_id BIGINT NOT NULL REFERENCES games(id) ON DELETE CASCADE,
     account_id UUID NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
     score INTEGER NOT NULL DEFAULT 0,
@@ -46,7 +46,7 @@ CREATE TABLE countries (
 );
 
 CREATE TABLE country_ownerships (
-    player_id BIGINT NOT NULL,
+    player_id UUID NOT NULL,
     country_id CHAR(2) NOT NULL REFERENCES countries(id) ON DELETE CASCADE,
     game_id BIGINT NOT NULL,
     lineup_space continent_name,
@@ -67,8 +67,8 @@ CREATE TYPE trade_status AS ENUM ('pending', 'canceled', 'accepted', 'declined')
 CREATE TABLE trades (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     game_id BIGINT NOT NULL,
-    proposer_player_id BIGINT NOT NULL,
-    target_player_id BIGINT,
+    proposer_player_id UUID NOT NULL,
+    target_player_id UUID,
     proposer_country_id CHAR(2) REFERENCES countries(id) ON DELETE CASCADE,
     target_country_id CHAR(2) NOT NULL REFERENCES countries(id),
     status trade_status NOT NULL DEFAULT 'pending',
