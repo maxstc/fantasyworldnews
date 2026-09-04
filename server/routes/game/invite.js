@@ -9,5 +9,5 @@ export async function invite (req, res) {
         `,
         [req.user.accountID, req.body.recipientAccountID, req.body.gameID]
     );
-    res.status(200).json({ success: true });
+    res.status(200).json({ inviteID: inviteQuery.rows[0].id });
 };
