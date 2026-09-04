@@ -47,7 +47,7 @@ CREATE TABLE countries (
 
 CREATE TABLE country_ownerships (
     player_id BIGINT NOT NULL,
-    country_id SMALLINT NOT NULL REFERENCES countries(id) ON DELETE CASCADE,
+    country_id CHAR(2) NOT NULL REFERENCES countries(id) ON DELETE CASCADE,
     game_id BIGINT NOT NULL,
     lineup_space continent_name,
     UNIQUE (player_id, country_id),
@@ -57,7 +57,7 @@ CREATE TABLE country_ownerships (
 
 CREATE TABLE country_names (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    country_id SMALLINT NOT NULL REFERENCES countries(id) ON DELETE CASCADE,
+    country_id CHAR(2) NOT NULL REFERENCES countries(id) ON DELETE CASCADE,
     name TEXT NOT NULL,
     UNIQUE (country_id, name)
 );
@@ -69,8 +69,8 @@ CREATE TABLE trades (
     game_id BIGINT NOT NULL,
     proposer_player_id BIGINT NOT NULL,
     target_player_id BIGINT,
-    proposer_country_id SMALLINT REFERENCES countries(id) ON DELETE CASCADE,
-    target_country_id SMALLINT NOT NULL REFERENCES countries(id),
+    proposer_country_id CHAR(2) REFERENCES countries(id) ON DELETE CASCADE,
+    target_country_id CHAR(2) NOT NULL REFERENCES countries(id),
     status trade_status NOT NULL DEFAULT 'pending',
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CHECK (proposer_player_id <> target_player_id),
