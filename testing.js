@@ -1,18 +1,32 @@
-async function test() {
-    const fetchResult = await fetch("http://localhost:41399/api/dashboard/trades", {
+//Written by Evan
+// You will need to change this test for games specific to your DB, 
+// make sure the games have players which own a country u want to check
+// else it'll just be null
+// For myself: in game where gameID: 1, player with player_id 1 has the US.
+
+console.log("Testing /api/dashboard/players...");
+console.log("");
+
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyMSIsImlhdCI6MTc4ODUwODk5OCwiZXhwIjoxNzg4NTEyNTk4fQ.ZtskZjeValjAunVCWKh99NHpQzIl28lxdmgWQ1P6-mM";
+
+
+const response = await fetch(
+    "http://localhost:41399/api/info/country",
+    {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImZhcnRsb3JkIiwiaWF0IjoxNzg4MzE5MDg4LCJleHAiOjE3ODgzMjI2ODh9.E20Pgpnny7Ndzsb2cjBi1YL5RLQLZhxYoHya754heV4"
+            "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify({
-            username: "fartlord",
-            password: "fart1234567890",
-            email: "fartlord@email.net"
+            gameID: "2",
+            countryCode: "US"
         })
-    })
-    const jsonResult = await fetchResult.json();
-    console.log(jsonResult);
-}
+    }
+);
 
-test();
+console.log("Status:", response.status);
+
+const body = await response.text();
+
+console.log("Response:", body);

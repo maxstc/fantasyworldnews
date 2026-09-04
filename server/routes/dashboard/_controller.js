@@ -9,9 +9,16 @@ import { checkAuth } from "#root/server/middleware/checkAuth.js";
 router.post("/headlines", headlines);
 router.post(
     "/trades",
-    checkParamsNotUndefined("gameID"),
     checkAuth,
-    trades);
-router.post("/players", players);
+    checkParamsNotUndefined(["gameID"]),
+    trades
+);
+
+router.post(
+    "/players",
+    checkAuth,
+    checkParamsNotUndefined(["gameID"]),
+    players
+);
 
 export { router };
