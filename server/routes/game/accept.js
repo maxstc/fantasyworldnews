@@ -5,6 +5,7 @@ export async function accept (req, res) {
     const client = await pool.connect();
 
     try {
+
         //start safe queries
         await client.query("BEGIN");
         //update invite and grab game id
