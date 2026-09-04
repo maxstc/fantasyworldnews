@@ -1,5 +1,3 @@
-CREATE DATABASE fwn;
-
 CREATE TYPE game_status AS ENUM ('preparing', 'in progress', 'completed');
 
 CREATE TABLE games (
