@@ -12,13 +12,13 @@ export async function decline (req, res) {
             AND (recipient_account_id = $2 OR sender_account_id = $2)
             RETURNING *;
             `,
-            [req.body.inviteID, req.user.id]);
+            [req.body.inviteID, req.user.accountID]);
         if (declineQuery.rowCount > 0) {
-            res.status(200).json({});
+            return res.status(200).json({});
         }
-        res.status(400).json({ message: "Invite not found" });
+        return res.status(400).json({ message: "Invite not found" });
     }
     catch (error) {
-        res.status(400).json({ message: "Decline failed" });
+        return res.status(400).json({ message: "Decline failed" });
     }
 };

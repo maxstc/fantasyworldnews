@@ -61,7 +61,7 @@ try {
     //decline
     process.stdout.write("Decline invite: ");
     const inviteID3 = (await p("api/game/invite", t1, {gameID: gameID, recipientAccountID: accountID3})).inviteID;
-    await p("api/game/decline", t3, {inviteID: inviteID2});
+    await p("api/game/decline", t3, {inviteID: inviteID3});
     const checkAcceptInviteID3 = (await pool.query("SELECT * FROM game_invites WHERE id = $1", [inviteID3])).rows[0].status;
     if (checkAcceptInviteID3 === "declined") {
         console.log("\x1b[32m✓\x1b[0m");
