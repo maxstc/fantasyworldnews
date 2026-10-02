@@ -1,0 +1,106 @@
+account
+    signup
+        params
+            String username
+            String password
+            String email
+        returns
+            String token
+    login
+        params
+            String username
+            String password
+        returns
+            String token
+dashboard
+    headlines
+        params
+            String username
+            String password
+        returns
+            String token
+    trades
+        params
+            String gameID
+        returns
+            Object[] trades
+            integer trades[i].timestamp
+            String trades[i].proposerTeam
+            String trades[i].targetTeam
+            String trades[i].proposerCountry
+            String trades[i].targetCountry
+            String trades[i].status
+    players
+        params
+            String gameID
+        returns
+            String[] playerIDs
+info
+    player
+        params
+            String gameID
+            String playerID
+        returns
+            String displayName
+            integer points
+            String[] countries
+            Boolean isYou
+    country
+        params
+            String gameID
+            String countryCode
+        returns
+            String displayName
+            String matches
+            String flag
+            String continent
+            String owner
+trade
+    propose
+        params
+            String gameID
+            String proposerCountry
+            String targetCountry
+        returns
+    accept
+        params
+            String gameID
+            String tradeID
+        returns
+    decline
+        params
+            String gameID
+            String tradeID
+        returns
+lineup
+    set
+        params
+            String gameID
+            String[] countries
+        returns
+game
+    create
+        params
+        returns
+            String gameID
+    invite
+        params
+            String gameID
+            String playerID
+        returns
+    accept
+        params
+            String inviteID
+        returns
+    get-invites
+        params
+        returns
+            String[] inviteIDs
+    decline
+        params
+            String inviteID
+        returns
+    get-games
+        params
+            String[] gameIDs
+        returns
