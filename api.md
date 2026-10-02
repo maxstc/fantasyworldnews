@@ -8,7 +8,7 @@ Unless otherwise specified, status code `200` should be used if a request was su
 
 (REQUIRES AUTHENTICATION) means the client has to have its session/login token in the request header `Authorization` with the format `Bearer <session-token>`
 
-# `POST /api/accounts/signup`
+# `POST /api/account/signup`
 
 Use this to create a new account
 
